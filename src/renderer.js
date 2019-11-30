@@ -2,6 +2,9 @@ import './main.scss';
 
 import 'bootstrap/dist/js/bootstrap.bundle';
 
+var {store,data}= require('./fs');
+
+
 
 // const { remote } = require('electron');
 // const { BrowserWindow } = remote;

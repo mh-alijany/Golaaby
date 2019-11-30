@@ -17,11 +17,11 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: "./icons/win/icon.ico"
+    icon: "./icons/win/icon.ico",
     // frame: false,
-    // webPreferences: {
-    //   nodeIntegration: true
-    // }
+    webPreferences: {
+      nodeIntegration: true
+    }
   });
 
   // and load the index.html of the app.
