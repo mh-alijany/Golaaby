@@ -1,4 +1,8 @@
-// Required
+$primary: #7BAD0C;
+$secondary: #B2B937;
+$light: #FBFBFB;
+$dark: #2E5016;
+
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
 @import "node_modules/bootstrap/scss/mixins";
@@ -10,18 +14,107 @@
 @import "node_modules/bootstrap/scss/images";
 @import "node_modules/bootstrap/scss/grid";
 
-// @import "../../node_modules/bootstrap/scss/buttons";
-// @import "../../node_modules/bootstrap/scss/modal";
-// @import "../../node_modules/bootstrap/scss/dropdown";
-// @import "../../node_modules/bootstrap/scss/forms";
-// @import "../../node_modules/bootstrap/scss/list-group";
-// @import "../../node_modules/bootstrap/scss/transitions";
-// @import "../../node_modules/bootstrap/scss/navbar";
-// @import "../../node_modules/bootstrap/scss/nav";
-// @import "../../node_modules/bootstrap/scss/spinners";
-// @import "../../node_modules/bootstrap/scss/alert";
-// @import "../../node_modules/bootstrap/scss/button-group";
+@import "node_modules/bootstrap/scss/buttons";
+// @import "../node_modules/bootstrap/scss/modal";
+@import "node_modules/bootstrap/scss/forms";
+@import "../node_modules/bootstrap/scss/custom-forms";
+@import "node_modules/bootstrap/scss/badge";
+@import "node_modules/bootstrap/scss/list-group";
+@import "node_modules/bootstrap/scss/tables";
+@import "node_modules/bootstrap/scss/navbar";
+@import "node_modules/bootstrap/scss/card";
+@import "node_modules/bootstrap/scss/nav";
+// @import "../node_modules/bootstrap/scss/spinners";
+// @import "../node_modules/bootstrap/scss/alert";
+@import "node_modules/bootstrap/scss/input-group";
+// @import "../node_modules/bootstrap/scss/button-group";
 
 @import "node_modules/bootstrap/scss/utilities";
 
-  
+
+.hover {
+    cursor: pointer;
+}
+
+.hover:hover {
+    border-right: 1rem solid $primary;
+}
+
+.hover.h-active {
+    border-right: 1rem solid $primary;
+}
+
+
+td {
+    cursor: pointer;
+}
+
+.connect {
+    display: inline-block;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    background-color: $success;
+}
+
+.disconnect {
+    display: inline-block;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    background-color: $danger;
+}
+
+.custom-control.custom-checkbox{padding-left: 0;}
+
+label.custom-control-label {
+  position: relative;
+  padding-right: 1.5rem;
+}
+
+label.custom-control-label::before, label.custom-control-label::after{
+  right: 0;
+  left: auto;
+}
+
+// -------------------------
+
+// .bar {
+//     /* text-align: right; */
+//     -webkit-user-select: none;
+//     -webkit-app-region: drag;
+//     padding: 10px;
+//     height: 35px;
+//     box-sizing: border-box;
+//     background-color: $light;
+//     width: 100vw;
+//     top: 0;
+//     user-select: none;
+// }
+
+// .bubble {
+//     float: right;
+//     -webkit-app-region: no-drag;
+//     width: 15px;
+//     height: 15px;
+//     border-radius: 15px;
+//     display: inline-block;
+//     margin-right: 5px;
+//     cursor: pointer;
+// }
+
+// .bubble:hover {
+//     opacity: .6;
+// }
+
+// .bar .red {
+//     background: #ea423f;
+// }
+
+// .bar .yellow {
+//     background: #efb62c;
+// }
+
+// .bar .green {
+//     background: #7ab300;
+// }

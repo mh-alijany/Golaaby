@@ -1,11 +1,199 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Golaaby</title>
 
-  </head>
-  <body>
-   
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Golaaby</title>
+
+</head>
+
+<body>
+
+  <div>
+    <!-- <div class="frame">
+      <div class="bar">
+        <div class="bubble red"></div>
+        <div class="bubble yellow"></div>
+        <div class="bubble green"></div>
+      </div> -->
+  </div>
+
+  <div class="container-fluid vh-100 overflow-auto flex-grow-1 position-relative">
+    <div class="row h-100">
+      <div class="col content">
+        <div class="tab-content " id="v-pills-tabContent">
+
+          <div class="tab-pane fade show active" id="v-pills-con" role="tabpanel" aria-labelledby="v-pills-con-tab">
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                  <div class="card text-white bg-warning my-3">
+                    <div class="card-body text-right">
+                      <h5 class="card-title">گلابی وصل نیست</h5>
+                      <p class="card-text pb-3">برای اتصال می توانید یکی از سرویس دهنده های زیر را انتخاب کنید</p>
+                      <button type="button" class="btn btn-light m-auto d-block text-warning">اتصال خودکار</button>
+                    </div>
+                  </div>
+                  <div class="mt-3 border border-primary rounded">
+                    <div class="bg-primary d-flex justify-content-between align-items-center">
+                      <button type="button" class="btn btn-light mx-3 my-2 text-primary">افزودن</button>
+                      <h5 class="mx-3 my-2 text-light">ها DNS لیست</h5>
+                    </div>
+                    <table class="table mb-0 table-hover text-right text-primary">
+                      <thead>
+                        <tr class="bg-primary text-light">
+                          <th scope="col">اتصال</th>
+                          <th scope="col">وضعیت</th>
+                          <th scope="col">مسافت</th>
+                          <th scope="col">سرویس دهنده</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <span class="text-success">متصل</span>
+                            <span class="connect"></span>
+                          </td>
+                          <td><span class="badge badge-success">در دسترس</span></td>
+                          <td>100</td>
+                          <td>شکن</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <span class="text-danger">قطع</span>
+                            <span class="disconnect"></span>
+                          </td>
+                          <td><span class="badge badge-danger">غیر فعال</span></td>
+                          <td>200</td>
+                          <td>گذر</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade text-dark" id="v-pills-set" role="tabpanel" aria-labelledby="v-pills-set-tab">
+            <div class="container mt-5 pt-5" style="direction: rtl;">
+              <div class="row  justify-content-center">
+                <div class="col-8 m-auto">
+                  <form>
+                    <div class="form-group row">
+                      <div class="custom-control custom-radio custom-control-inline mb-2 mr-0">
+                        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input"
+                          checked="checked">
+                        <label class="custom-control-label" for="customRadio1">از DNS های زیر استفاده شود</label>
+                      </div>
+                      <div class="col-12 mb-2">
+                        <input type="text" class="form-control" id="dn1" placeholder="DNS 1">
+                      </div>
+                      <div class="col-12 mb-2">
+                        <input type="text" class="form-control" id="dn2" placeholder="DNS 2">
+                      </div>
+                      <div class="col-12">
+                        <button class="btn btn-primary float-left" type="submit">انجام</button>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadio2">به طور خودکار تایین شود</label>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="v-pills-check" role="tabpanel" aria-labelledby="v-pills-check-tab">
+            <div class="container">
+              <div class="row">
+                <div class="col-11 mx-auto">
+                  <form>
+                    <div class="form-row">
+                      <label for="checkDomain" class="d-block text-primary mx-auto mt-5 pt-5 mb-3">
+                        <h5>برسی یا گذارش تحریم</h5>
+                      </label>
+                      <div class="input-group mb-3">
+                        <input type="url" class="form-control" id="checkDomain" placeholder="ادرس صفحه مورد نظر"
+                          required>
+                        <div class="valid-feedback">
+                          با گلابی کار میکنه
+                        </div>
+                        <div class="invalid-feedback">
+                          این فیلتره که.
+                        </div>
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button" id="button-addon2">برسی</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+            <div class="container mt-3">
+              <div class="row text-dark" style="direction: rtl; ">
+                <div class="col-12 mx-3">
+                  <form>
+                    <div class="form-group row text-right ">
+                      <h5 class="float-left text-primary">برنامه</h5>
+                      <div class="col-12 mb-2">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="opt-startup" checked>
+                          <label class="custom-control-label" for="opt-startup">شروع خودکار با بالا آمدنِ ویندوز</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="opt-auto" checked>
+                          <label class="custom-control-label" for="opt-auto">برسی خودکار وضعیت</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row text-right">
+                      <h5 class="float-left text-primary">ظاهر</h5>
+                      <div class="col-12 mb-2">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="light" name="customRadio-them" class="custom-control-input"
+                            checked="checked">
+                          <label class="custom-control-label" for="light">روشن</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="dark" name="customRadio-them" class="custom-control-input">
+                          <label class="custom-control-label" for="dark">تیره</label>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-3 menu bg-light shadow">
+        <div class="nav flex-column nav-pills text-right mt-5" id="v-pills-tab" role="tablist"
+          aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-con-tab" data-toggle="pill" href="#v-pills-con" role="tab"
+            aria-controls="v-pills-con" aria-selected="true">اتصال</a>
+          <a class="nav-link" id="v-pills-set-tab" data-toggle="pill" href="#v-pills-set" role="tab"
+            aria-controls="v-pills-set" aria-selected="false"> DNS تنظیم</a>
+          <a class="nav-link" id="v-pills-check-tab" data-toggle="pill" href="#v-pills-check" role="tab"
+            aria-controls="v-pills-check" aria-selected="false">برسی تحریم</a>
+          <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
+            aria-controls="v-pills-settings" aria-selected="false">تنظیمات</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</body>
+
 </html>
