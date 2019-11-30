@@ -12,10 +12,7 @@ export async function measure(DNS_array, dist = 'google.com') {
     var time = new Date().getTime();
     resolver.resolve4(dist, (err, addresses) => {
         let result;
-        if (err)
-            result = 'error'
-        else
-            result = new Date().getTime() - time;
+        result = (err) ? 'error' : new Date().getTime() - time;
         return new Promise(resolve => resolve(result));
     });
 }
