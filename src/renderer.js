@@ -13,7 +13,7 @@ function checkDNS(dns_servers, name, url) {
     if (currentDNS_servers.every(item => dns_servers.includes(item))) {
         $(".status-non").hide();
         $(".status-set").show();
-        $('#link').html(`<a href="#">${name}</a>`);
+        $('#link').html(`<a href="${url}" target="_blank">${name}</a>`);
     }
 }
 
@@ -56,6 +56,8 @@ async function updateDNS_State() {
     }
 }
 
+$(".status-non").show();
+$(".status-set").hide();
 addDNSToTable();
 updateDNS_State()
 

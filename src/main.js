@@ -1,4 +1,5 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, webContents } = require('electron');
+import open from 'open';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -22,6 +23,12 @@ const createWindow = () => {
     webPreferences: {
       nodeIntegration: true
     }
+  });
+
+  // open new links in OS default browser
+  mainWindow.webContents.on('new-window', function (event, url) {
+    event.preventDefault();
+    open(url);
   });
 
   // and load the index.html of the app.

@@ -11,14 +11,14 @@ export var data = {
             DNS1: '178.22.122.100',
             DNS2: '185.51.200.2',
             icon: '',
-            url: ''
+            url: 'https://shecan.ir/'
         },
         {
             name: 'بگذر',
             DNS1: '185.55.226.26',
             DNS2: '185.55.226.25',
             icon: '',
-            url: ''
+            url: 'https://begzar.ir/'
         }
     ]
 };
