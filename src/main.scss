@@ -49,22 +49,6 @@ td {
     cursor: pointer;
 }
 
-.connect {
-    display: inline-block;
-    height: 1rem;
-    width: 1rem;
-    border-radius: 50%;
-    background-color: $success;
-}
-
-.disconnect {
-    display: inline-block;
-    height: 1rem;
-    width: 1rem;
-    border-radius: 50%;
-    background-color: $danger;
-}
-
 .custom-control.custom-checkbox{padding-left: 0;}
 
 label.custom-control-label {
