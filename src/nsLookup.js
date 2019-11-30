@@ -1,4 +1,5 @@
-const { Resolver } = require('dns');
+const dns = require('dns');
+const { Resolver } = dns;
 const resolver = new Resolver();
 
 // set DNS server
@@ -18,3 +19,9 @@ export function measure(DNS_array, dist = 'google.com') {
         });
     });
 }
+
+
+export function getDNS_Servers() {
+    return dns.getServers()
+};
+

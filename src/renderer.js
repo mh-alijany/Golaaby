@@ -3,7 +3,7 @@ import './main.scss';
 import 'bootstrap/dist/js/bootstrap.bundle';
 
 var { store, data } = require('./fs');
-var { measure } = require('./nsLookup');
+var { measure, getDNS_Servers } = require('./nsLookup');
 
 // init user interface ----------------------------------------------
 
@@ -22,7 +22,7 @@ async function updateRow($el) {
     if (latency)
         $el.children().eq(1).html(`<span class="badge badge-success">${latency}</span>`)
     else
-        $el.children().eq(1).html('<span class="badge badge-warn">قطع</span>')
+        $el.children().eq(1).html('<span class="badge badge-danger">قطع</span>')
 }
 
 // append rows of DNS to table body

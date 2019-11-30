@@ -27,11 +27,18 @@
             <div class="container">
               <div class="row">
                 <div class="col-12">
-                  <div class="card text-white bg-warning my-3">
+                  <div class="status card text-danger border border-danger my-3 d-none">
                     <div class="card-body text-right">
                       <h5 class="card-title">گلابی وصل نیست</h5>
                       <p class="card-text pb-3">برای اتصال می توانید یکی از سرویس دهنده های زیر را انتخاب کنید</p>
-                      <button type="button" class="btn btn-light m-auto d-block text-warning">اتصال خودکار</button>
+                      <button type="button" class="btn btn-danger m-auto d-block text-light">اتصال خودکار</button>
+                    </div>
+                  </div>
+                  <div class="status card text-right border border-primary my-3 d-none">
+                    <div class="card-body text-primary">
+                      <h5 class="card-title">گلابی وصل است</h5>
+                      <p class="card-text pb-3">شما در حال استفاده از <b id="link">شکن</b> هستید</p>
+                      <button type="button" class="btn btn-primary m-auto d-block" id="disconnect">قطع اتصال</button>
                     </div>
                   </div>
                   <div class="mt-3 border border-primary rounded">
@@ -48,7 +55,7 @@
                         </tr>
                       </thead>
                       <tbody id='DNS-table'>
-                       
+
                       </tbody>
                     </table>
                   </div>
