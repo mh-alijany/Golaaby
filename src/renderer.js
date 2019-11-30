@@ -7,17 +7,27 @@ var { measure, getDNS_Servers } = require('./nsLookup');
 
 // init user interface ----------------------------------------------
 
+// update status according to system current dns 
+function checkDNS(dns_servers, name, url) {
+    var currentDNS_servers = getDNS_Servers();
+    if (currentDNS_servers.every(item => dns_servers.includes(item))) {
+        $(".status-non").hide();
+        $(".status-set").show();
+        $('#link').html(`<a href="#">${name}</a>`);
+    }
+}
+
 // create a table row for a DNS
 function addRow(dns) {
     var row = $(`<tr><td>options</td><td><span class="badge badge-warning">درحال برسی</span></td><td>${dns.name}</td></tr>`);
 
     // attach dns data to row
-    row.data('data', { id: dns.name, DNS_servers: [dns.DNS1, dns.DNS2] });
+    row.data('data', { name: dns.name, url: dns.url, DNS_servers: [dns.DNS1, dns.DNS2] });
     return row;
 }
 
-async function updateRow($el) {
-    var dns_servers = $el.data('data').DNS_servers;
+// update latency of an dns row
+async function updateRow($el, dns_servers) {
     var latency = await measure(dns_servers);
     if (latency)
         $el.children().eq(1).html(`<span class="badge badge-success">${latency}</span>`)
@@ -39,7 +49,10 @@ async function updateDNS_State() {
     var rows = $("#DNS-table tr")
 
     for (let i = 0; i < rows.length; i++) {
-        await updateRow($(rows[i]));
+        let $el = $(rows[i]);
+        let info = $el.data('data');
+        checkDNS(info.DNS_servers, info.name, info.url);
+        await updateRow($el, info.DNS_servers);
     }
 }
 
