@@ -2,7 +2,8 @@ import './main.scss';
 
 import 'bootstrap/dist/js/bootstrap.bundle';
 
-var {store,data}= require('./fs');
+var { store, data } = require('./fs');
+require('./nsLookup');
 
 
 

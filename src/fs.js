@@ -4,7 +4,7 @@ var fs = require('fs');
 const path = '/data/dnsList.json';
 
 export var data = {
-    // define default dns list
+    // default dns list
     DNS_list: [
         {
             name: 'شکن',
