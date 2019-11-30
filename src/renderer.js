@@ -8,7 +8,7 @@ var { measure } = require('./nsLookup');
 // init user interface ----------------------------------------------
 
 // create a table row for a DNS
-function makeRow(dns) {
+function addRow(dns) {
     var row = $(`<tr><td>options</td><td><span class="badge badge-warning">درحال برسی</span></td><td>${dns.name}</td></tr>`);
 
     // attach dns data to row
@@ -16,25 +16,30 @@ function makeRow(dns) {
     return row;
 }
 
+async function updateRow($el) {
+    var dns_servers = $el.data('data').DNS_servers;
+    var latency = await measure(dns_servers);
+    if (latency)
+        $el.children().eq(1).html(`<span class="badge badge-success">${latency}</span>`)
+    else
+        $el.children().eq(1).html('<span class="badge badge-warn">قطع</span>')
+}
+
 // append rows of DNS to table body
 function addDNSToTable() {
     var tableBody = [];
     data.DNS_list.forEach(dns => {
-        tableBody.push(makeRow(dns));
+        tableBody.push(addRow(dns));
     });
     $("#DNS-table").append(tableBody);
 }
 
+// update latency of each dns row
 async function updateDNS_State() {
     var rows = $("#DNS-table tr")
 
     for (let i = 0; i < rows.length; i++) {
-        var dns_servers = $(rows[i]).data('data').DNS_servers;
-        var latency = await measure(dns_servers);
-        if (latency) {
-            $(rows[i]).children().eq(1).html(`<span class="badge badge-success">${latency}</span>`)
-        } else
-            $(rows[i]).children().eq(1).html('<span class="badge badge-warn">قطع</span>')
+        await updateRow($(rows[i]));
     }
 }
 
