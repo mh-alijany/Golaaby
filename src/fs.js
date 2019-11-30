@@ -1,7 +1,8 @@
 
 var fs = require('fs');
+const path = require('path');
 
-const path = '/data/dnsList.json';
+const filePath = path.resolve('src/data.json');
 
 export var data = {
     // default dns list
@@ -24,15 +25,15 @@ export var data = {
 };
 
 // read App data
-if (fs.existsSync(path)) {
-    var raw = fs.readFileSync(path, 'utf8');
+if (fs.existsSync(filePath)) {
+    var raw = fs.readFileSync(filePath, 'utf8');
     data = JSON.parse(raw);
 }
 
 // save App changes
 export async function store(items) {
     Object.assign(data, items);
-    fs.writeFile(path, JSON.stringify(data), function (err) {
+    fs.writeFile(filePath, JSON.stringify(data), function (err) {
         if (err) console.log(err);
     });
 }
