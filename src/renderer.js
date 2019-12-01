@@ -4,6 +4,7 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 
 var { store, data } = require('./fs');
 var { measure, getDNS_Servers } = require('./nsLookup');
+require('./powerShell');
 
 // init user interface ----------------------------------------------
 
