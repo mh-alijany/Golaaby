@@ -6,9 +6,13 @@ let ps = new shell({
 });
 
 
-export function getNetworks() {
-    ps.addCommand('Get-NetAdapter | Select-Object  InterfaceAlias , InterfaceIndex , Status | ConvertTo-Json');
-    return ps.invoke();
+export async function getNetworks() {
+    return new Promise(resolve => {
+        ps.addCommand('Get-NetAdapter | Select-Object  InterfaceAlias , InterfaceIndex , Status | ConvertTo-Json');
+        ps.invoke()
+            .then(networks => resolve(networks))
+            .catch(err => resolve(err));
+    });
 }
 
 export function setDNS_servers(index, DNS1, DNS2) {
