@@ -52,7 +52,8 @@
     }
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "node-powershell": "^4.0.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.45",
