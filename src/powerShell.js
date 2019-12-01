@@ -13,6 +13,7 @@ let ps = new shell({
 // ps.invoke()
 
 ps.addCommand('Get-NetAdapter | Select-Object  InterfaceAlias , InterfaceIndex , Status | ConvertTo-Json');
+var networks;
 
 ps.invoke().then(output => {
     networks = JSON.parse(output);
