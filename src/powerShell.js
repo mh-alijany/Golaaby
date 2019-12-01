@@ -21,7 +21,7 @@ export function getNetworks() {
  * @param {Number} index Interface Index of a network adaptor
  * @param {String} DNS1 preferred DNS server
  * @param {String} DNS2 alternative DNS server
- * @returns {Promise} that fulfills with rejects with an error
+ * @returns {Promise} that fulfills with the output of command or rejects with an error
  */
 export function setDNS_servers(index, DNS1, DNS2) {
     ps.addCommand(`Set-DnsClientServerAddress -InterfaceIndex ${index} -ServerAddresses ("${DNS1}","${DNS2}")`);
@@ -32,7 +32,7 @@ export function setDNS_servers(index, DNS1, DNS2) {
  * Obtain DNS servers automatically.
  * @export
  * @param {Number} index Interface Index of a network adaptor
- * @returns {Promise} that fulfills with rejects with an error
+ * @returns {Promise} that fulfills with the output of command or rejects with an error
  */
 export function setDNS_Auto(index) {
     ps.addCommand(`Set-DnsClientServerAddress -InterfaceIndex ${index} -ResetServerAddresses`);
