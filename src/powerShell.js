@@ -12,9 +12,13 @@ let ps = new shell({
 // ps.addCommand('')
 // ps.invoke()
 
-ps.addCommand('Get-NetAdapter | Select-Object  InterfaceAlias , InterfaceIndex , Status | ConvertTo-Json');
-var networks;
+async function getNetworks() {
+    ps.addCommand('Get-NetAdapter | Select-Object  InterfaceAlias , InterfaceIndex , Status | ConvertTo-Json');
+    return ps.invoke();
+}
 
-ps.invoke().then(output => {
-    networks = JSON.parse(output);
-});
+async function setDNS_servers(index, DNS1, DNS2) {
+    ps.addCommand(`Set-DnsClientServerAddress -InterfaceIndex ${index} -ServerAddresses ("${DNS1}","${DNS2}")`);
+    return ps.invoke();
+}
+
