@@ -20,7 +20,7 @@ function checkDNS(dns_servers, name, url) {
 
 // create a table row for a DNS
 function addRow(dns) {
-    var row = $(`<tr><td>options</td><td><span class="badge badge-danger">درحال برسی</span></td><td>${dns.name}</td></tr>`);
+    var row = $(`<tr><td>options</td><td><span class="badge badge-danger text-light">درحال برسی</span></td><td>${dns.name}</td></tr>`);
 
     // attach dns data to row
     row.data('data', { name: dns.name, url: dns.url, DNS_servers: [dns.DNS1, dns.DNS2] });
