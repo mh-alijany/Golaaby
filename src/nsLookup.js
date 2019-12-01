@@ -2,12 +2,21 @@ const dns = require('dns');
 const { Resolver } = dns;
 const resolver = new Resolver();
 
-// set DNS server
+/**
+ * set DNS servers for resolver
+ * @param {Array} DNS_array ip of static DNS servers
+ */
 function setDNS_Servers(DNS_array) {
     resolver.setServers(DNS_array);
 }
 
-// measure time of resolving a domain
+/**
+ * Retrieves time of resolving a domain
+ * @export
+ * @param {Array} DNS_array ip of static DNS servers 
+ * @param {string} [dist='google.com'] domain to resolve
+ * @returns {Promise}  that fulfills with the time of dns resolver
+ */
 export function measure(DNS_array, dist = 'google.com') {
     return new Promise(resolve => {
         setDNS_Servers(DNS_array);
@@ -20,7 +29,11 @@ export function measure(DNS_array, dist = 'google.com') {
     });
 }
 
-
+/**
+ * dns server of network interface which is up
+ * @export
+ * @returns {Array} ip of static DNS servers 
+ */
 export function getDNS_Servers() {
     return dns.getServers()
 };
