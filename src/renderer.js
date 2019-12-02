@@ -2,8 +2,8 @@ import './main.scss';
 
 import 'bootstrap/dist/js/bootstrap.bundle';
 
-var { store, data } = require('./fs');
-var { measure, getDNS_Servers } = require('./nsLookup');
+var model = require('./fs');
+var DNS_resolver = require('./nsLookup');
 require('./powerShell');
 
 // init user interface ----------------------------------------------
@@ -15,7 +15,7 @@ require('./powerShell');
  * @param {String} url provider website 
  */
 function checkDNS(dns_servers, name, url) {
-    var currentDNS_servers = getDNS_Servers();
+    var currentDNS_servers = DNS_resolver.getDNS_Servers();
     if (currentDNS_servers.every(item => dns_servers.includes(item))) {
         $(".status-non").hide();
         $(".status-set").show();
@@ -41,7 +41,7 @@ function addRow(dns_info) {
  * @param {Array} dns_servers dns servers ip
  */
 async function updateRow($row, dns_servers) {
-    var latency = await measure(dns_servers);
+    var latency = await DNS_resolver.measure(dns_servers);
     if (latency)
         $row.children().eq(1).html(`<span class="badge badge-success">${latency}</span>`)
     else
@@ -54,6 +54,7 @@ async function updateRow($row, dns_servers) {
  */
 function addDNSToTable() {
     var tableBody = [];
+    data = model.read();
     data.DNS_list.forEach(dns => {
         tableBody.push(addRow(dns));
     });

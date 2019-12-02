@@ -24,10 +24,16 @@ export var data = {
     ]
 };
 
-// read App data
-if (fs.existsSync(filePath)) {
-    var raw = fs.readFileSync(filePath, 'utf8');
-    data = JSON.parse(raw);
+/**
+ * read App data from file
+ * @export
+ * @returns {Object} app data
+ */
+export function read() {
+    if (fs.existsSync(filePath)) {
+        var raw = fs.readFileSync(filePath, 'utf8');
+        return JSON.parse(raw);
+    }
 }
 
 /**
