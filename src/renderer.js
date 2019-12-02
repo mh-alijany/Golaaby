@@ -50,7 +50,7 @@ async function updateRow($row, dns_servers) {
 
 /**
  * read all dns servers from file then append rows of each them into the table 
- * @todo convert data.DNS_list to DATA read dns list and add table to params
+ * @todo get table from globals
  */
 function addDNSToTable() {
     var tableBody = [];
