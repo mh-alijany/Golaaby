@@ -43,7 +43,9 @@ function addRow(dns_info) {
 async function updateLatency($row, dns_servers) {
     var latency = await DNS_resolver.measure(dns_servers);
     if (latency)
-        $row.children().eq(1).html(`<span class="badge badge-success">${latency}</span>`)
+        $row.children().eq(1)
+            .html(`<span class="badge badge-success">${latency}</span>`)
+            .data('latency', latency)
     else
         $row.children().eq(1).html('<span class="badge badge-danger">قطع</span>')
 }
