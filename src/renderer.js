@@ -80,10 +80,28 @@ async function updateLatencies() {
     }
 }
 
+/**
+ * get dns which has less latency
+ *
+ * @returns {Number} id of best DNS
+ */
+function getBestDNS() {
+    var min = Infinity;
+    var best_id;
+    for (const id in model.data.DNS_list) {
+        var latency = model.data.DNS_list[id].latency;
+        if (latency < min) {
+            min = latency;
+            best_id = id;
+        }
+    }
+    return best_id;
+}
+
 $(".status-non").show();
 $(".status-set").hide();
 addDNSToTable();
-updateLatencies()
+updateLatencies();
 
 
 // const { remote } = require('electron');
