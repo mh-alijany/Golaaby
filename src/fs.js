@@ -33,7 +33,8 @@ export function read() {
     if (fs.existsSync(filePath)) {
         var raw = fs.readFileSync(filePath, 'utf8');
         return JSON.parse(raw);
-    }
+    } else
+        return data;
 }
 
 /**

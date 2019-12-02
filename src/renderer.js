@@ -54,7 +54,7 @@ async function updateRow($row, dns_servers) {
  */
 function addDNSToTable() {
     var tableBody = [];
-    data = model.read();
+    var data = model.read();
     data.DNS_list.forEach(dns => {
         tableBody.push(addRow(dns));
     });
