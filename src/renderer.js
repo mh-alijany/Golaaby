@@ -8,7 +8,12 @@ require('./powerShell');
 
 // init user interface ----------------------------------------------
 
-// update status according to system current dns 
+/**
+ * if system current dns equals dns_servers then update status to connected 
+ * @param {Array} dns_servers dns servers ip 
+ * @param {String} name provider of dns_servers
+ * @param {String} url provider website 
+ */
 function checkDNS(dns_servers, name, url) {
     var currentDNS_servers = getDNS_Servers();
     if (currentDNS_servers.every(item => dns_servers.includes(item))) {
@@ -18,25 +23,35 @@ function checkDNS(dns_servers, name, url) {
     }
 }
 
-// create a table row for a DNS
-function addRow(dns) {
-    var row = $(`<tr><td>options</td><td><span class="badge badge-danger text-light">درحال برسی</span></td><td>${dns.name}</td></tr>`);
-
+/**
+ * create a table row from a dns_info
+ * @param {Object} dns_info DNS information such as ip addresses and provider name
+ * @returns {JQuery} table row
+ */
+function addRow(dns_info) {
+    var row = $(`<tr><td>options</td><td><span class="badge badge-danger text-light">درحال برسی</span></td><td>${dns_info.name}</td></tr>`);
     // attach dns data to row
-    row.data('data', { name: dns.name, url: dns.url, DNS_servers: [dns.DNS1, dns.DNS2] });
+    row.data('data', { name: dns_info.name, url: dns_info.url, DNS_servers: [dns_info.DNS1, dns_info.DNS2] });
     return row;
 }
 
-// update latency of an dns row
-async function updateRow($el, dns_servers) {
+/**
+ * update latency of the dns (in dns table)
+ * @param {JQuery} $row table row of dns
+ * @param {Array} dns_servers dns servers ip
+ */
+async function updateRow($row, dns_servers) {
     var latency = await measure(dns_servers);
     if (latency)
-        $el.children().eq(1).html(`<span class="badge badge-success">${latency}</span>`)
+        $row.children().eq(1).html(`<span class="badge badge-success">${latency}</span>`)
     else
-        $el.children().eq(1).html('<span class="badge badge-danger">قطع</span>')
+        $row.children().eq(1).html('<span class="badge badge-danger">قطع</span>')
 }
 
-// append rows of DNS to table body
+/**
+ * read all dns servers from file then append rows of each them into the table 
+ * @todo convert data.DNS_list to DATA read dns list and add table to params
+ */
 function addDNSToTable() {
     var tableBody = [];
     data.DNS_list.forEach(dns => {
@@ -45,7 +60,9 @@ function addDNSToTable() {
     $("#DNS-table").append(tableBody);
 }
 
-// update latency of each dns row
+/**
+ * update latency of each dns server
+ */
 async function updateDNS_State() {
     var rows = $("#DNS-table tr")
 
