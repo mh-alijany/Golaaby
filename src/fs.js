@@ -30,7 +30,11 @@ if (fs.existsSync(filePath)) {
     data = JSON.parse(raw);
 }
 
-// save App changes
+/**
+ * merge data changes and data then write new data to file
+ * @export
+ * @param {Object} items data props which is modified
+ */
 export async function store(items) {
     Object.assign(data, items);
     fs.writeFile(filePath, JSON.stringify(data), function (err) {
