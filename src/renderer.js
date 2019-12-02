@@ -9,7 +9,7 @@ require('./powerShell');
 // init user interface ----------------------------------------------
 
 /**
- * if system current dns equals dns_servers then update status to connected 
+ * if system current DNS server addresses equals dns_servers then update status to connected 
  * @param {Array} dns_servers dns servers ip 
  * @param {String} name provider of dns_servers
  * @param {String} url provider website 
@@ -25,7 +25,7 @@ function checkDNS(dns_servers, name, url) {
 
 /**
  * create a table row from dns_info
- * @param {Object} dns_info DNS information such as ip addresses and provider name
+ * @param {Object} dns_info DNS information such as DNS server addresses and provider name
  * @returns {JQuery} table row
  */
 function addRow(dns_info) {
@@ -36,7 +36,7 @@ function addRow(dns_info) {
 }
 
 /**
- * update latency of the dns (in dns table)
+ * update latency of the dns servers (in dns table)
  * @param {JQuery} $row table row of dns
  * @param {Array} dns_servers dns servers ip
  */
