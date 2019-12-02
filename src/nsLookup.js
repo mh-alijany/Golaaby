@@ -15,7 +15,7 @@ function setDNS_Servers(DNS_array) {
  * @export
  * @param {Array} DNS_array ip of static DNS servers 
  * @param {string} [dist='google.com'] domain to resolve
- * @returns {Promise}  that fulfills with the time of dns resolver
+ * @returns {Promise}  that fulfills with the time of dns resolving
  */
 export function measure(DNS_array, dist = 'google.com') {
     return new Promise(resolve => {
@@ -23,7 +23,7 @@ export function measure(DNS_array, dist = 'google.com') {
         var time = new Date().getTime();
         resolver.resolve4(dist, (err, addresses) => {
             let result;
-            result = (!err && addresses) ? new Date().getTime() - time : 'نا موجود';
+            result = (!err && addresses) ? new Date().getTime() - time : false;
             resolve(result)
         });
     });

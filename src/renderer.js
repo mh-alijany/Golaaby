@@ -9,7 +9,7 @@ require('./powerShell');
 // init user interface ----------------------------------------------
 
 /**
- * if system current DNS server addresses equals dns_servers then update status to connected 
+ * if system is using dns_servers then update status to connected 
  * @param {Array} dns_servers dns servers ip 
  * @param {String} name provider of dns_servers
  * @param {String} url provider website 
@@ -40,7 +40,7 @@ function addRow(dns_info) {
  * @param {JQuery} $row table row of dns
  * @param {Array} dns_servers dns servers ip
  */
-async function updateRow($row, dns_servers) {
+async function updateLatency($row, dns_servers) {
     var latency = await DNS_resolver.measure(dns_servers);
     if (latency)
         $row.children().eq(1).html(`<span class="badge badge-success">${latency}</span>`)
@@ -64,21 +64,21 @@ function addDNSToTable() {
 /**
  * update latency of each dns server
  */
-async function updateDNS_State() {
-    var rows = $("#DNS-table tr")
+async function updateLatencies() {
+    var rows = $("#DNS-table tr");
 
     for (let i = 0; i < rows.length; i++) {
         let $el = $(rows[i]);
         let info = $el.data('data');
         checkDNS(info.DNS_servers, info.name, info.url);
-        await updateRow($el, info.DNS_servers);
+        await updateLatency($el, info.DNS_servers);
     }
 }
 
 $(".status-non").show();
 $(".status-set").hide();
 addDNSToTable();
-updateDNS_State()
+updateLatencies()
 
 
 // const { remote } = require('electron');
