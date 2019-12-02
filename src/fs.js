@@ -9,15 +9,13 @@ export var data = {
     DNS_list: [
         {
             name: 'شکن',
-            DNS1: '178.22.122.100',
-            DNS2: '185.51.200.2',
+            DNS_servers: ['178.22.122.100', '185.51.200.2'],
             icon: '',
             url: 'https://shecan.ir/'
         },
         {
             name: 'بگذر',
-            DNS1: '185.55.226.26',
-            DNS2: '185.55.226.25',
+            DNS_servers: ['185.55.226.26', '185.55.226.25'],
             icon: '',
             url: 'https://begzar.ir/'
         }

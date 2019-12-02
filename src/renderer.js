@@ -29,10 +29,10 @@ function checkDNS(dns_servers, name, url) {
  * @returns {JQuery} table row
  */
 function addRow(dns_info) {
-    var row = $(`<tr><td>options</td><td><span class="badge badge-danger text-light">درحال برسی</span></td><td>${dns_info.name}</td></tr>`);
+    var $row = $(`<tr><td>options</td><td><span class="badge badge-danger text-light">درحال برسی</span></td><td>${dns_info.name}</td></tr>`);
     // attach dns data to row
-    row.data('data', { name: dns_info.name, url: dns_info.url, DNS_servers: [dns_info.DNS1, dns_info.DNS2] });
-    return row;
+    $row.data('dns_info', dns_info);
+    return $row;
 }
 
 /**
@@ -69,7 +69,7 @@ async function updateLatencies() {
 
     for (let i = 0; i < rows.length; i++) {
         let $el = $(rows[i]);
-        let info = $el.data('data');
+        let info = $el.data('dns_info');
         checkDNS(info.DNS_servers, info.name, info.url);
         await updateLatency($el, info.DNS_servers);
     }
