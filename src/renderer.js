@@ -24,7 +24,7 @@ function checkDNS(dns_servers, name, url) {
 }
 
 /**
- * create a table row from a dns_info
+ * create a table row from dns_info
  * @param {Object} dns_info DNS information such as ip addresses and provider name
  * @returns {JQuery} table row
  */
