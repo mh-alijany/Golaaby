@@ -38,12 +38,10 @@ export function read() {
 }
 
 /**
- * merge data changes and data then write new data to file
+ * write new data to file
  * @export
- * @param {Object} items data props which is modified
  */
-export async function store(items) {
-    Object.assign(data, items);
+export async function store() {
     fs.writeFile(filePath, JSON.stringify(data), function (err) {
         if (err) console.log(err);
     });

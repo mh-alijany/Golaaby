@@ -23,7 +23,7 @@ export function measure(DNS_array, dist = 'google.com') {
         var time = new Date().getTime();
         resolver.resolve4(dist, (err, addresses) => {
             let result;
-            result = (!err && addresses) ? new Date().getTime() - time : false;
+            result = (!err && addresses) ? new Date().getTime() - time : undefined;
             resolve(result)
         });
     });

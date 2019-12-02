@@ -31,7 +31,7 @@ function checkDNS(dns_servers, name, url) {
 function addRow(dns_info) {
     var $row = $(`<tr><td>options</td><td><span class="badge badge-danger text-light">درحال برسی</span></td><td>${dns_info.name}</td></tr>`);
     // attach dns data to row
-    $row.data('dns_info', dns_info);
+    $row.data('id', dns_info.id);
     return $row;
 }
 
@@ -40,13 +40,16 @@ function addRow(dns_info) {
  * @param {JQuery} $row table row of dns
  * @param {Array} dns_servers dns servers ip
  */
-async function updateLatency($row, dns_servers) {
+async function updateLatency($row, dns_servers, id) {
     var latency = await DNS_resolver.measure(dns_servers);
+
+    model.data.DNS_list[id].latency = latency;
+    model.store();
+
     if (latency)
-        $row.data('latency', latency)
-            .children().eq(1).html(`<span class="badge badge-success">${latency}</span>`)
+        $row.children().eq(1).html(`<span class="badge badge-success">${latency}</span>`);
     else
-        $row.children().eq(1).html('<span class="badge badge-danger">قطع</span>')
+        $row.children().eq(1).html('<span class="badge badge-danger">قطع</span>');
 }
 
 /**
@@ -56,9 +59,9 @@ async function updateLatency($row, dns_servers) {
 function addDNSToTable() {
     var tableBody = [];
     var data = model.read();
-    data.DNS_list.forEach(dns => {
-        tableBody.push(addRow(dns));
-    });
+    for (let id in data.DNS_list) {
+        tableBody.push(addRow(data.DNS_list[id]));
+    };
     $("#DNS-table").append(tableBody);
 }
 
@@ -69,10 +72,11 @@ async function updateLatencies() {
     var rows = $("#DNS-table tr");
 
     for (let i = 0; i < rows.length; i++) {
-        let $el = $(rows[i]);
-        let info = $el.data('dns_info');
-        checkDNS(info.DNS_servers, info.name, info.url);
-        await updateLatency($el, info.DNS_servers);
+        let $row = $(rows[i]);
+        let id = $row.data('id');
+        let dns_info = model.data.DNS_list[id];
+        checkDNS(dns_info.DNS_servers, dns_info.name, dns_info.url);
+        await updateLatency($row, dns_info.DNS_servers, dns_info.id);
     }
 }
 
