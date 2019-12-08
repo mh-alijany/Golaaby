@@ -5,9 +5,10 @@ import Manual from './Components/ManualTab/ManualTab';
 import Check from './Components/CheckTab/CheckTab';
 import Setting from './Components/SettingTab/SettingTab';
 
+import useDNS_List from './useDNS_List';
+
 const App = () => {
-    // use Load as default state
-    // const [CurrentTab, setCurrentTab] = useState('main');
+    const DNS_List = useDNS_List();
 
     return (
         <div className="container-fluid vh-100 overflow-auto flex-grow-1 position-relative">
