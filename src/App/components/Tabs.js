@@ -1,30 +1,41 @@
-import Main from './Tabs/MainTab';
-import Manual from './Tabs/ManualTab';
-import Check from './Tabs/CheckTab';
-import Setting from './Tabs/SettingTab';
+import Nav from './Nav';
 
-const Tabs = () => {
-    return (
-        <div className="tab-content " id="v-pills-tabContent">
+class Tabs extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { ActiveTab: 0 };
+        this.setActiveTab = this.setActiveTab.bind(this);
 
-            <div className="tab-pane fade show active" id="tab-con" role="tabpanel" aria-labelledby="pills-con">
-                <Main />
+        this.tabs = React.Children.map(props.children, child =>
+            <div className="tab-pane fade show active" role="tabpanel" aria-labelledby="pills-con">
+                {child}
             </div>
+        );
+        
+        this.tabs_name = React.Children.map(props.children, child => child.props.name);
+    }
 
-            <div className="tab-pane fade text-dark" id="tab-set" role="tabpanel" aria-labelledby="pills-set">
-                <Manual />
+    setActiveTab(index) {
+        this.setState({ ActiveTab: index });
+    }
+
+    render() {
+        return (
+            <div className="row h-100">
+
+                <div className="col content">
+                    <div className="tab-content " id="v-pills-tabContent">
+                        {this.tabs[this.state.ActiveTab]}
+                    </div>
+                </div>
+
+                <div className="col-3 menu bg-light shadow">
+                    <Nav tabs_name={this.tabs_name} setTab={this.setActiveTab} />
+                </div>
+
             </div>
-
-            <div className="tab-pane fade" id="tab-check" role="tabpanel" aria-labelledby="pills-check">
-                <Check />
-            </div>
-
-            <div className="tab-pane fade" id="tab-settings" role="tabpanel" aria-labelledby="pills-settings">
-                <Setting />
-            </div>
-
-        </div>
-    );
+        );
+    }
 }
 
 export default Tabs;
