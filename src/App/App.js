@@ -9,13 +9,14 @@ const App = () => {
         <div className="container-fluid vh-100 overflow-auto flex-grow-1 position-relative">
             <div className="row h-100">
 
+                <div className="col content">
+                  <Tabs />
+                </div>
+                
                 <div className="col-3 menu bg-light shadow">
                     <Nav />
                 </div>
 
-                <div className="col content">
-                  <Tabs />
-                </div>
 
             </div>
         </div>
