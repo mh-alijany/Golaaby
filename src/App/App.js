@@ -10,7 +10,7 @@ import useDNS_List from './useDNS_List';
 // import { useState, useEffect } from 'react';
 
 const App = () => {
-    const [DNS_List, BestDNS_ofList] = useDNS_List();
+    const [DNS_List, BestDNS_id] = useDNS_List();
 
     return (
         <div className="container-fluid vh-100 overflow-auto flex-grow-1 position-relative">

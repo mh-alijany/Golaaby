@@ -4,7 +4,7 @@ var DNS_resolver = require('./modules/nsLookup');
 
 const useDNS_List = () => {
     const [DNS_List, setDNS_List] = useState(defaultData.DNS_list);
-    const [BestDNS_ofList, setBestDNS_ofList] = useState(1);
+    const [BestDNS_id, setBestDNS_id] = useState(1);
 
     useEffect(() => {
         async function updateLatency() {
@@ -24,14 +24,14 @@ const useDNS_List = () => {
                 }
             }
 
-            setBestDNS_ofList(best_id);
+            setBestDNS_id(best_id);
             setDNS_List(DNS_List);
         }
 
         updateLatency();
     }, []);
 
-    return [DNS_List, BestDNS_ofList];
+    return [DNS_List, BestDNS_id];
 }
 
 export default useDNS_List;
