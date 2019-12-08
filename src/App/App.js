@@ -7,8 +7,10 @@ import Setting from './Components/SettingTab/SettingTab';
 
 import useDNS_List from './useDNS_List';
 
+// import { useState, useEffect } from 'react';
+
 const App = () => {
-    const DNS_List = useDNS_List();
+    const [DNS_List, BestDNS_ofList] = useDNS_List();
 
     return (
         <div className="container-fluid vh-100 overflow-auto flex-grow-1 position-relative">
@@ -19,7 +21,7 @@ const App = () => {
                 <Check name="برسی تحریم" />
                 <Setting name="تنظیمات" />
             </Tabs>
-            
+
         </div>
     );
 }
