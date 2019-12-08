@@ -3,7 +3,7 @@ const checkTab = () => {
         <div className="container">
             <div className="row">
                 <div className="col-11 mx-auto">
-                    <form className="fa">
+                    <form>
                         <div className="form-row">
                             <label htmlFor="checkDomain" className="d-block text-primary mx-auto mt-5 pt-5 mb-3">
                                 <h5>برسی یا گذارش تحریم</h5>

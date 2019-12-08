@@ -3,7 +3,7 @@ const ManualTab = () => {
         <div className="container mt-5 pt-5">
             <div className="row  justify-content-center">
                 <div className="col-8 m-auto">
-                    <form>
+                    <form className="fa">
                         <div className="form-group row">
                             <div className="custom-control custom-radio custom-control-inline mb-2 mr-0">
                                 <input type="radio" id="customRadio1" name="customRadio" className="custom-control-input" />
