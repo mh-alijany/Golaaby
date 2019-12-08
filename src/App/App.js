@@ -13,9 +13,9 @@ const App = () => {
         <div className="container-fluid vh-100 overflow-auto flex-grow-1 position-relative">
 
             <Tabs>
-                <Main name="اتصال" />
-                <Manual name="دستی" />
-                <Check name="برسی" />
+                <Main name="اتصال خودکار" />
+                <Manual name="اتصال دستی" />
+                <Check name="برسی تحریم" />
                 <Setting name="تنظیمات" />
             </Tabs>
             
