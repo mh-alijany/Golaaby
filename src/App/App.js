@@ -1,5 +1,5 @@
-import Nav from './Nav';
-import Tabs from './Tabs';
+import Nav from './Components/Nav';
+import Tabs from './Components/Tabs';
 
 const App = () => {
     // use Load as default state
