@@ -2,6 +2,14 @@ import './main.scss';
 
 import 'bootstrap/dist/js/bootstrap.bundle';
 
+import ReactDOM from 'react-dom';
+import App from './App/App'
+
+ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+);
+
 // var model = require('./fs');
 // var DNS_resolver = require('./nsLookup');
 // require('./powerShell');

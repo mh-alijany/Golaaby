@@ -10,9 +10,9 @@ const App = () => {
             <div className="row h-100">
 
                 <div className="col content">
-                  <Tabs />
+                    <Tabs />
                 </div>
-                
+
                 <div className="col-3 menu bg-light shadow">
                     <Nav />
                 </div>
