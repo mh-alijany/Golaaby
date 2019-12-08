@@ -1,9 +1,9 @@
-import Tabs from './Components/Tabs';
+import Tabs from './Components/Tabs/Tabs';
 
-import Main from './Components/Tabs/MainTab';
-import Manual from './Components/Tabs/ManualTab';
-import Check from './Components/Tabs/CheckTab';
-import Setting from './Components/Tabs/SettingTab';
+import Main from './Components/MainTab/MainTab';
+import Manual from './Components/ManualTab/ManualTab';
+import Check from './Components/CheckTab/CheckTab';
+import Setting from './Components/SettingTab/SettingTab';
 
 const App = () => {
     // use Load as default state

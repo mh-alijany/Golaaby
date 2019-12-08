@@ -1,4 +1,4 @@
-import Nav from './Nav';
+import Nav from './components/Nav';
 
 class Tabs extends React.Component {
     constructor(props) {
