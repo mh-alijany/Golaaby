@@ -14,7 +14,7 @@ const App = () => {
         <div className="container-fluid vh-100 overflow-auto flex-grow-1 position-relative">
 
             <Tabs>
-                <Main name="اتصال خودکار" latencies={IsUpdate} />
+                <Main name="اتصال خودکار" DNS_info={DNS_info} />
                 <Manual name="اتصال دستی" />
                 <Check name="برسی تحریم" />
                 <Setting name="تنظیمات" />

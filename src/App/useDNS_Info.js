@@ -5,38 +5,38 @@ var { getLatency, isSystemDNS_Server } = require('./kernel');
 
 
 const useDNS_Info = () => {
-    const [DNS_List, setDNS_List] = useState(defaultData.DNS_list);
-    const [BestDNS_id, setBestDNS_id] = useState(1);
-    const [IsUpdate, setIsUpdate] = useState(false);
-    const [EnableDNS_id, setEnableDNS_id] = useState(false);
+    const [DNS_Info, setDNS_Info] = useState({
+        DNS_List: defaultData.DNS_list,
+        BestDNS: false,
+        EnableDNS: false,
+        IsUpdate: false,
+    });
 
     useEffect(() => {
         async function update() {
             var min = Infinity;
-            var best_id;
 
-            for (const id in DNS_List) {
-                if (isSystemDNS_Server(DNS_List[id].DNS_servers))
-                    setEnableDNS_id(id);
+            for (const id in DNS_Info.DNS_List) {
+                if (isSystemDNS_Server(DNS_Info.DNS_List[id].DNS_servers))
+                    DNS_Info.EnableDNS = id;
 
-                var latency = await getLatency(DNS_List[id].DNS_servers);
-                DNS_List[id].latency = latency;
+                var latency = await getLatency(DNS_Info.DNS_List[id].DNS_servers);
+                DNS_Info.DNS_List[id].latency = latency;
 
                 if (latency < min) {
                     min = latency;
-                    best_id = id;
+                    DNS_Info.BestDNS = id;
                 }
             }
 
-            setBestDNS_id(best_id);
-            setDNS_List(DNS_List);
-            setIsUpdate(true);
+            DNS_Info.IsUpdate = true;
+            setDNS_Info(DNS_Info);
         }
 
         update();
     }, []);
 
-    return { DNS_List, BestDNS_id, EnableDNS_id, IsUpdate };
+    return DNS_Info;
 }
 
 export default useDNS_Info;
