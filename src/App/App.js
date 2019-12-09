@@ -10,13 +10,13 @@ import useDNS_List from './useDNS_List';
 // import { useState, useEffect } from 'react';
 
 const App = () => {
-    const [DNS_List, BestDNS_id] = useDNS_List();
+    const [DNS_List, BestDNS_id, IsUpdate] = useDNS_List();
 
     return (
         <div className="container-fluid vh-100 overflow-auto flex-grow-1 position-relative">
 
             <Tabs>
-                <Main name="اتصال خودکار" />
+                <Main name="اتصال خودکار" latencies={IsUpdate} />
                 <Manual name="اتصال دستی" />
                 <Check name="برسی تحریم" />
                 <Setting name="تنظیمات" />
