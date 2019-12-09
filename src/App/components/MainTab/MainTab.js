@@ -18,7 +18,7 @@ var panels = {
         img: '/Asset 51024 px.png',
         color: 'text-primary',
         title: 'گلابی متصل است',
-        body: <span>شما در حال استفاده از <b id="#">شکن</b> هستید</span>,
+        body: '',
         btnText: 'قطع اتصال',
         btnColor: 'btn-danger',
         btnAction: () => { },
@@ -48,6 +48,12 @@ var panels = {
     }
 }
 
+const ConnectedDNSBody = (props) => {
+    return (
+        <span>شما در حال استفاده از <a href={props.link} target="_blank"><b>{props.name}</b></a> هستید</span>
+    );
+}
+
 const MainTab = (props) => {
     const [Panel, setPanel] = React.useState(panels.load);
 
@@ -58,6 +64,8 @@ const MainTab = (props) => {
             if (networks.length === 0) {
                 setPanel(panels.noNet);
             } else if (props.DNS_info.EnableDNS) {
+                var DNS = props.DNS_info.DNS_List[props.DNS_info.EnableDNS];
+                panels.connected.body = <ConnectedDNSBody name={DNS.name} link={DNS.url} />
                 setPanel(panels.connected);
             } else {
                 setPanel(panels.disconnect);
