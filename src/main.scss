@@ -69,6 +69,11 @@ label.custom-control-label::before, label.custom-control-label::after{
 a {
   cursor: pointer;
 }
+
+button:disabled,
+button[disabled]{
+  cursor: default;
+}
 // -------------------------
 
 // .bar {

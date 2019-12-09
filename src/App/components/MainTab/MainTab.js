@@ -1,25 +1,87 @@
-const MainTab = (props) => {
-    return (
+import { getConnectedNetworkInterfaces } from '../../kernel'
+import { realpathSync } from 'fs';
+import { async } from 'q';
 
+var panels = {
+    disconnect: {
+        img: '/Asset 81024 px.png',
+        color: 'text-danger',
+        title: 'گلابی وصل نیست',
+        body: 'با کلیک بر اتصال به سریع ترین سرویس متصل شوید',
+        btnText: 'اتصال',
+        btnColor: 'btn-primary',
+        btnAction: () => { },
+        btnDisable: false
+    },
+
+    connected: {
+        img: '/Asset 51024 px.png',
+        color: 'text-primary',
+        title: 'گلابی متصل است',
+        body: <span>شما در حال استفاده از <b id="#">شکن</b> هستید</span>,
+        btnText: 'قطع اتصال',
+        btnColor: 'btn-danger',
+        btnAction: () => { },
+        btnDisable: false
+    },
+
+    noNet: {
+        img: '/Asset 91024 px.png',
+        color: 'text-danger',
+        title: 'ارتباط ناموفق',
+        body: 'اتصال خود با شبکه را برسی کنید',
+        btnText: 'تلاش مجدد',
+        btnColor: 'btn-primary',
+        btnAction: () => { },
+        btnDisable: false
+    },
+
+    load: {
+        img: '/Asset 101024 px.png',
+        color: 'text-danger',
+        title: 'صبر کنید',
+        body: ' ... در حال بار گذاری',
+        btnText: 'اتصال',
+        btnColor: 'btn-primary',
+        btnAction: () => { },
+        btnDisable: true
+    }
+}
+
+const MainTab = (props) => {
+    const [Panel, setPanel] = React.useState(panels.load);
+
+    React.useEffect(() => {
+        async function update() {
+            var networks = await getConnectedNetworkInterfaces();
+
+            if (networks.length === 0) {
+                setPanel(panels.noNet);
+            } else if (props.DNS_info.EnableDNS) {
+                setPanel(panels.connected);
+            } else {
+                setPanel(panels.disconnect);
+            }
+        }
+
+        update()
+    }, []);
+
+    return (
         <div className="container">
             <div className="row">
                 <div className="col-12 d-flex vh-100 justify-content-center align-items-center">
 
-                    <div className="status-non card text-danger border border-danger my-3">
+                    <div className="status-non card my-3 border-0">
+                        <img className="card-img-top img-fluid w-25 mx-auto mb-5" src={Panel.img} alt="Card image cap" />
                         <div className="card-body text-center">
-                            <h5 className="card-title">گلابی وصل نیست</h5>
-                            <p className="card-text pb-3">برای اتصال می توانید یکی از سرویس دهنده های زیر را انتخاب کنید</p>
-                            <button type="button" className="btn btn-danger m-auto d-block text-light">اتصال خودکار</button>
+                            <h5 className={'card-title ' + Panel.color}>{Panel.title}</h5>
+                            <p className="card-text mb-5">{Panel.body}</p>
+                            <button type="button" disabled={Panel.btnDisable} onClick={Panel.btnAction}
+                                className={"btn mx-auto d-block text-light " + Panel.btnColor}>
+                                {Panel.btnText}</button>
                         </div>
                     </div>
-
-                    {/* <div className="status-set card text-right border border-primary my-3">
-                        <div className="card-body text-primary">
-                            <h5 className="card-title">گلابی وصل است</h5>
-                            <p className="card-text pb-3">شما در حال استفاده از <b id="link">شکن</b> هستید</p>
-                            <button type="button" className="btn btn-primary m-auto d-block" id="disconnect">قطع اتصال</button>
-                        </div>
-                    </div> */}
 
                     {/* <div className="mt-3 border border-primary rounded">
                         <div className="bg-primary d-flex justify-content-between align-items-center">
@@ -39,7 +101,7 @@ const MainTab = (props) => {
                             </tbody>
                         </table>
                     </div> */}
-                    
+
                 </div>
             </div>
         </div>
