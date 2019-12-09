@@ -5,10 +5,10 @@ import Manual from './Components/ManualTab/ManualTab';
 import Check from './Components/CheckTab/CheckTab';
 import Setting from './Components/SettingTab/SettingTab';
 
-import useDNS_List from './useDNS_List';
+import useDNS_Info from './useDNS_Info';
 
 const App = () => {
-    const [DNS_List, BestDNS_id, EnableDNS_id, IsUpdate] = useDNS_List();
+    const DNS_info = useDNS_Info();
 
     return (
         <div className="container-fluid vh-100 overflow-auto flex-grow-1 position-relative">

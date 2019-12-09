@@ -4,7 +4,7 @@ import { defaultData } from './globals';
 var { getLatency, isSystemDNS_Server } = require('./kernel');
 
 
-const useDNS_List = () => {
+const useDNS_Info = () => {
     const [DNS_List, setDNS_List] = useState(defaultData.DNS_list);
     const [BestDNS_id, setBestDNS_id] = useState(1);
     const [IsUpdate, setIsUpdate] = useState(false);
@@ -36,7 +36,7 @@ const useDNS_List = () => {
         update();
     }, []);
 
-    return [DNS_List, BestDNS_id, EnableDNS_id, IsUpdate];
+    return { DNS_List, BestDNS_id, EnableDNS_id, IsUpdate };
 }
 
-export default useDNS_List;
+export default useDNS_Info;
