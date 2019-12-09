@@ -1,51 +1,61 @@
-import { getConnectedNetworkInterfaces, setDNS_Auto, setDNS_ConnectedInterfaces } from '../../kernel'
+import { getConnectedNetworkInterfaces, setDNS_Auto, setDNS_ConnectedInterfaces, isSystemDNS_Server, getLatency } from '../../kernel'
+import { defaultData } from '../../globals';
 import { realpathSync } from 'fs';
 import { async } from 'q';
 
+
 var panels = {
-    disconnect: {
-        img: '/Asset 81024 px.png',
-        color: 'text-danger',
-        title: 'گلابی وصل نیست',
-        body: 'با کلیک بر اتصال به سریع ترین سرویس متصل شوید',
-        btnText: 'اتصال',
-        btnColor: 'btn-primary',
-        btnAction: () => { },
-        btnDisable: false
+    disconnect: function (props) {
+        return (
+            <div className="status-non card my-3 border-0">
+                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 81024 px.png" key={4}  />
+                <div className="card-body text-center">
+                    <h5 className='card-title text-danger'>گلابی وصل نیست</h5>
+                    <p className="card-text mb-5">با کلیک بر اتصال به سریع ترین سرویس متصل شوید</p>
+                    <button type="button" onClick={props.btnAction} className="btn mx-auto d-block text-light btn-primary">اتصال</button>
+                </div>
+            </div>
+        )
     },
 
-    connected: {
-        img: '/Asset 51024 px.png',
-        color: 'text-primary',
-        title: 'گلابی متصل است',
-        body: '',
-        btnText: 'قطع اتصال',
-        btnColor: 'btn-danger',
-        btnAction: setDNS_Auto,
-        btnDisable: false
+    connected: function (props) {
+        return (
+            <div className="status-non card my-3 border-0">
+                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 51024 px.png" />
+                <div className="card-body text-center">
+                    <h5 className='card-title text-primary'>گلابی متصل است</h5>
+                    <p className="card-text mb-5">{props.body}</p>
+                    <button type="button" onClick={props.btnAction} className="btn mx-auto d-block text-light btn-danger">قطع اتصال</button>
+                </div>
+            </div>
+        )
     },
 
-    noNet: {
-        img: '/Asset 91024 px.png',
-        color: 'text-danger',
-        title: 'ارتباط ناموفق',
-        body: 'اتصال خود با شبکه را برسی کنید',
-        btnText: 'اتصال',
-        btnColor: 'btn-primary',
-        btnAction: () => { },
-        btnDisable: true
+    noNet: function (props) {
+        return (
+            <div className="status-non card my-3 border-0">
+                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 91024 px.png"  />
+                <div className="card-body text-center">
+                    <h5 className='card-title text-danger'>گلابی متصل است</h5>
+                    <p className="card-text mb-5">اتصال خود با شبکه را برسی کنید</p>
+                    <button type="button" onClick={props.btnAction} className="btn mx-auto d-block text-light btn-primary">تلاش مجدد</button>
+                </div>
+            </div>
+        )
     },
 
-    load: {
-        img: '/Asset 101024 px.png',
-        color: 'text-danger',
-        title: 'صبر کنید',
-        body: ' ... در حال بار گذاری',
-        btnText: 'اتصال',
-        btnColor: 'btn-primary',
-        btnAction: () => { },
-        btnDisable: true
-    }
+    Load: function () {
+        return (
+            <div className="status-non card my-3 border-0">
+                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 101024 px.png"  />
+                <div className="card-body text-center">
+                    <h5 className='card-title text-danger'>صبر کنید</h5>
+                    <p className="card-text mb-5"> ... در حال بار گذاری </p>
+                    <button type="button" disabled={true} className="btn mx-auto d-block text-light btn-primary">تلاش مجدد</button>
+                </div>
+            </div>
+        )
+    },
 }
 
 const ConnectedDNSBody = (props) => {
@@ -55,42 +65,74 @@ const ConnectedDNSBody = (props) => {
 }
 
 const MainTab = (props) => {
-    const [Panel, setPanel] = React.useState(panels.load);
+    const [DNS_Info, setDNS_Info] = React.useState({
+        DNS_List: defaultData.DNS_list,
+        BestDNS: false,
+        EnableDNS: false,
+    });
 
-    React.useEffect(() => {
-        async function update() {
-            var networks = await getConnectedNetworkInterfaces();
+    const [Panel, setPanel] = React.useState(<panels.Load />);
 
-            if (networks.length === 0) {
-                setPanel(panels.noNet);
-            } else if (props.DNS_info.EnableDNS) {
-                var DNS = props.DNS_info.DNS_List[props.DNS_info.EnableDNS];
-                panels.connected.body = <ConnectedDNSBody name={DNS.name} link={DNS.url} />
-                setPanel(panels.connected);
-            } else {
-                panels.disconnect.btnAction = () => { debugger; setDNS_ConnectedInterfaces(props.DNS_info.DNS_List[props.DNS_info.BestDNS]).DNS_servers }
-                setPanel(panels.disconnect);
+    async function connect() {
+        var out = await setDNS_ConnectedInterfaces(DNS_Info.DNS_List[DNS_Info.BestDNS].DNS_servers);
+        DNS_Info.EnableDNS = DNS_Info.BestDNS;
+        setDNS_Info(DNS_Info);
+        update();
+    }
+
+    async function tryAgain() {
+        update();
+    }
+
+    async function disconnect() {
+        var out = await setDNS_Auto();
+        DNS_Info.EnableDNS = false;
+        setDNS_Info(DNS_Info);
+        update();
+    }
+
+    async function init() {
+        var min = Infinity;
+        for (const id in DNS_Info.DNS_List) {
+            if (isSystemDNS_Server(DNS_Info.DNS_List[id].DNS_servers))
+                DNS_Info.EnableDNS = id;
+
+            var latency = await getLatency(DNS_Info.DNS_List[id].DNS_servers);
+            DNS_Info.DNS_List[id].latency = latency;
+
+            if (latency < min) {
+                min = latency;
+                DNS_Info.BestDNS = id;
             }
         }
+    }
 
+    async function update() {
+
+        var networks = await getConnectedNetworkInterfaces();
+        if (DNS_Info.EnableDNS) {
+            var DNS = DNS_Info.DNS_List[DNS_Info.EnableDNS];
+            var body = <ConnectedDNSBody name={DNS.name} link={DNS.url} />
+            setPanel(<panels.connected btnAction={disconnect} body={body} />);
+        } else if (networks.length === 0) {
+            setPanel(<panels.noNet btnAction={tryAgain} />);
+        } else {
+            setPanel(<panels.disconnect btnAction={connect} />);
+        }
+        setDNS_Info(DNS_Info);
+    }
+
+    React.useEffect(() => {
+        init();
         update();
-    });
+    }, []);
 
     return (
         <div className="container">
             <div className="row">
                 <div className="col-12 d-flex vh-100 justify-content-center align-items-center">
+                    {Panel}
 
-                    <div className="status-non card my-3 border-0">
-                        <img className="card-img-top img-fluid w-25 mx-auto mb-5" src={Panel.img} alt="Card image cap" />
-                        <div className="card-body text-center">
-                            <h5 className={'card-title ' + Panel.color}>{Panel.title}</h5>
-                            <p className="card-text mb-5">{Panel.body}</p>
-                            <button type="button" disabled={Panel.btnDisable} onClick={Panel.btnAction}
-                                className={"btn mx-auto d-block text-light " + Panel.btnColor}>
-                                {Panel.btnText}</button>
-                        </div>
-                    </div>
 
                     {/* <div className="mt-3 border border-primary rounded">
                         <div className="bg-primary d-flex justify-content-between align-items-center">

@@ -19,6 +19,8 @@ class Tabs extends React.Component {
         this.setState({ ActiveTab: index });
     }
 
+    
+
     render() {
         return (
             <div className="row h-100">

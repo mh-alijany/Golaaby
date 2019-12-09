@@ -5,16 +5,12 @@ import Manual from './Components/ManualTab/ManualTab';
 import Check from './Components/CheckTab/CheckTab';
 import Setting from './Components/SettingTab/SettingTab';
 
-import useDNS_Info from './useDNS_Info';
-
 const App = () => {
-    const DNS_info = useDNS_Info();
-
     return (
         <div className="container-fluid vh-100 overflow-auto flex-grow-1 position-relative">
 
             <Tabs>
-                <Main name="اتصال خودکار" DNS_info={DNS_info} />
+                <Main name="اتصال خودکار"/>
                 <Manual name="اتصال دستی" />
                 <Check name="برسی تحریم" />
                 <Setting name="تنظیمات" />
