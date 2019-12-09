@@ -7,9 +7,6 @@ import Setting from './Components/SettingTab/SettingTab';
 
 import useDNS_List from './useDNS_List';
 
-import {setDNS_Servers} from './kernel';
-
-
 const App = () => {
     const [DNS_List, BestDNS_id, IsUpdate] = useDNS_List();
 
