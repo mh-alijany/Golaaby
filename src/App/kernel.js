@@ -1,5 +1,5 @@
 import { getNetworks, setDNS_servers } from './modules/shell';
-import { measure } from './modules/nsLookup'
+import { measure ,getDNS_Servers} from './modules/nsLookup'
 import { async } from 'q';
 
 export async function getAllNetworkInterfaces(){
@@ -18,6 +18,11 @@ export async function setDNS_ConnectedInterfaces(DNS_Servers) {
     for (const network of connectedInterfaces) {
         await setDNS_servers(network.InterfaceIndex, DNS_Servers[0], DNS_Servers[1]);
     }
+}
+
+export function isSystemDNS_Server(dns_servers) {
+    var systemDNS_servers = getDNS_Servers();
+    return systemDNS_servers.every(item => dns_servers.includes(item))
 }
 
 export function setDNS_ManualInterface(DNS_Servers, InterfaceIndex) {

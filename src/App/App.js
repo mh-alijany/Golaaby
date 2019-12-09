@@ -8,7 +8,7 @@ import Setting from './Components/SettingTab/SettingTab';
 import useDNS_List from './useDNS_List';
 
 const App = () => {
-    const [DNS_List, BestDNS_id, IsUpdate] = useDNS_List();
+    const [DNS_List, BestDNS_id, EnableDNS_id, IsUpdate] = useDNS_List();
 
     return (
         <div className="container-fluid vh-100 overflow-auto flex-grow-1 position-relative">
