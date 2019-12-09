@@ -72,7 +72,7 @@ const MainTab = (props) => {
             }
         }
 
-        update()
+        update();
     }, []);
 
     return (
