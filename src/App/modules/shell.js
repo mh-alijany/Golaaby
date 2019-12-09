@@ -34,7 +34,7 @@ export function setDNS_servers(index, DNS1, DNS2) {
  * @param {Number} index Interface Index of a network adaptor
  * @returns {Promise} that fulfills with the output of command or rejects with an error
  */
-export function setDNS_Auto(index) {
+export function setDNS_auto(index) {
     ps.addCommand(`Set-DnsClientServerAddress -InterfaceIndex ${index} -ResetServerAddresses`);
     return ps.invoke();
 }

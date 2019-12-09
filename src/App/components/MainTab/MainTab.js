@@ -1,4 +1,4 @@
-import { getConnectedNetworkInterfaces } from '../../kernel'
+import { getConnectedNetworkInterfaces, setDNS_Auto, setDNS_ConnectedInterfaces } from '../../kernel'
 import { realpathSync } from 'fs';
 import { async } from 'q';
 
@@ -21,7 +21,7 @@ var panels = {
         body: '',
         btnText: 'قطع اتصال',
         btnColor: 'btn-danger',
-        btnAction: () => { },
+        btnAction: setDNS_Auto,
         btnDisable: false
     },
 
@@ -30,10 +30,10 @@ var panels = {
         color: 'text-danger',
         title: 'ارتباط ناموفق',
         body: 'اتصال خود با شبکه را برسی کنید',
-        btnText: 'تلاش مجدد',
+        btnText: 'اتصال',
         btnColor: 'btn-primary',
         btnAction: () => { },
-        btnDisable: false
+        btnDisable: true
     },
 
     load: {
@@ -68,12 +68,13 @@ const MainTab = (props) => {
                 panels.connected.body = <ConnectedDNSBody name={DNS.name} link={DNS.url} />
                 setPanel(panels.connected);
             } else {
+                panels.disconnect.btnAction = () => { debugger; setDNS_ConnectedInterfaces(props.DNS_info.DNS_List[props.DNS_info.BestDNS]).DNS_servers }
                 setPanel(panels.disconnect);
             }
         }
 
         update();
-    }, []);
+    });
 
     return (
         <div className="container">
