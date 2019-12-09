@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { defaultData } from './globals';
 
-import { getBestDNS } from './kernel';
-var DNS_resolver = require('./modules/nsLookup');
+var { getLatency } = require('./kernel');
 
 
 const useDNS_List = () => {
@@ -13,12 +12,16 @@ const useDNS_List = () => {
     useEffect(() => {
         async function updateLatency() {
 
+            var min = Infinity;
+            var best_id;
             for (const id in DNS_List) {
-                var latency = await DNS_resolver.measure(DNS_List[id].DNS_servers);
+                var latency = await getLatency(DNS_List[id].DNS_servers);
                 DNS_List[id].latency = latency;
+                if (latency < min) {
+                    min = latency;
+                    best_id = id;
+                }
             }
-
-            var best_id = getBestDNS(DNS_List);
 
             setBestDNS_id(best_id);
             setDNS_List(DNS_List);
