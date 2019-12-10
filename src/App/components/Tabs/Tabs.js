@@ -5,13 +5,6 @@ class Tabs extends React.Component {
         super(props);
         this.state = { ActiveTab: 0 };
         this.setActiveTab = this.setActiveTab.bind(this);
-
-        this.tabs = React.Children.map(props.children, child =>
-            <div className="tab-pane fade show active" role="tabpanel" aria-labelledby="pills-con">
-                {child}
-            </div>
-        );
-        
         this.tabs_name = React.Children.map(props.children, child => child.props.name);
     }
 
@@ -19,15 +12,22 @@ class Tabs extends React.Component {
         this.setState({ ActiveTab: index });
     }
 
-    
+
 
     render() {
+        var tabs = React.Children.map(this.props.children, (child, i) =>
+            <div className={"tab-pane fade show active" + (i === this.state.ActiveTab ? '' : "d-none")}
+                role="tabpanel" aria-labelledby="pills-con">
+                {child}
+            </div>
+        )
+        
         return (
             <div className="row h-100">
 
                 <div className="col content">
                     <div className="tab-content " id="v-pills-tabContent">
-                        {this.tabs[this.state.ActiveTab]}
+                        {tabs}
                     </div>
                 </div>
 
