@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit, faSync } from '@fortawesome/free-solid-svg-icons';
+import DNS_Form from './components/DNS_Form';
 
 function Options(props) {
     return (
@@ -53,7 +54,7 @@ const ManualTab = (props) => {
                 </table>
             </div>
 
-            
+            <DNS_Form title="تست" display={true} />
 
         </div>
     );
