@@ -1,14 +1,13 @@
-import { getConnectedNetworkInterfaces, setDNS_Auto, setDNS_ConnectedInterfaces, isSystemDNS_Server, getLatency } from '../../kernel'
-import { defaultData } from '../../globals';
+import { getConnectedNetworkInterfaces, setDNS_Auto, setDNS_ConnectedInterfaces } from '../../kernel'
 import { realpathSync } from 'fs';
 import { async } from 'q';
-
+import useDNS_Info from '../../useDNS_Info';
 
 var panels = {
     disconnect: function (props) {
         return (
             <div className="status-non card my-3 border-0">
-                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 81024 px.png" key={4}  />
+                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 81024 px.png" />
                 <div className="card-body text-center">
                     <h5 className='card-title text-danger'>گلابی وصل نیست</h5>
                     <p className="card-text mb-5">با کلیک بر اتصال به سریع ترین سرویس متصل شوید</p>
@@ -34,7 +33,7 @@ var panels = {
     noNet: function (props) {
         return (
             <div className="status-non card my-3 border-0">
-                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 91024 px.png"  />
+                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 91024 px.png" />
                 <div className="card-body text-center">
                     <h5 className='card-title text-danger'>گلابی متصل است</h5>
                     <p className="card-text mb-5">اتصال خود با شبکه را برسی کنید</p>
@@ -47,7 +46,7 @@ var panels = {
     Load: function () {
         return (
             <div className="status-non card my-3 border-0">
-                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 101024 px.png"  />
+                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 101024 px.png" />
                 <div className="card-body text-center">
                     <h5 className='card-title text-danger'>صبر کنید</h5>
                     <p className="card-text mb-5"> ... در حال بار گذاری </p>
@@ -65,12 +64,7 @@ const ConnectedDNSBody = (props) => {
 }
 
 const MainTab = (props) => {
-    const [DNS_Info, setDNS_Info] = React.useState({
-        DNS_List: defaultData.DNS_list,
-        BestDNS: false,
-        EnableDNS: false,
-    });
-
+    const [DNS_Info, setDNS_Info, HasUpdate, setHasUpdate] = useDNS_Info();
     const [Panel, setPanel] = React.useState(<panels.Load />);
 
     async function connect() {
@@ -91,22 +85,6 @@ const MainTab = (props) => {
         update();
     }
 
-    async function init() {
-        var min = Infinity;
-        for (const id in DNS_Info.DNS_List) {
-            if (isSystemDNS_Server(DNS_Info.DNS_List[id].DNS_servers))
-                DNS_Info.EnableDNS = id;
-
-            var latency = await getLatency(DNS_Info.DNS_List[id].DNS_servers);
-            DNS_Info.DNS_List[id].latency = latency;
-
-            if (latency < min) {
-                min = latency;
-                DNS_Info.BestDNS = id;
-            }
-        }
-    }
-
     async function update() {
 
         var networks = await getConnectedNetworkInterfaces();
@@ -123,14 +101,23 @@ const MainTab = (props) => {
     }
 
     React.useEffect(() => {
-        init();
-        update();
-    }, []);
+        if (HasUpdate) {
+            update();
+            setHasUpdate(false);
+        }
+    }, [HasUpdate]);
 
     return (
         <div className="container">
             <div className="row">
                 <div className="col-12 d-flex vh-100 justify-content-center align-items-center">
+                    {/* pre load images */}
+                    <img className="d-none" src="/Asset 51024 px.png" />
+                    <img className="d-none" src="/Asset 101024 px.png" />
+                    <img className="d-none" src="/Asset 81024 px.png" />
+                    <img className="d-none" src="/Asset 91024 px.png" />
+
+
                     {Panel}
 
 
