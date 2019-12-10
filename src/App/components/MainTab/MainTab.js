@@ -1,4 +1,4 @@
-import { getConnectedNetworkInterfaces, setDNS_Auto, setDNS_ConnectedInterfaces } from '../../kernel'
+import { setDNS_Auto, setDNS_ConnectedInterfaces } from '../../kernel'
 import { realpathSync } from 'fs';
 import { async } from 'q';
 import useDNS_Info from '../../useDNS_Info';
@@ -28,12 +28,11 @@ const MainTab = (props) => {
     }
 
     async function update() {
-        var networks = await getConnectedNetworkInterfaces();
         if (DNS_Info.EnableDNS) {
             var DNS = DNS_Info.DNS_List[DNS_Info.EnableDNS];
             var body = <ConnectedDNSBody name={DNS.name} link={DNS.url} />
             setPanel(<panels.Connected btnAction={disconnect} body={body} />);
-        } else if (networks.length === 0) {
+        } else if (DNS_Info.ConnectedInterfaces.length === 0) {
             setPanel(<panels.NoNet btnAction={tryAgain} />);
         } else {
             setPanel(<panels.Disconnect btnAction={connect} />);
@@ -42,7 +41,9 @@ const MainTab = (props) => {
     }
 
     React.useEffect(() => {
+        console.log("check");
         if (HasUpdate) {
+            console.log("getUpdate");
             update();
             setHasUpdate(false);
         }

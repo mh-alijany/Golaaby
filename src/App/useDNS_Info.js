@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { defaultData } from './globals';
 
-var { getLatency, isSystemDNS_Server } = require('./kernel');
+var { getConnectedNetworkInterfaces, getLatency, isSystemDNS_Server } = require('./kernel');
 
 
 const useDNS_Info = () => {
     const [DNS_Info, setDNS_Info] = useState({
         DNS_List: defaultData.DNS_list,
+        ConnectedInterfaces: [],
         BestDNS: false,
         EnableDNS: false,
     });
@@ -30,10 +31,13 @@ const useDNS_Info = () => {
                 }
             }
 
+            var networks = await getConnectedNetworkInterfaces();
+            DNS_Info.ConnectedInterfaces = networks;
+
             setDNS_Info(DNS_Info);
             setHasUpdate(true);
         }
-
+        
         update();
     }, []);
 
