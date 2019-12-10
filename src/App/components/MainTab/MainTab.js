@@ -70,21 +70,3 @@ const MainTab = (props) => {
 export default MainTab;
 
 
-/* <div className="mt-3 border border-primary rounded">
-        <div className="bg-primary d-flex justify-content-between align-items-center">
-            <button type="button" className="btn btn-light mx-3 my-2 text-primary">افزودن</button>
-            <h5 className="mx-3 my-2 text-light">ها DNS لیست</h5>
-        </div>
-        <table className="table mb-0 table-hover text-right text-primary">
-            <thead>
-                <tr className="bg-primary text-light">
-                    <th scope="col">گذینه ها</th>
-                    <th scope="col">تاخیر</th>
-                    <th scope="col">سرویس دهنده</th>
-                </tr>
-            </thead>
-            <tbody id='DNS-table'>
-
-            </tbody>
-        </table>
-    </div> */
