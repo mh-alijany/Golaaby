@@ -1,4 +1,4 @@
-import Nav from './components/Tabs/components/Nav';
+import Nav from './components/Tabs/Nav';
 
 import Main from './Components/MainTab/MainTab';
 import Manual from './Components/ManualTab/ManualTab';
