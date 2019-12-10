@@ -7,7 +7,7 @@ import Setting from './Components/SettingTab/SettingTab';
 
 const App = () => {
     const tabs = ["اتصال خودکار", "اتصال دستی", "برسی تحریم", "تنظیمات"];
-    const [ActiveTab, setActiveTab] = React.useState("اتصال خودکار");
+    const [ActiveTab, setActiveTab] = React.useState("اتصال دستی");
 
     return (
         <div className="container-fluid vh-100 overflow-auto flex-grow-1 position-relative">
@@ -23,7 +23,7 @@ const App = () => {
                 </div>
 
                 <div className="col-3 menu bg-light shadow">
-                    <Nav tabs_name={tabs} setTab={setActiveTab} />
+                    <Nav tabs_name={tabs} setTab={setActiveTab} defaultTab={ActiveTab} />
                 </div>
 
             </div>

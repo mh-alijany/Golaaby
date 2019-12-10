@@ -3,7 +3,7 @@ class Nav extends React.Component {
         super(props);
         this.links = props.tabs_name.map((name, index) =>
             <a id="pills-con" data-toggle="pill" aria-controls="tab-con" aria-selected="true"
-                className={index === 0 ? 'nav-link active' : 'nav-link'}
+                className={name == props.defaultTab ? 'nav-link active' : 'nav-link'}
                 key={index}
                 onClick={() => props.setTab(name)}
                 role="tab">
