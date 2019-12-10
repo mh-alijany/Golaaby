@@ -16,7 +16,7 @@ $dark: rgb(63, 63, 63);
 @import "node_modules/bootstrap/scss/grid";
 
 @import "node_modules/bootstrap/scss/buttons";
-// @import "../node_modules/bootstrap/scss/modal";
+@import "node_modules/bootstrap/scss/modal";
 @import "node_modules/bootstrap/scss/forms";
 @import "../node_modules/bootstrap/scss/custom-forms";
 @import "node_modules/bootstrap/scss/badge";
@@ -45,6 +45,10 @@ $dark: rgb(63, 63, 63);
     border-right: 1rem solid $primary;
 }
 
+.m-display {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
 td {
     cursor: pointer;

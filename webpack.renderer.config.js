@@ -19,6 +19,19 @@ rules.push({
   }
 })
 
+rules.push({
+  test: /\.(woff|woff2|ttf|otf)$/,
+  use: [
+    {
+      loader: 'file-loader',
+      options: {
+        // outputPath: '/assets/fonts',
+        name: '[name].[ext]'
+      }
+    },
+  ],
+})
+
 module.exports = {
   // Put your normal webpack config below here
   module: {
