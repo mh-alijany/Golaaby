@@ -50,15 +50,17 @@ const MainTab = (props) => {
     }, [HasUpdate]);
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-12 d-flex vh-100 justify-content-center align-items-center">
-                    {/* pre load images */}
-                    <img className="d-none" src="/Asset 51024 px.png" />
-                    <img className="d-none" src="/Asset 101024 px.png" />
-                    <img className="d-none" src="/Asset 81024 px.png" />
-                    <img className="d-none" src="/Asset 91024 px.png" />
-                    {Panel}
+        <div className={"tab-pane fade show active" + (props.isActive ? '' : "d-none")}>
+            <div className="container">
+                <div className="row">
+                    <div className="col-12 d-flex vh-100 justify-content-center align-items-center">
+                        {/* pre load images */}
+                        <img className="d-none" src="/Asset 51024 px.png" />
+                        <img className="d-none" src="/Asset 101024 px.png" />
+                        <img className="d-none" src="/Asset 81024 px.png" />
+                        <img className="d-none" src="/Asset 91024 px.png" />
+                        {Panel}
+                    </div>
                 </div>
             </div>
         </div>

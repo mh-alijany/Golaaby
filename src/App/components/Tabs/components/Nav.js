@@ -5,7 +5,7 @@ class Nav extends React.Component {
             <a id="pills-con" data-toggle="pill" aria-controls="tab-con" aria-selected="true"
                 className={index === 0 ? 'nav-link active' : 'nav-link'}
                 key={index}
-                onClick={() => props.setTab(index)}
+                onClick={() => props.setTab(name)}
                 role="tab">
                 {name}
             </a>
