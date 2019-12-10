@@ -1,12 +1,12 @@
 import { setDNS_Auto, setDNS_ConnectedInterfaces } from '../../kernel'
 import { realpathSync } from 'fs';
 import { async } from 'q';
-import useDNS_Info from '../../useDNS_Info';
+// import useDNS_Info from '../../useDNS_Info';
 import { panels, ConnectedDNSBody } from './components/panels'
 
 
 const MainTab = (props) => {
-    const [DNS_Info, setDNS_Info, HasUpdate, setHasUpdate] = useDNS_Info();
+    var [DNS_Info, setDNS_Info, HasUpdate, setHasUpdate] = props.DNS_Info;
     const [Panel, setPanel] = React.useState(<panels.Load />);
 
     async function connect() {
@@ -40,10 +40,9 @@ const MainTab = (props) => {
         setDNS_Info(DNS_Info);
     }
 
+    // console.log(HasUpdate);
     React.useEffect(() => {
-        console.log("check");
         if (HasUpdate) {
-            console.log("getUpdate");
             update();
             setHasUpdate(false);
         }

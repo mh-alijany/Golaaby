@@ -1,4 +1,18 @@
 const ManualTab = (props) => {
+    var [DNS_Info, setDNS_Info, HasUpdate, setHasUpdate] = props.DNS_Info;
+
+    var rows = Object.values(DNS_Info.DNS_List).map((DNS) =>
+        <tr key={DNS.id}>
+            <td>...</td>
+            <td>
+                <span className={"badge text-light " + (DNS.latency ? "badge-success" : "badge-danger")}>
+                    {DNS.latency || "درحال برسی"}
+                </span>
+            </td>
+            <td><a href={DNS.url} target="_blank">{DNS.name}</a></td>
+        </tr>
+    );
+
     return (
         <div className={"tab-pane fade show active" + (props.isActive ? '' : "d-none")}>
 
@@ -19,11 +33,7 @@ const ManualTab = (props) => {
                     </thead>
 
                     <tbody id='DNS-table'>
-                        <tr>
-                            <td></td>
-                            <td>بارگذاری ...</td>
-                            <td></td>
-                        </tr>
+                        {rows}
                     </tbody>
                 </table>
             </div>
