@@ -9,7 +9,7 @@ import useDNS_Info from './useDNS_Info'
 const App = () => {
     const DNS_Info = useDNS_Info();
     const tabs = ["اتصال خودکار", "اتصال دستی", "برسی تحریم", "تنظیمات"];
-    const [ActiveTab, setActiveTab] = React.useState("اتصال خودکار");
+    const [ActiveTab, setActiveTab] = React.useState(tabs[0]);
 
     return (
         <div className="container-fluid vh-100 overflow-auto flex-grow-1 position-relative">
@@ -17,10 +17,10 @@ const App = () => {
 
                 <div className="col content">
                     <div className="tab-content " id="v-pills-tabContent">
-                        <Main isActive={ActiveTab == "اتصال خودکار"} DNS_Info={DNS_Info} />
-                        <Manual isActive={ActiveTab == "اتصال دستی"} DNS_Info={DNS_Info} />
-                        <Check isActive={ActiveTab == "برسی تحریم"} />
-                        <Setting isActive={ActiveTab == "تنظیمات"} />
+                        <Main isActive={ActiveTab == tabs[0]} DNS_Info={DNS_Info} />
+                        <Manual isActive={ActiveTab == tabs[1]} DNS_Info={DNS_Info} />
+                        <Check isActive={ActiveTab == tabs[2]} />
+                        <Setting isActive={ActiveTab == tabs[3]} />
                     </div>
                 </div>
 
