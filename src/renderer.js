@@ -1,7 +1,5 @@
 import './main.scss';
 
-import 'bootstrap/dist/js/bootstrap.bundle';
-
 import ReactDOM from 'react-dom';
 import App from './App/App'
 
