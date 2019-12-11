@@ -6,7 +6,10 @@ export class ManualTab extends React.Component {
         super(props);
         // [DNS_Info, setDNS_Info, HasUpdate, setHasUpdate]
         this.DNS_Info = props.DNS_Info[0];
-        this.rows = Object.values(this.DNS_Info.DNS_List).map((DNS) => <DNS_Row DNS={DNS} key={DNS.id} />);
+
+        this.state = {
+            rows : Object.values(this.DNS_Info.DNS_List).map((DNS) => <DNS_Row DNS={DNS} key={DNS.id} />)
+        }
     }
 
     render() {
@@ -28,7 +31,7 @@ export class ManualTab extends React.Component {
                             </tr>
                         </thead>
                         <tbody id='DNS-table'>
-                            {this.rows}
+                            {this.state.rows}
                         </tbody>
                     </table>
                 </div>
