@@ -10,7 +10,7 @@ class DNS_Form extends React.Component {
             Name: props.Name || ""
         };
 
-        this.updateDNS = this.onChange.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     updateName(e) {
@@ -26,7 +26,6 @@ class DNS_Form extends React.Component {
     done() {
         this.props.action({
             name: this.state.Name,
-            id: this.state.Name,
             DNS1: this.state.DNS1,
             DNS2: this.state.DNS2
         })

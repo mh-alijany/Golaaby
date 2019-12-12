@@ -16,14 +16,6 @@ export class ManualTab extends React.Component {
         this.openAddDNS = this.openAddDNS.bind(this);
     }
 
-    addDNS(DNS) {
-        var rows = this.state.rows;
-        if (DNS) rows.push(<DNS_Row DNS={DNS} key={DNS.id} />);
-
-        this.setState({
-            form: null
-        });
-    }
 
     openAddDNS() {
         this.setState({
@@ -35,6 +27,24 @@ export class ManualTab extends React.Component {
         this.setState({
             form: <DNS_Form title="ویرایش" action={this.addDNS} />
         });
+    }
+
+
+    isValid(form, adding) {
+        let DNS_List = Object.values(this.DNS_Info);
+        let condition_1 = form.name != '';
+        let condition_2 = form.DNS1 != form.DNS2;
+        let condition_3 = adding && DNS_List.every(item => item.name != form.name);
+
+        return condition_1 && condition_2 && condition_3 // esle add warns to form
+    }
+
+    addDNS(form) {
+        var rows = this.state.rows;
+        if (form && this.isValid(form, true)) {
+            rows.push(<DNS_Row DNS={form} key={form.name} />); // add to DNS_info
+            this.setState({ form: null, rows: rows });
+        }
     }
 
     render() {
