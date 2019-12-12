@@ -11,13 +11,13 @@ const checkTab = (props) => {
                                     <h5>برسی یا گذارش تحریم</h5>
                                 </label>
                                 <div className="input-group mb-3">
-                                    <input type="url" className="form-control" id="checkDomain" placeholder="ادرس صفحه مورد نظر"
+                                    <input type="url" className="form-control" id="checkDomain" placeholder="آدرس صفحه مورد نظر"
                                         required />
                                     <div className="valid-feedback">
-                                        با گلابی کار میکنه
+                                        با گلابی کار می کنه
                                 </div>
                                     <div className="invalid-feedback">
-                                        این فیلتره که.
+                                        این فیلتر که.
                                 </div>
                                     <div className="input-group-append">
                                         <button className="btn btn-outline-secondary" type="button" id="button-addon2">برسی</button>

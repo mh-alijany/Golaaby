@@ -23,7 +23,7 @@ export class ManualTab extends React.Component {
         });
     }
 
-    openEditeDNS(id) {
+    openEditDNS(id) {
         this.setState({
             form: <DNS_Form title="ویرایش" action={this.addDNS} />
         });
@@ -36,7 +36,7 @@ export class ManualTab extends React.Component {
         let condition_2 = form.DNS1 != form.DNS2;
         let condition_3 = adding && DNS_List.every(item => item.name != form.name);
 
-        return condition_1 && condition_2 && condition_3 // esle add warns to form
+        return condition_1 && condition_2 && condition_3 // else add warns to form
     }
 
     addDNS(form) {
@@ -60,7 +60,7 @@ export class ManualTab extends React.Component {
                     <table className="table mb-0 table-hover text-right text-dark">
                         <thead>
                             <tr className="te">
-                                <td scope="col">گذینه ها</td>
+                                <td scope="col">گزینه ها</td>
                                 <td scope="col">تاخیر</td>
                                 <td scope="col">سرویس دهنده</td>
                             </tr>

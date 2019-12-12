@@ -37,7 +37,7 @@ export class IP_input extends React.Component {
     render() {
         return (
             <div className="col-6">
-                <label htmlFor={this.props.state} className="float-right">DNS جایگذین :</label>
+                <label htmlFor={this.props.state} className="float-right">DNS جایگزین :</label>
                 <input state={this.props.state} value={this.state.Value || ''} onChange={this.update}
                     style={{ direction: "ltr" }} placeholder="DNS IP" type="text" className="form-control" />
             </div>
