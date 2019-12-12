@@ -8,8 +8,30 @@ export class ManualTab extends React.Component {
         this.DNS_Info = props.DNS_Info[0];
 
         this.state = {
-            rows : Object.values(this.DNS_Info.DNS_List).map((DNS) => <DNS_Row DNS={DNS} key={DNS.id} />)
+            form: false,
+            form_title: "افزودن DNS",
+            rows: Object.values(this.DNS_Info.DNS_List).map((DNS) => <DNS_Row DNS={DNS} key={DNS.id} />)
         }
+
+        this.addDNS = this.addDNS.bind(this);
+        this.openAddDNS = this.openAddDNS.bind(this);
+    }
+
+    addDNS(DNS) {
+        var rows = this.state.rows;
+        if (DNS) rows.push(<DNS_Row DNS={DNS} key={DNS.id} />);
+
+        this.setState({
+            form: false,
+            rows: rows
+        });
+    }
+
+    openAddDNS() {
+        this.setState({
+            form: true,
+            form_title: "افزودن DNS"
+        });
     }
 
     render() {
@@ -18,7 +40,7 @@ export class ManualTab extends React.Component {
 
                 <div className="m-3 mt-5">
                     <div className="d-flex mb-3 justify-content-between align-items-center">
-                        <button type="button" className="btn btn-primary mx-3 my-2 ">افزودن</button>
+                        <button type="button" className="btn btn-primary mx-3 my-2 " onClick={this.openAddDNS}>افزودن</button>
                         <h6 className="mx-3 my-2 text-primary">ها DNS لیست</h6>
                     </div>
 
@@ -36,7 +58,9 @@ export class ManualTab extends React.Component {
                     </table>
                 </div>
 
-                <DNS_Form title="تست" display={true} />
+                {
+                    this.state.form && <DNS_Form title={this.state.form_title} addDNS={this.addDNS} />
+                }
             </div>
         );
     }

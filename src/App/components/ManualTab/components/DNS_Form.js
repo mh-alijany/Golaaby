@@ -8,7 +8,6 @@ class DNS_Form extends React.Component {
             DNS1: props.DNS1 || "",
             DNS2: props.DNS2 || "",
             Name: props.Name || "",
-            Display: props.display
         };
     }
 
@@ -45,16 +44,18 @@ class DNS_Form extends React.Component {
         this.setState(newState);
     }
 
-    exit(done) {
-        if (done)
-            console.log(this.state.DNS1 + " " + this.state.DNS2);
-
-        this.setState({ Display: false })
+    validate() {
+        this.props.addDNS({
+            name: this.state.Name,
+            id: this.state.Name,
+            DNS1: this.state.DNS1,
+            DNS2: this.state.DNS2
+        })
     }
 
     render() {
         return (
-            <div className={"modal fa fade show " + (this.state.Display ? "m-display" : "")} role="dialog">
+            <div className="modal fa fade show m-display" role="dialog">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -88,9 +89,9 @@ class DNS_Form extends React.Component {
                         </div>
 
                         <div className="modal-footer">
-                            <button type="button" onClick={() => this.exit(false)}
+                            <button type="button" onClick={() => this.props.addDNS()}
                                 className="btn btn-secondary" data-dismiss="modal">لغو</button>
-                            <button type="button" onClick={() => this.exit(true)}
+                            <button type="button" onClick={() => this.validate()}
                                 className="btn btn-primary">قبول</button>
                         </div>
 
