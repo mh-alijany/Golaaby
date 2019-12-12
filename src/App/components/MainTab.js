@@ -6,8 +6,8 @@ import { panels, ConnectedDNSBody } from './panels'
 
 
 const MainTab = (props) => {
-    var [DNS_Info, setDNS_Info, HasUpdate, setHasUpdate] = props.DNS_Info;
-    var DNS_List =DNS_Info.DNS_List;
+    var { DNS_Info, setDNS_Info, HasUpdate, setHasUpdate } = props.DNS_Info;
+    var DNS_List = DNS_Info.DNS_List;
     const [Panel, setPanel] = React.useState(<panels.Load />);
 
     async function connect() {
@@ -22,7 +22,7 @@ const MainTab = (props) => {
     }
 
     async function disconnect() {
-        var out = await setDNS_Auto();
+        await setDNS_Auto();
         DNS_Info.EnableDNS = false;
         setDNS_Info(DNS_Info);
         update();
@@ -42,10 +42,8 @@ const MainTab = (props) => {
     }
 
     React.useEffect(() => {
-        if (HasUpdate) {
-            update();
-            setHasUpdate(false);
-        }
+        update();
+        console.log('MainTab updated');
     }, [HasUpdate]);
 
     return (

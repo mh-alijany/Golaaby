@@ -37,12 +37,12 @@ const useDNS_Info = () => {
             setDNS_Info(DNS_Info);
             setHasUpdate(true);
         }
-        
+
         update();
     }, []);
 
 
-    return [DNS_Info, setDNS_Info, HasUpdate, setHasUpdate];
+    return { DNS_Info, setDNS_Info, HasUpdate, setHasUpdate };
 }
 
 export default useDNS_Info;

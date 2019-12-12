@@ -4,9 +4,9 @@ import DNS_Row from './DNS_Row';
 export class ManualTab extends React.Component {
     constructor(props) {
         super(props);
-        // [DNS_Info, setDNS_Info, HasUpdate, setHasUpdate]
-        this.DNS_Info = props.DNS_Info[0];
-        this.setDNS_Info = props.DNS_Info[1];
+
+        this.DNS_Info = props.DNS_Info.DNS_Info;
+        this.setDNS_Info = props.DNS_Info.setDNS_Info;
 
         this.state = {
             form: false,
@@ -18,9 +18,17 @@ export class ManualTab extends React.Component {
         this.closeForm = this.closeForm.bind(this);
     }
 
-    componentDidUpdate() {
-        if (this.props.DNS_Info[2])
-            console.log(true);
+    componentDidMount() {
+        this.setState({
+            rows: Object.values(this.DNS_Info.DNS_List).map((DNS) => <DNS_Row DNS={DNS} key={DNS.id} />)
+        })
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        let condition_1 = this.props.isActive != nextProps.isActive
+        let condition_2 = this.props.DNS_Info.HasUpdate != nextProps.DNS_Info.HasUpdate;
+        let condition_3 = this.state.form != nextState.form;
+        return condition_1 || condition_2 || condition_3;
     }
 
     openAddDNS() {
@@ -54,8 +62,10 @@ export class ManualTab extends React.Component {
         if (form && this.isValid(form, true)) {
             form.id = form.name; // check it later
             this.DNS_Info[form.name] = form;
-            this.setDNS_Info(this.DNS_Info)
-            this.setState({ form: null, rows: rows });
+            this.setDNS_Info(this.DNS_Info);
+            this.props.DNS_Info.setHasUpdate(!this.props.DNS_Info.HasUpdate);
+
+            this.setState({ form: false, rows: rows });
         }
     }
 
