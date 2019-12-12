@@ -36,7 +36,6 @@ const useDNS_Info = () => {
             updateAll();
             return;
         }
-
         isEnable(id);
         await updateDNS(id);
         checkMin(id);
@@ -48,7 +47,7 @@ const useDNS_Info = () => {
     async function updateAll() {
         debugger;
         for (const id in DNS_Info.DNS_List) {
-            isEnable(id);;
+            isEnable(id);
             await updateDNS(id);
             checkMin(id);
         }
