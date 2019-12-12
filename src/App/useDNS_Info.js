@@ -32,6 +32,12 @@ const useDNS_Info = () => {
             DNS_Info.EnableDNS = id;
     }
 
+    function edit(id, DNS) {
+        Object.assign(DNS_Info.DNS_List[id], DNS);
+        setDNS_Info(DNS_Info);
+        setHasUpdate(!HasUpdate);
+    }
+
     async function remove(id) {
         delete DNS_Info.DNS_List[id];
         setDNS_Info(DNS_Info);
@@ -52,7 +58,6 @@ const useDNS_Info = () => {
     }
 
     async function updateAll() {
-        debugger;
         for (const id in DNS_Info.DNS_List) {
             isEnable(id);
             await updateDNS(id);
@@ -71,7 +76,7 @@ const useDNS_Info = () => {
     }, []);
 
 
-    return { DNS_Info, setDNS_Info, HasUpdate, setHasUpdate, update, remove };
+    return { DNS_Info, setDNS_Info, HasUpdate, setHasUpdate, update, remove, edit };
 }
 
 export default useDNS_Info;

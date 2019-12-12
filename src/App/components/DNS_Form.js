@@ -7,20 +7,14 @@ class DNS_Form extends React.Component {
         this.state = {
             DNS1: props.DNS1 || "",
             DNS2: props.DNS2 || "",
-            Name: props.Name || ""
+            Name: props.name || ""
         };
-
-        this.onChange = this.onChange.bind(this);
     }
 
     updateName(e) {
         this.setState({
             Name: e.target.value
         })
-    }
-
-    onChange(Value) {
-        this.setState(Value);
     }
 
     done() {
@@ -43,9 +37,15 @@ class DNS_Form extends React.Component {
 
                             <form className="px-3 py-2">
                                 <div className="form-group row">
-                                    <IP_input state={"DNS1"} updateDNS={this.onChange} />
+                                    <IP_input
+                                        title="DNS اصلی :"
+                                        DNS={this.state.DNS1}
+                                        change={(value) => this.setState({ DNS1: value })} />
 
-                                    <IP_input state={"DNS2"} updateDNS={this.onChange} />
+                                    <IP_input
+                                        title="DNS جایگزین :"
+                                        DNS={this.state.DNS2}
+                                        change={(value) => this.setState({ DNS2: value })} />
                                 </div>
 
                                 <div className="form-group row">

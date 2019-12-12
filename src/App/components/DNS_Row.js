@@ -29,8 +29,8 @@ export class DNS_Row extends React.Component {
                 <td>
                     <Options icon={faSync} action={this.props.sync} />
                     <Options icon={faTrash} action={this.props.rm} />
-                    {/* <Options icon={faEdit} action={() => { }} />
-                         */}
+                    <Options icon={faEdit} action={this.props.edit} />
+
                 </td>
                 <td>
                     <span className={"badge text-light " + (this.state.latency ? "badge-success" : "badge-danger")}>
