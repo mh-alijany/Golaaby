@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { defaultData } from './globals';
-
 var { getConnectedNetworkInterfaces, getLatency, isSystemDNS_Server } = require('./kernel');
 
 
@@ -32,6 +31,20 @@ const useDNS_Info = () => {
             DNS_Info.EnableDNS = id;
     }
 
+    async function update(id) {
+        if (!id) {
+            updateAll();
+            return;
+        }
+
+        isEnable(id);
+        await updateDNS(id);
+        checkMin(id);
+
+        setDNS_Info(DNS_Info);
+        setHasUpdate(true);
+    }
+    
     async function updateAll() {
         debugger;
         for (const id in DNS_Info.DNS_List) {
@@ -52,7 +65,7 @@ const useDNS_Info = () => {
     }, []);
 
 
-    return { DNS_Info, setDNS_Info, HasUpdate, setHasUpdate };
+    return { DNS_Info, setDNS_Info, HasUpdate, setHasUpdate, update };
 }
 
 export default useDNS_Info;
