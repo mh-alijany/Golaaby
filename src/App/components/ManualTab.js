@@ -1,5 +1,5 @@
-import DNS_Form from './components/DNS_Form';
-import DNS_Row from './components/DNS_Row';
+import DNS_Form from './DNS_Form';
+import DNS_Row from './DNS_Row';
 
 export class ManualTab extends React.Component {
     constructor(props) {

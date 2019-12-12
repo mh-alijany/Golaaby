@@ -1,8 +1,8 @@
-import { setDNS_Auto, setDNS_ConnectedInterfaces } from '../../kernel'
+import { setDNS_Auto, setDNS_ConnectedInterfaces } from '../kernel'
 import { realpathSync } from 'fs';
 import { async } from 'q';
 // import useDNS_Info from '../../useDNS_Info';
-import { panels, ConnectedDNSBody } from './components/panels'
+import { panels, ConnectedDNSBody } from './panels'
 
 
 const MainTab = (props) => {

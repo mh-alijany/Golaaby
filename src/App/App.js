@@ -1,8 +1,8 @@
-import Nav from './components/Tabs/Nav';
-import Main from './Components/MainTab/MainTab';
-import Manual from './Components/ManualTab/ManualTab';
-import Check from './Components/CheckTab/CheckTab';
-import Setting from './Components/SettingTab/SettingTab';
+import Nav from './components/Nav';
+import Main from './Components/MainTab';
+import Manual from './Components/ManualTab';
+import Check from './Components/CheckTab';
+import Setting from './Components/SettingTab';
 
 import useDNS_Info from './useDNS_Info'
 

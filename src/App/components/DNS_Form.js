@@ -1,5 +1,3 @@
-import React from 'react';
-
 //is-invalid is-valid
 class DNS_Form extends React.Component {
     constructor(props) {
