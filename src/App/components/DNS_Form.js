@@ -20,8 +20,7 @@ class DNS_Form extends React.Component {
     done() {
         this.props.action({
             name: this.state.Name,
-            DNS1: this.state.DNS1,
-            DNS2: this.state.DNS2
+            DNS_servers: [this.state.DNS1, this.state.DNS2]
         })
     }
 

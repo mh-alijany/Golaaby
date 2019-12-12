@@ -32,6 +32,14 @@ const useDNS_Info = () => {
             DNS_Info.EnableDNS = id;
     }
 
+    function add(dns) {
+        let id = Math.max(...Object.keys(DNS_Info.DNS_List)) + 1;
+        dns.id = String(id);
+        DNS_Info.DNS_List[id] = dns;
+        setDNS_Info(DNS_Info);
+        setHasUpdate(!HasUpdate);
+    }
+
     function edit(id, DNS) {
         Object.assign(DNS_Info.DNS_List[id], DNS);
         setDNS_Info(DNS_Info);
@@ -76,7 +84,7 @@ const useDNS_Info = () => {
     }, []);
 
 
-    return { DNS_Info, setDNS_Info, HasUpdate, setHasUpdate, update, remove, edit };
+    return { DNS_Info, setDNS_Info, HasUpdate, setHasUpdate, update, remove, edit, add };
 }
 
 export default useDNS_Info;

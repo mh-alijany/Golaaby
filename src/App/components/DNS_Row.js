@@ -34,7 +34,7 @@ export class DNS_Row extends React.Component {
                 </td>
                 <td>
                     <span className={"badge text-light " + (this.state.latency ? "badge-success" : "badge-danger")}>
-                        {this.state.latency || "درحال برسی"}
+                        {this.state.latency || "نا مشخص"}
                     </span>
                 </td>
                 <td><a href={this.props.DNS.url} target="_blank">{this.props.DNS.name}</a></td>
