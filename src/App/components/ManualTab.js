@@ -22,7 +22,10 @@ export class ManualTab extends React.Component {
         let DNS_List = Object.values(this.DNS_Info.DNS_List);
         return DNS_List.map((DNS) => {
             let key = DNS.id + (DNS.latency || "")
-            return <DNS_Row DNS={DNS} key={key} />
+
+            return <DNS_Row DNS={DNS} key={key}
+                sync={() => this.syncRow(DNS.id)}
+                rm={() => this.removeRow(DNS.id)} />
         })
     }
 
@@ -77,12 +80,12 @@ export class ManualTab extends React.Component {
         }
     }
 
-    updateLatency(id) {
-
+    syncRow(id) {
+        this.props.DNS_Info.update(id);
     }
 
     removeRow(id) {
-        
+        this.props.DNS_Info.remove(id);
     }
 
     render() {
