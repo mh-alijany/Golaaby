@@ -10,7 +10,7 @@ export class ManualTab extends React.Component {
 
         this.state = {
             form: false,
-            rows: Object.values(this.DNS_Info.DNS_List).map((DNS) => <DNS_Row DNS={DNS} key={DNS.id} />)
+            rows: this.getRows()
         }
 
         this.addDNS = this.addDNS.bind(this);
@@ -18,12 +18,21 @@ export class ManualTab extends React.Component {
         this.closeForm = this.closeForm.bind(this);
     }
 
+    getRows() {
+        let DNS_List = Object.values(this.DNS_Info.DNS_List);
+        return DNS_List.map((DNS) => {
+            let key = DNS.id + (DNS.latency || "")
+            return <DNS_Row DNS={DNS} key={key} />
+        })
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.DNS_Info.HasUpdate != prevProps.DNS_Info.HasUpdate) {
             this.DNS_Info = this.props.DNS_Info.DNS_Info;
+            var newRow = this.getRows();
             this.setState({
-                rows: Object.values(this.DNS_Info.DNS_List).map((DNS) => <DNS_Row DNS={DNS} key={DNS.id} />)
-            })
+                rows: newRow
+            });
         }
     }
 
