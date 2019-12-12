@@ -18,18 +18,17 @@ export class ManualTab extends React.Component {
         this.closeForm = this.closeForm.bind(this);
     }
 
-    componentDidMount() {
-        this.setState({
-            rows: Object.values(this.DNS_Info.DNS_List).map((DNS) => <DNS_Row DNS={DNS} key={DNS.id} />)
-        })
+    componentDidUpdate(prevProps) {
+        if (this.props.DNS_Info.HasUpdate != prevProps.DNS_Info.HasUpdate) {
+            this.DNS_Info = this.props.DNS_Info.DNS_Info;
+            this.setState({
+                rows: Object.values(this.DNS_Info.DNS_List).map((DNS) => <DNS_Row DNS={DNS} key={DNS.id} />)
+            })
+        }
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        let condition_1 = this.props.isActive != nextProps.isActive
-        let condition_2 = this.props.DNS_Info.HasUpdate != nextProps.DNS_Info.HasUpdate;
-        let condition_3 = this.state.form != nextState.form;
-        return condition_1 || condition_2 || condition_3;
-    }
+    // shouldComponentUpdate(nextProps, nextState) {      
+    // }
 
     openAddDNS() {
         this.setState({
@@ -61,7 +60,7 @@ export class ManualTab extends React.Component {
         var rows = this.state.rows;
         if (form && this.isValid(form, true)) {
             form.id = form.name; // check it later
-            this.DNS_Info[form.name] = form;
+            this.DNS_Info.DNS_List[form.name] = form;
             this.setDNS_Info(this.DNS_Info);
             this.props.DNS_Info.setHasUpdate(!this.props.DNS_Info.HasUpdate);
 
