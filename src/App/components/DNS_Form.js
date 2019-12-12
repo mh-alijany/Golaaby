@@ -23,8 +23,8 @@ class DNS_Form extends React.Component {
         this.setState(Value);
     }
 
-    validate() {
-        this.props.addDNS({
+    done() {
+        this.props.action({
             name: this.state.Name,
             id: this.state.Name,
             DNS1: this.state.DNS1,
@@ -60,9 +60,9 @@ class DNS_Form extends React.Component {
                         </div>
 
                         <div className="modal-footer">
-                            <button type="button" onClick={() => this.props.addDNS()}
+                            <button type="button" onClick={() => this.props.action()}
                                 className="btn btn-secondary" data-dismiss="modal">لغو</button>
-                            <button type="button" onClick={() => this.validate()}
+                            <button type="button" onClick={() => this.done()}
                                 className="btn btn-primary">قبول</button>
                         </div>
 

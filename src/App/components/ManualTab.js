@@ -9,7 +9,6 @@ export class ManualTab extends React.Component {
 
         this.state = {
             form: false,
-            form_title: "افزودن DNS",
             rows: Object.values(this.DNS_Info.DNS_List).map((DNS) => <DNS_Row DNS={DNS} key={DNS.id} />)
         }
 
@@ -22,15 +21,19 @@ export class ManualTab extends React.Component {
         if (DNS) rows.push(<DNS_Row DNS={DNS} key={DNS.id} />);
 
         this.setState({
-            form: false,
-            rows: rows
+            form: null
         });
     }
 
     openAddDNS() {
         this.setState({
-            form: true,
-            form_title: "افزودن DNS"
+            form: <DNS_Form title="افزودن" action={this.addDNS} />
+        });
+    }
+
+    openEditeDNS(id) {
+        this.setState({
+            form: <DNS_Form title="ویرایش" action={this.addDNS} />
         });
     }
 
@@ -59,7 +62,7 @@ export class ManualTab extends React.Component {
                 </div>
 
                 {
-                    this.state.form && <DNS_Form title={this.state.form_title} addDNS={this.addDNS} />
+                    this.state.form
                 }
             </div>
         );
