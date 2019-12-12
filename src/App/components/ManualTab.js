@@ -6,6 +6,7 @@ export class ManualTab extends React.Component {
         super(props);
         // [DNS_Info, setDNS_Info, HasUpdate, setHasUpdate]
         this.DNS_Info = props.DNS_Info[0];
+        this.setDNS_Info = props.DNS_Info[1];
 
         this.state = {
             form: false,
@@ -14,19 +15,28 @@ export class ManualTab extends React.Component {
 
         this.addDNS = this.addDNS.bind(this);
         this.openAddDNS = this.openAddDNS.bind(this);
+        this.closeForm = this.closeForm.bind(this);
     }
 
+    componentDidUpdate() {
+        if (this.props.DNS_Info[2])
+            console.log(true);
+    }
 
     openAddDNS() {
         this.setState({
-            form: <DNS_Form title="افزودن" action={this.addDNS} />
+            form: <DNS_Form title="افزودن" action={this.addDNS} close={this.closeForm} />
         });
     }
 
     openEditDNS(id) {
         this.setState({
-            form: <DNS_Form title="ویرایش" action={this.addDNS} />
+            form: <DNS_Form title="ویرایش" action={this.addDNS} close={this.closeForm} />
         });
+    }
+
+    closeForm() {
+        this.setState({ form: null })
     }
 
 
@@ -42,7 +52,9 @@ export class ManualTab extends React.Component {
     addDNS(form) {
         var rows = this.state.rows;
         if (form && this.isValid(form, true)) {
-            rows.push(<DNS_Row DNS={form} key={form.name} />); // add to DNS_info
+            form.id = form.name; // check it later
+            this.DNS_Info[form.name] = form;
+            this.setDNS_Info(this.DNS_Info)
             this.setState({ form: null, rows: rows });
         }
     }

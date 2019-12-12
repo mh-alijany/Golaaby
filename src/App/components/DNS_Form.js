@@ -59,7 +59,7 @@ class DNS_Form extends React.Component {
                         </div>
 
                         <div className="modal-footer">
-                            <button type="button" onClick={() => this.props.action()}
+                            <button type="button" onClick={this.props.close}
                                 className="btn btn-secondary" data-dismiss="modal">لغو</button>
                             <button type="button" onClick={() => this.done()}
                                 className="btn btn-primary">قبول</button>
