@@ -61,9 +61,7 @@ export class ManualTab extends React.Component {
                     </table>
                 </div>
 
-                {
-                    this.state.form
-                }
+                {this.state.form}
             </div>
         );
     }

@@ -31,14 +31,14 @@ export class IP_input extends React.Component {
         });
 
         this.setState({ Value: _ip });
-        this.props.updateDNS({ [this.props.id]: _ip });
+        this.props.updateDNS({ [this.props.state]: _ip });
     }
 
     render() {
         return (
             <div className="col-6">
-                <label htmlFor={this.props.id} className="float-right">DNS جایگذین :</label>
-                <input id={this.props.id} value={this.state.Value || ''} onChange={this.update}
+                <label htmlFor={this.props.state} className="float-right">DNS جایگذین :</label>
+                <input state={this.props.state} value={this.state.Value || ''} onChange={this.update}
                     style={{ direction: "ltr" }} placeholder="DNS IP" type="text" className="form-control" />
             </div>
         );
