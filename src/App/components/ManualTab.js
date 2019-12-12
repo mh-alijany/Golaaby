@@ -56,7 +56,7 @@ export class ManualTab extends React.Component {
     }
 
 
-    isValid(form, adding) {
+    isValid(form, adding) { // move in form
         let DNS_List = Object.values(this.DNS_Info);
         let condition_1 = form.name != '';
         let condition_2 = form.DNS1 != form.DNS2;
@@ -75,6 +75,14 @@ export class ManualTab extends React.Component {
 
             this.setState({ form: false, rows: rows });
         }
+    }
+
+    updateLatency(id) {
+
+    }
+
+    removeRow(id) {
+        
     }
 
     render() {

@@ -14,31 +14,41 @@ const useDNS_Info = () => {
 
     const [HasUpdate, setHasUpdate] = useState(false);
 
-    useEffect(() => {
-        async function update() {
-            var min = Infinity;
+    async function updateDNS(id) {
+        var latency = await getLatency(DNS_Info.DNS_List[id].DNS_servers);
+        DNS_Info.DNS_List[id].latency = latency;
+    }
 
-            for (const id in DNS_Info.DNS_List) {
-                if (isSystemDNS_Server(DNS_Info.DNS_List[id].DNS_servers))
-                    DNS_Info.EnableDNS = id;
+    function checkMin(id) {
+        var best = DNS_Info.DNS_List[DNS_Info.BestDNS];
+        var current = DNS_Info.DNS_List[id].latency;
+        if (!DNS_Info.BestDNS || best > current) {
+            DNS_Info.BestDNS = id;
+        }
+    }
 
-                var latency = await getLatency(DNS_Info.DNS_List[id].DNS_servers);
-                DNS_Info.DNS_List[id].latency = latency;
+    function isEnable(id) {
+        if (isSystemDNS_Server(DNS_Info.DNS_List[id].DNS_servers))
+            DNS_Info.EnableDNS = id;
+    }
 
-                if (latency < min) {
-                    min = latency;
-                    DNS_Info.BestDNS = id;
-                }
-            }
-
-            var networks = await getConnectedNetworkInterfaces();
-            DNS_Info.ConnectedInterfaces = networks;
-
-            setDNS_Info(DNS_Info);
-            setHasUpdate(true);
+    async function updateAll() {
+        debugger;
+        for (const id in DNS_Info.DNS_List) {
+            isEnable(id);;
+            await updateDNS(id);
+            checkMin(id);
         }
 
-        update();
+        var networks = await getConnectedNetworkInterfaces();
+        DNS_Info.ConnectedInterfaces = networks;
+
+        setDNS_Info(DNS_Info);
+        setHasUpdate(true);
+    }
+
+    useEffect(() => {
+        updateAll();
     }, []);
 
 
