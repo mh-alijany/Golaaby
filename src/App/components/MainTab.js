@@ -2,7 +2,7 @@ import { async } from 'q';
 import { panels, ConnectedDNSBody } from './panels'
 
 const MainTab = (props) => {
-    var { DNS_Info, HasUpdate, setEnable, setDisable, update } = props.DNS_Info;
+    var { DNS_Info, HasUpdate, setEnable, disable, update } = props.DNS_Info;
     var DNS_List = DNS_Info.DNS_List;
     const [Panel, setPanel] = React.useState(null);
 
@@ -19,7 +19,7 @@ const MainTab = (props) => {
         } else if (DNS_Info.EnableDNS) {
             var DNS = DNS_List[DNS_Info.EnableDNS];
             var body = <ConnectedDNSBody name={DNS.name} link={DNS.url} />
-            setPanel(<panels.Connected btnAction={setDisable} body={body} />);
+            setPanel(<panels.Connected btnAction={disable} body={body} />);
         } else if (DNS_Info.ConnectedInterfaces.length === 0) {
             setPanel(<panels.NoNet btnAction={tryAgain} />);
         } else {

@@ -15,7 +15,6 @@ const useDNS_Info = () => {
     const [HasUpdate, setHasUpdate] = useState(false);
 
     async function setEnable(id) {
-        debugger;
         if (!id)
             id = DNS_Info.BestDNS;
         await setDNS_ConnectedInterfaces(DNS_Info.DNS_List[id].DNS_servers);
