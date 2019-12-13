@@ -14,12 +14,12 @@ const useDNS_Info = () => {
 
     const [HasUpdate, setHasUpdate] = useState(false);
 
-    async function updateDNS(id) {
+    async function updateLatency(id) {
         var latency = await getLatency(DNS_Info.DNS_List[id].DNS_servers);
         DNS_Info.DNS_List[id].latency = latency;
     }
 
-    function checkMin(id) {
+    function checkIsBest(id) {
         var best = DNS_Info.DNS_List[DNS_Info.BestDNS];
         var current = DNS_Info.DNS_List[id].latency;
         if (!DNS_Info.BestDNS || best > current) {
@@ -27,7 +27,7 @@ const useDNS_Info = () => {
         }
     }
 
-    function isEnable(id) {
+    function checkIsEnable(id) {
         if (isSystemDNS_Server(DNS_Info.DNS_List[id].DNS_servers))
             DNS_Info.EnableDNS = id;
     }
@@ -58,9 +58,9 @@ const useDNS_Info = () => {
             updateAll();
             return;
         }
-        isEnable(id);
-        await updateDNS(id);
-        checkMin(id);
+        checkIsEnable(id);
+        await updateLatency(id);
+        checkIsBest(id);
 
         setDNS_Info(DNS_Info);
         setHasUpdate(!HasUpdate);
@@ -68,9 +68,9 @@ const useDNS_Info = () => {
 
     async function updateAll() {
         for (const id in DNS_Info.DNS_List) {
-            isEnable(id);
-            await updateDNS(id);
-            checkMin(id);
+            checkIsEnable(id);
+            await updateLatency(id);
+            checkIsBest(id);
         }
 
         var networks = await getConnectedNetworkInterfaces();
