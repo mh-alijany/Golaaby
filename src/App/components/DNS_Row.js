@@ -3,7 +3,7 @@ import { faTrash, faEdit, faSync } from '@fortawesome/free-solid-svg-icons';
 
 function Options(props) {
     return (
-        <a href="#" onClick={props.action} className="mx-1">
+        <a href="#" onClick={props.action} className={"mx-1 " + (props.action ? "disabled" : "")}>
             <FontAwesomeIcon icon={props.icon} />
         </a>
     )

@@ -75,8 +75,10 @@ export class ManualTab extends React.Component {
     }
 
     addRow(form) {
+        var rows = this.state.rows;
         if (form && this.isValid(form, true)) {
-            this.setState({ form: false });
+            rows.push(<DNS_Row DNS={form} key={"temp" + form.name} />)
+            this.setState({ form: false, rows: rows });
             this.props.DNS_Info.add(form);
         }
     }

@@ -36,8 +36,9 @@ const useDNS_Info = () => {
         let id = Math.max(...Object.keys(DNS_Info.DNS_List)) + 1;
         dns.id = String(id);
         DNS_Info.DNS_List[id] = dns;
-        setDNS_Info(DNS_Info);
-        setHasUpdate(!HasUpdate);
+        // setDNS_Info(DNS_Info);
+        // setHasUpdate(!HasUpdate);
+        update(id);
     }
 
     function edit(id, DNS) {

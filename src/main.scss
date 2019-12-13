@@ -34,15 +34,15 @@ $dark: rgb(63, 63, 63);
 
 
 .hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .hover:hover {
-    border-right: 1rem solid $primary;
+  border-right: 1rem solid $primary;
 }
 
 .hover.h-active {
-    border-right: 1rem solid $primary;
+  border-right: 1rem solid $primary;
 }
 
 .m-display {
@@ -50,18 +50,26 @@ $dark: rgb(63, 63, 63);
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-td {
-    cursor: pointer;
+a.disabled {
+  color: gray;
+  pointer-events: none;
 }
 
-.custom-control.custom-checkbox{padding-left: 0;}
+td {
+  cursor: pointer;
+}
+
+.custom-control.custom-checkbox {
+  padding-left: 0;
+}
 
 label.custom-control-label {
   position: relative;
   padding-right: 1.5rem;
 }
 
-label.custom-control-label::before, label.custom-control-label::after{
+label.custom-control-label::before,
+label.custom-control-label::after {
   right: 0;
   left: auto;
 }
@@ -75,9 +83,10 @@ a {
 }
 
 button:disabled,
-button[disabled]{
+button[disabled] {
   cursor: default;
 }
+
 // -------------------------
 
 // .bar {
