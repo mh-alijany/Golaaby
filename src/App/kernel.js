@@ -2,10 +2,14 @@ import { getNetworks, setDNS_servers, setDNS_auto } from './modules/shell';
 import { measure, getDNS_Servers } from './modules/nsLookup'
 import { async } from 'q';
 
-export async function getConnectedNetworkInterfaces() {
+export async function getAllNetworkInterfaces() {
     let networksJson = await getNetworks();
-    let networks = JSON.parse(networksJson);
-    let connectedInterfaces = networks.filter((netWork) => netWork.Status == "Up");
+    return JSON.parse(networksJson);
+}
+
+export async function getConnectedNetworkInterfaces() {
+    let interfaces = await getAllNetworkInterfaces()
+    let connectedInterfaces = interfaces.filter((netWork) => netWork.Status == "Up");
     return connectedInterfaces;
 }
 
