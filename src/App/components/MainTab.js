@@ -6,30 +6,33 @@ import { panels, ConnectedDNSBody } from './panels'
 
 
 const MainTab = (props) => {
-    var { DNS_Info, setDNS_Info, HasUpdate, setHasUpdate } = props.DNS_Info;
+    var { DNS_Info, setDNS_Info, HasUpdate, update } = props.DNS_Info;
     var DNS_List = DNS_Info.DNS_List;
-    const [Panel, setPanel] = React.useState(<panels.Load />);
+    const [Panel, setPanel] = React.useState(null);
 
     async function connect() {
         await setDNS_ConnectedInterfaces(DNS_List[DNS_Info.BestDNS].DNS_servers);
         DNS_Info.EnableDNS = DNS_Info.BestDNS;
         setDNS_Info(DNS_Info);
-        update();
+        updatePanel();
     }
 
     async function tryAgain() {
-        update();
+        // need fix shell cancel;
+        // update();
     }
 
     async function disconnect() {
         await setDNS_Auto();
         DNS_Info.EnableDNS = false;
         setDNS_Info(DNS_Info);
-        update();
+        updatePanel();
     }
 
-    async function update() {
-        if (DNS_Info.EnableDNS) {
+    async function updatePanel() {
+        if (!DNS_Info.BestDNS) {
+            setPanel(<panels.Load />)
+        } else if (DNS_Info.EnableDNS) {
             var DNS = DNS_List[DNS_Info.EnableDNS];
             var body = <ConnectedDNSBody name={DNS.name} link={DNS.url} />
             setPanel(<panels.Connected btnAction={disconnect} body={body} />);
@@ -42,8 +45,7 @@ const MainTab = (props) => {
     }
 
     React.useEffect(() => {
-        update();
-        console.log('MainTab updated');
+        updatePanel();
     }, [HasUpdate]);
 
     return (

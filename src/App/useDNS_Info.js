@@ -85,7 +85,7 @@ const useDNS_Info = () => {
     }, []);
 
 
-    return { DNS_Info, setDNS_Info, HasUpdate, setHasUpdate, update, remove, edit, add };
+    return { DNS_Info, setDNS_Info, HasUpdate, update, remove, edit, add };
 }
 
 export default useDNS_Info;

@@ -30,7 +30,7 @@ export const panels = {
             <div className="status-non card my-3 border-0">
                 <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 91024 px.png" />
                 <div className="card-body text-center">
-                    <h5 className='card-title text-danger'>گلابی متصل است</h5>
+                    <h5 className='card-title text-danger'>گلابی قطع است</h5>
                     <p className="card-text mb-5">اتصال خود با شبکه را برسی کنید</p>
                     <button type="button" onClick={props.btnAction} className="btn mx-auto d-block text-light btn-primary">تلاش مجدد</button>
                 </div>
@@ -45,7 +45,7 @@ export const panels = {
                 <div className="card-body text-center">
                     <h5 className='card-title text-danger'>صبر کنید</h5>
                     <p className="card-text mb-5"> ... در حال بار گذاری </p>
-                    <button type="button" disabled={true} className="btn mx-auto d-block text-light btn-primary">تلاش مجدد</button>
+                    <button type="button" disabled={true} className="btn mx-auto d-block text-light btn-primary">اتصال</button>
                 </div>
             </div>
         )
