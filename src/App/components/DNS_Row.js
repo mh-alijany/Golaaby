@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEdit, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit, faSync, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 function Options(props) {
     return (
@@ -30,7 +30,7 @@ export class DNS_Row extends React.Component {
                     <Options icon={faSync} action={this.props.sync} />
                     <Options icon={faTrash} action={this.props.rm} />
                     <Options icon={faEdit} action={this.props.edit} />
-
+                    {this.props.DNS.isEnable && <span className="float-left text-primary"><FontAwesomeIcon icon={faCircle} /></span>}
                 </td>
                 <td>
                     <span className={"badge text-light " + (this.state.latency ? "badge-success" : "badge-danger")}>

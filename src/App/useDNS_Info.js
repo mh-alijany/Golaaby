@@ -44,8 +44,10 @@ const useDNS_Info = () => {
     }
 
     function checkIsEnable(id) {
-        if (isSystemDNS_Server(DNS_Info.DNS_List[id].DNS_servers))
+        if (isSystemDNS_Server(DNS_Info.DNS_List[id].DNS_servers)) {
             DNS_Info.EnableDNS = id;
+            DNS_Info.DNS_List[id].isEnable = true;
+        }
     }
 
     function add(dns) {
