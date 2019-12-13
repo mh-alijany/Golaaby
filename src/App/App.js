@@ -1,7 +1,7 @@
 import Nav from './components/Nav';
 import Main from './Components/MainTab';
 import Manual from './Components/ManualTab';
-import Check from './Components/CheckTab';
+import Report from './Components/ReportTab';
 import Setting from './Components/SettingTab';
 
 import useDNS_Info from './useDNS_Info'
@@ -19,7 +19,7 @@ const App = () => {
                     <div className="tab-content " id="v-pills-tabContent">
                         <Main isActive={ActiveTab == tabs[0]} DNS_Info={DNS_Info} />
                         <Manual isActive={ActiveTab == tabs[1]} DNS_Info={DNS_Info} />
-                        <Check isActive={ActiveTab == tabs[2]} />
+                        <Report isActive={ActiveTab == tabs[2]} />
                         <Setting isActive={ActiveTab == tabs[3]} />
                     </div>
                 </div>

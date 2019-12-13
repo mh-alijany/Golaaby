@@ -1,4 +1,4 @@
-const checkTab = (props) => {
+const Report = (props) => {
     return (
         <div className={"tab-pane fade show active" + (props.isActive ? '' : "d-none")}>
 
@@ -32,4 +32,4 @@ const checkTab = (props) => {
     );
 }
 
-export default checkTab;
+export default Report;
