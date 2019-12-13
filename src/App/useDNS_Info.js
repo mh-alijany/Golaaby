@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { defaultData } from './globals';
-import { async } from 'q';
-var { getConnectedNetworkInterfaces, getLatency, isSystemDNS_Server } = require('./kernel');
+
+var { getConnectedNetworkInterfaces, getLatency, isSystemDNS_Server, setDNS_Auto, setDNS_ConnectedInterfaces } = require('./kernel');
 
 
 const useDNS_Info = () => {
@@ -13,6 +13,23 @@ const useDNS_Info = () => {
     });
 
     const [HasUpdate, setHasUpdate] = useState(false);
+
+    async function setEnable(id) {
+        debugger;
+        if (!id)
+            id = DNS_Info.BestDNS;
+        await setDNS_ConnectedInterfaces(DNS_Info.DNS_List[id].DNS_servers);
+        DNS_Info.EnableDNS = id;
+        setDNS_Info(DNS_Info);
+        setHasUpdate(!HasUpdate);
+    }
+
+    async function disable() {
+        await setDNS_Auto();
+        DNS_Info.EnableDNS = false;
+        setDNS_Info(DNS_Info);
+        setHasUpdate(!HasUpdate);
+    }
 
     async function updateLatency(id) {
         var latency = await getLatency(DNS_Info.DNS_List[id].DNS_servers);
@@ -85,7 +102,7 @@ const useDNS_Info = () => {
     }, []);
 
 
-    return { DNS_Info, setDNS_Info, HasUpdate, update, remove, edit, add };
+    return { DNS_Info, HasUpdate, setEnable, disable, update, remove, edit, add };
 }
 
 export default useDNS_Info;

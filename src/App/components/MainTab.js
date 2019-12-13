@@ -1,33 +1,17 @@
-import { setDNS_Auto, setDNS_ConnectedInterfaces } from '../kernel'
-import { realpathSync } from 'fs';
 import { async } from 'q';
-// import useDNS_Info from '../../useDNS_Info';
 import { panels, ConnectedDNSBody } from './panels'
 
-
 const MainTab = (props) => {
-    var { DNS_Info, setDNS_Info, HasUpdate, update } = props.DNS_Info;
+    var { DNS_Info, HasUpdate, setEnable, setDisable, update } = props.DNS_Info;
     var DNS_List = DNS_Info.DNS_List;
     const [Panel, setPanel] = React.useState(null);
 
-    async function connect() {
-        await setDNS_ConnectedInterfaces(DNS_List[DNS_Info.BestDNS].DNS_servers);
-        DNS_Info.EnableDNS = DNS_Info.BestDNS;
-        setDNS_Info(DNS_Info);
-        updatePanel();
-    }
 
     async function tryAgain() {
         // need fix shell cancel;
         // update();
     }
 
-    async function disconnect() {
-        await setDNS_Auto();
-        DNS_Info.EnableDNS = false;
-        setDNS_Info(DNS_Info);
-        updatePanel();
-    }
 
     async function updatePanel() {
         if (!DNS_Info.BestDNS) {
@@ -35,13 +19,13 @@ const MainTab = (props) => {
         } else if (DNS_Info.EnableDNS) {
             var DNS = DNS_List[DNS_Info.EnableDNS];
             var body = <ConnectedDNSBody name={DNS.name} link={DNS.url} />
-            setPanel(<panels.Connected btnAction={disconnect} body={body} />);
+            setPanel(<panels.Connected btnAction={setDisable} body={body} />);
         } else if (DNS_Info.ConnectedInterfaces.length === 0) {
             setPanel(<panels.NoNet btnAction={tryAgain} />);
         } else {
-            setPanel(<panels.Disconnect btnAction={connect} />);
+            setPanel(<panels.Disconnect btnAction={setEnable} />);
         }
-        setDNS_Info(DNS_Info);
+        // setDNS_Info(DNS_Info);
     }
 
     React.useEffect(() => {

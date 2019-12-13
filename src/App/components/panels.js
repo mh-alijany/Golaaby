@@ -6,7 +6,7 @@ export const panels = {
                 <div className="card-body text-center">
                     <h5 className='card-title text-danger'>گلابی وصل نیست</h5>
                     <p className="card-text mb-5">با کلیک بر اتصال به سریع ترین سرویس متصل شوید</p>
-                    <button type="button" onClick={props.btnAction} className="btn mx-auto d-block text-light btn-primary">اتصال</button>
+                    <button type="button" onClick={() => props.btnAction(false)} className="btn mx-auto d-block text-light btn-primary">اتصال</button>
                 </div>
             </div>
         )
