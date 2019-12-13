@@ -22,10 +22,16 @@ class DNS_Form extends React.Component {
     isValid() { // move in form
         let condition_1 = this.state.Name != '';
         let condition_2 = this.state.DNS1 != this.state.DNS2;
-        let condition_3 = /^([\d]{1,3}\.?){4}$/.test(this.state.DNS1, this.state.DNS2);
+        let condition_3 = /^([\d]{1,3}\.?){4}$/.test(this.state.DNS1)
+        let condition_4 = /^([\d]{1,3}\.?){4}$/.test(this.state.DNS4)
+
+        condition_1 || this.setState({ Name_: "is-invalid" });
+        condition_2 || this.setState({ DNS1_: "is-invalid", DNS2_: "is-invalid" })
+        condition_3 || this.setState({ DNS1_: "is-invalid" })
+        condition_4 || this.setState({ DNS2_: "is-invalid" })
 
         // is-invalid control
-        return condition_1 && condition_2 && condition_3;
+        return condition_1 && condition_2 && condition_3 && condition_4;
     }
 
     done() {
@@ -51,12 +57,15 @@ class DNS_Form extends React.Component {
                                 <div className="form-group row">
                                     <IP_input
                                         title="DNS اصلی :"
+                                        setDNS_={(valid) => this.setState({ DNS1_: valid })}
                                         DNS={this.state.DNS1}
+                                        Oder={this.state.DNS2}
                                         change={(value) => this.setState({ DNS1: value })} />
 
                                     <IP_input
                                         title="DNS جایگزین :"
                                         DNS={this.state.DNS2}
+                                        Oder={this.state.DNS1}
                                         change={(value) => this.setState({ DNS2: value })} />
 
                                     <label htmlFor="DNS-Name" className="float-right">{this.state.alert}</label>
@@ -66,7 +75,7 @@ class DNS_Form extends React.Component {
                                 <div className="form-group row">
                                     <div className="col-12">
                                         <label htmlFor="DNS-Name" className="float-right">نام ارائه دهنده :</label>
-                                        <input id="DNS-Name" value={this.state.Name} onChange={(e) => this.updateName(e)}
+                                        <input id="DNS-Name" value={this.state.Name} onChange={(e, isValid) => this.updateName(e, isValid)}
                                             type="text" className={"form-control " + this.state.Name_} />
                                     </div>
                                 </div>

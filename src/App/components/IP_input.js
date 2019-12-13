@@ -4,7 +4,7 @@ export class IP_input extends React.Component {
         super(props);
         this.state = {
             Value: props.DNS || "",
-            valid: props.valid || ""
+            valid: ""
         }
         this.update = this.update.bind(this);
     }
@@ -13,7 +13,7 @@ export class IP_input extends React.Component {
         let input = event.target.value || "";
         let regex = /(\d{1,3})\.?/g;
         let ip = input.match(regex) || [];
-        let valid = ip.length > 3 ? "is-valid" : "is-invalid";
+        let valid = ip.length > 3 && input != this.props.Oder ? "is-valid" : "is-invalid";
         let _ip = "";
 
         if (this.state.Value.indexOf(input) === 0) {
