@@ -47,13 +47,13 @@ class DNS_Form extends React.Component {
             <div className="modal fa fade show m-display" role="dialog">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
+
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">{this.props.title}</h5>
                         </div>
+
                         <div className="modal-body">
-
                             <form className="px-3 py-2">
-
                                 <div className="form-group row">
                                     <IP_input
                                         title="DNS اصلی :"
@@ -67,9 +67,6 @@ class DNS_Form extends React.Component {
                                         DNS={this.state.DNS2}
                                         Oder={this.state.DNS1}
                                         change={(value) => this.setState({ DNS2: value })} />
-
-                                    <label htmlFor="DNS-Name" className="float-right">{this.state.alert}</label>
-
                                 </div>
 
                                 <div className="form-group row">
