@@ -64,23 +64,13 @@ export class ManualTab extends React.Component {
         this.setState({ form: null })
     }
 
-
-    isValid(form, adding) { // move in form
-        let DNS_List = Object.values(this.DNS_Info);
-        let condition_1 = form.name != '';
-        let condition_2 = form.DNS_servers[0] != form.DNS_servers[1];
-        let condition_3 = adding && DNS_List.every(item => item.name != form.name);
-
-        return condition_1 && condition_2 && condition_3 // else add warns to form
-    }
-
     addRow(form) {
         var rows = this.state.rows;
-        if (form && this.isValid(form, true)) {
-            rows.push(<DNS_Row DNS={form} key={"temp" + form.name} />)
-            this.setState({ form: false, rows: rows });
-            this.props.DNS_Info.add(form);
-        }
+        // if (form && this.isValid(form, true)) {
+        rows.push(<DNS_Row DNS={form} key={"temp" + form.name} />)
+        this.setState({ form: false, rows: rows });
+        this.props.DNS_Info.add(form);
+        // }
     }
 
     syncRow(id) {
