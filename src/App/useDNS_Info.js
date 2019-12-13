@@ -14,18 +14,26 @@ const useDNS_Info = () => {
 
     const [HasUpdate, setHasUpdate] = useState(false);
 
-    async function setEnable(id) {
+    function setEnable(id) {
+        if (DNS_Info.EnableDNS)
+            DNS_Info.DNS_List[DNS_Info.EnableDNS].isEnable = false;
+        DNS_Info.EnableDNS = id;
+        if (id)
+            DNS_Info.DNS_List[id].isEnable = true;
+    }
+
+    async function connect(id) {
         if (!id)
             id = DNS_Info.BestDNS;
         await setDNS_ConnectedInterfaces(DNS_Info.DNS_List[id].DNS_servers);
-        DNS_Info.EnableDNS = id;
+        setEnable(id);
         setDNS_Info(DNS_Info);
         setHasUpdate(!HasUpdate);
     }
 
-    async function disable() {
+    async function disconnect() {
         await setDNS_Auto();
-        DNS_Info.EnableDNS = false;
+        setEnable(false);
         setDNS_Info(DNS_Info);
         setHasUpdate(!HasUpdate);
     }
@@ -54,8 +62,6 @@ const useDNS_Info = () => {
         let id = Math.max(...Object.keys(DNS_Info.DNS_List)) + 1;
         dns.id = String(id);
         DNS_Info.DNS_List[id] = dns;
-        // setDNS_Info(DNS_Info);
-        // setHasUpdate(!HasUpdate);
         update(id);
     }
 
@@ -103,7 +109,7 @@ const useDNS_Info = () => {
     }, []);
 
 
-    return { DNS_Info, HasUpdate, setEnable, disable, update, remove, edit, add };
+    return { DNS_Info, HasUpdate, connect, disconnect, update, remove, edit, add };
 }
 
 export default useDNS_Info;

@@ -30,7 +30,6 @@ class DNS_Form extends React.Component {
         condition_3 || this.setState({ DNS1_: "is-invalid" })
         condition_4 || this.setState({ DNS2_: "is-invalid" })
 
-        // is-invalid control
         return condition_1 && condition_2 && condition_3 && condition_4;
     }
 
