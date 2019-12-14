@@ -39,7 +39,9 @@ const useDNS_Info = () => {
     }
 
     async function updateLatency(id) {
-        var latency = await getLatency(DNS_Info.DNS_List[id].DNS_servers);
+        let latency = false;
+        if (DNS_Info.ConnectedInterfaces.length > 0)
+            latency = await getLatency(DNS_Info.DNS_List[id].DNS_servers);
         DNS_Info.DNS_List[id].latency = latency;
     }
 
@@ -91,14 +93,14 @@ const useDNS_Info = () => {
     }
 
     async function updateAll() {
+        var networks = await getConnectedNetworkInterfaces();
+        DNS_Info.ConnectedInterfaces = networks;
+
         for (const id in DNS_Info.DNS_List) {
             checkIsEnable(id);
             await updateLatency(id);
             checkIsBest(id);
         }
-
-        var networks = await getConnectedNetworkInterfaces();
-        DNS_Info.ConnectedInterfaces = networks;
 
         setDNS_Info(DNS_Info);
         setHasUpdate(!HasUpdate);
