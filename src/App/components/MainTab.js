@@ -2,27 +2,26 @@ import { async } from 'q';
 import { panels, ConnectedDNSBody } from './panels'
 
 const MainTab = (props) => {
-    var { DNS_Info, HasUpdate } = props.DNS_Info;
+    var { DNS_Info, HasUpdate, fn } = props.DNS_Info;
     var DNS_List = DNS_Info.DNS_List;
 
     const [Panel, setPanel] = React.useState(<panels.Load />);
     const [didMount, setDidMount] = React.useState(false);
 
     async function tryAgain() {
-        DNS_Info.update();
+        fn.update();
     }
 
     async function updatePanel() {
         if (DNS_Info.EnableDNS) {
             var DNS = DNS_List[DNS_Info.EnableDNS];
             var body = <ConnectedDNSBody name={DNS.name} link={DNS.url} />
-            setPanel(<panels.Connected btnAction={DNS_Info.disconnect} body={body} />);
+            setPanel(<panels.Connected btnAction={fn.disconnect} body={body} />);
         } else if (DNS_Info.ConnectedInterfaces.length === 0) {
             setPanel(<panels.NoNet btnAction={tryAgain} />);
         } else {
-            setPanel(<panels.Disconnect btnAction={DNS_Info.connect} />);
+            setPanel(<panels.Disconnect btnAction={fn.connect} />);
         }
-        // setDNS_Info(DNS_Info);
     }
 
     React.useEffect(() => {

@@ -13,13 +13,16 @@ const useDNS_Info = () => {
         ConnectedInterfaces: [],
         BestDNS: false,
         EnableDNS: false,
+    });
+
+    const fn = {
         update: update,
         connect: connect,
         disconnect: disconnect,
         add: add,
         remove: remove,
         edit: edit
-    });
+    }
 
     const [HasUpdate, setHasUpdate] = useState(false);
 
@@ -126,7 +129,7 @@ const useDNS_Info = () => {
     }, [InterfaceChang]);
 
 
-    return { DNS_Info, HasUpdate, setHasUpdate };
+    return { DNS_Info, HasUpdate, fn };
 }
 
 export default useDNS_Info;

@@ -5,8 +5,8 @@ export class ManualTab extends React.Component {
     constructor(props) {
         super(props);
 
-        this.DNS_Info = props.DNS_Info.DNS_Info;
-        this.setDNS_Info = props.DNS_Info.setDNS_Info;
+        this.DNS_List = props.DNS_Info.DNS_Info.DNS_List;
+        this.fn = props.DNS_Info.fn;
 
         this.state = {
             form: false,
@@ -19,13 +19,13 @@ export class ManualTab extends React.Component {
     }
 
     getRows() {
-        let DNS_List = Object.values(this.DNS_Info.DNS_List);
+        let DNS_List = Object.values(this.DNS_List);
         return DNS_List.map((DNS) => {
             let key = `${DNS.id}-${DNS.latency}-${DNS.isEnable}`
 
             return <DNS_Row DNS={DNS} key={key}
                 sync={() => this.syncRow(DNS.id)}
-                connect={() => this.DNS_Info.connect(DNS.id)}
+                connect={() => this.fn.connect(DNS.id)}
                 edit={() => this.openEditDNS(DNS)}
                 rm={() => this.removeRow(DNS.id)} />
         })
@@ -33,7 +33,7 @@ export class ManualTab extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.DNS_Info.HasUpdate != prevProps.DNS_Info.HasUpdate) {
-            this.DNS_Info = this.props.DNS_Info.DNS_Info;
+            this.DNS_List = this.props.DNS_Info.DNS_Info.DNS_List;
             var newRow = this.getRows();
             this.setState({
                 rows: newRow
@@ -67,24 +67,22 @@ export class ManualTab extends React.Component {
 
     addRow(form) {
         var rows = this.state.rows;
-        // if (form && this.isValid(form, true)) {
         rows.push(<DNS_Row DNS={form} key={"temp" + form.name} />)
         this.setState({ form: false, rows: rows });
-        this.DNS_Info.add(form);
-        // }
+        this.fn.add(form);
     }
 
     syncRow(id) {
-        this.DNS_Info.update(id);
+        this.fn.update(id);
     }
 
     editRow(id, DNS) {
-        this.DNS_Info.edit(id, DNS);
+        this.fn.edit(id, DNS);
         this.closeForm();
     }
 
     removeRow(id) {
-        this.DNS_Info.remove(id);
+        this.fn.remove(id);
     }
 
     render() {
