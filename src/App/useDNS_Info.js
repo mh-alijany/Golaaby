@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { defaultData } from './globals';
+import useNetwork from './useNetwork'
 
 var { getConnectedNetworkInterfaces, getLatency, isSystemDNS_Server, setDNS_Auto, setDNS_ConnectedInterfaces } = require('./kernel');
 
 
 const useDNS_Info = () => {
+    let InterfaceChang = useNetwork();
+
     const [DNS_Info, setDNS_Info] = useState({
         DNS_List: defaultData.DNS_list,
         ConnectedInterfaces: [],
@@ -36,7 +39,7 @@ const useDNS_Info = () => {
         await setDNS_ConnectedInterfaces(DNS_Info.DNS_List[id].DNS_servers);
         setEnable(id);
         setDNS_Info(DNS_Info);
-        setHasUpdate(!HasUpdate);
+        setHasUpdate(HasUpdate => !HasUpdate);
     }
 
     async function disconnect() {
@@ -45,11 +48,12 @@ const useDNS_Info = () => {
         await setDNS_Auto();
         setEnable(false);
         setDNS_Info(DNS_Info);
-        setHasUpdate(!HasUpdate);
+        setHasUpdate(HasUpdate => !HasUpdate);
     }
 
     async function updateLatency(id) {
         let connected = DNS_Info.ConnectedInterfaces.length > 0;
+
         let latency = connected && await getLatency(DNS_Info.DNS_List[id].DNS_servers);
         DNS_Info.DNS_List[id].latency = latency;
     }
@@ -64,6 +68,7 @@ const useDNS_Info = () => {
 
     function checkIsEnable(id) {
         let connected = DNS_Info.ConnectedInterfaces.length > 0;
+
         if (isSystemDNS_Server(DNS_Info.DNS_List[id].DNS_servers)) {
             DNS_Info.EnableDNS = connected && id;
             DNS_Info.DNS_List[id].isEnable = connected && true;
@@ -80,13 +85,13 @@ const useDNS_Info = () => {
     function edit(id, DNS) {
         Object.assign(DNS_Info.DNS_List[id], DNS);
         setDNS_Info(DNS_Info);
-        setHasUpdate(!HasUpdate);
+        setHasUpdate(HasUpdate => !HasUpdate);
     }
 
     async function remove(id) {
         delete DNS_Info.DNS_List[id];
         setDNS_Info(DNS_Info);
-        setHasUpdate(!HasUpdate);
+        setHasUpdate(HasUpdate => !HasUpdate);
     }
 
     async function update(id) {
@@ -99,7 +104,7 @@ const useDNS_Info = () => {
         checkIsBest(id);
 
         setDNS_Info(DNS_Info);
-        setHasUpdate(!HasUpdate);
+        setHasUpdate(HasUpdate => !HasUpdate);
     }
 
     async function updateAll() {
@@ -113,15 +118,15 @@ const useDNS_Info = () => {
         }
 
         setDNS_Info(DNS_Info);
-        setHasUpdate(!HasUpdate);
+        setHasUpdate(HasUpdate => !HasUpdate);
     }
 
     useEffect(() => {
-        updateAll();
-    }, []);
+        update();
+    }, [InterfaceChang]);
 
 
-    return { DNS_Info, HasUpdate };
+    return { DNS_Info, HasUpdate, setHasUpdate };
 }
 
 export default useDNS_Info;

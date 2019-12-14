@@ -8,8 +8,7 @@ const useNetwork = () => {
         var timer = setInterval(() => {
             let newInterfaces = Object.keys(os.networkInterfaces());
             if (newInterfaces.toString() != interfaces.toString()) {
-                setInterfaceChang(!InterfaceChang);
-                console.log("change");
+                setInterfaceChang(InterfaceChang => !InterfaceChang);
             }
             interfaces = newInterfaces;
         }, 3000);
