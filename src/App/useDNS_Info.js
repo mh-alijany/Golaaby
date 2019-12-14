@@ -93,6 +93,8 @@ const useDNS_Info = () => {
 
     async function remove(id) {
         delete DNS_Info.DNS_List[id];
+        if (id == DNS_Info.EnableDNS)
+            DNS_Info.EnableDNS = false;
         setDNS_Info(DNS_Info);
         setHasUpdate(HasUpdate => !HasUpdate);
     }
