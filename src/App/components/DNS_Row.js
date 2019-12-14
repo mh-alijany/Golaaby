@@ -27,7 +27,7 @@ export class DNS_Row extends React.Component {
         return (
             <tr>
                 <td>
-                    <Options icon={faPowerOff} action={this.props.connect} />
+                    <Options icon={faPowerOff} action={this.props.action} />
                     <Options icon={faSync} action={this.props.sync} />
                     <Options icon={faTrash} action={this.props.rm} />
                     <Options icon={faEdit} action={this.props.edit} />
