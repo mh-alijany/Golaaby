@@ -9,8 +9,7 @@ const MainTab = (props) => {
     const [didMount, setDidMount] = React.useState(false);
 
     async function tryAgain() {
-        // need fix shell cancel;
-        // update();
+        update();
     }
 
     async function updatePanel() {

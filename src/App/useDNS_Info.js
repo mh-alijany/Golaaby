@@ -23,6 +23,8 @@ const useDNS_Info = () => {
     }
 
     async function connect(id) {
+        if (DNS_Info.ConnectedInterfaces.length === 0) return;
+
         if (!id)
             id = DNS_Info.BestDNS;
         await setDNS_ConnectedInterfaces(DNS_Info.DNS_List[id].DNS_servers);
@@ -32,6 +34,8 @@ const useDNS_Info = () => {
     }
 
     async function disconnect() {
+        if (DNS_Info.ConnectedInterfaces.length === 0) return;
+
         await setDNS_Auto();
         setEnable(false);
         setDNS_Info(DNS_Info);
@@ -39,9 +43,9 @@ const useDNS_Info = () => {
     }
 
     async function updateLatency(id) {
-        let latency = false;
-        if (DNS_Info.ConnectedInterfaces.length > 0)
-            latency = await getLatency(DNS_Info.DNS_List[id].DNS_servers);
+        if (DNS_Info.ConnectedInterfaces.length === 0) return;
+
+        let latency =  await getLatency(DNS_Info.DNS_List[id].DNS_servers);
         DNS_Info.DNS_List[id].latency = latency;
     }
 
@@ -54,6 +58,8 @@ const useDNS_Info = () => {
     }
 
     function checkIsEnable(id) {
+        if (DNS_Info.ConnectedInterfaces.length === 0) return;
+
         if (isSystemDNS_Server(DNS_Info.DNS_List[id].DNS_servers)) {
             DNS_Info.EnableDNS = id;
             DNS_Info.DNS_List[id].isEnable = true;
