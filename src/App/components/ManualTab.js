@@ -25,7 +25,7 @@ export class ManualTab extends React.Component {
 
             return <DNS_Row DNS={DNS} key={key}
                 sync={() => this.syncRow(DNS.id)}
-                connect={() => this.props.DNS_Info.connect(DNS.id)}
+                connect={() => this.DNS_Info.connect(DNS.id)}
                 edit={() => this.openEditDNS(DNS)}
                 rm={() => this.removeRow(DNS.id)} />
         })
@@ -70,21 +70,21 @@ export class ManualTab extends React.Component {
         // if (form && this.isValid(form, true)) {
         rows.push(<DNS_Row DNS={form} key={"temp" + form.name} />)
         this.setState({ form: false, rows: rows });
-        this.props.DNS_Info.add(form);
+        this.DNS_Info.add(form);
         // }
     }
 
     syncRow(id) {
-        this.props.DNS_Info.update(id);
+        this.DNS_Info.update(id);
     }
 
     editRow(id, DNS) {
-        this.props.DNS_Info.edit(id, DNS);
+        this.DNS_Info.edit(id, DNS);
         this.closeForm();
     }
 
     removeRow(id) {
-        this.props.DNS_Info.remove(id);
+        this.DNS_Info.remove(id);
     }
 
     render() {

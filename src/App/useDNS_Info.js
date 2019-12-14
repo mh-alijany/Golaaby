@@ -10,6 +10,12 @@ const useDNS_Info = () => {
         ConnectedInterfaces: [],
         BestDNS: false,
         EnableDNS: false,
+        update: update,
+        connect: connect,
+        disconnect: disconnect,
+        add: add,
+        remove: remove,
+        edit: edit
     });
 
     const [HasUpdate, setHasUpdate] = useState(false);
@@ -43,9 +49,8 @@ const useDNS_Info = () => {
     }
 
     async function updateLatency(id) {
-        if (DNS_Info.ConnectedInterfaces.length === 0) return;
-
-        let latency =  await getLatency(DNS_Info.DNS_List[id].DNS_servers);
+        let connected = DNS_Info.ConnectedInterfaces.length > 0;
+        let latency = connected && await getLatency(DNS_Info.DNS_List[id].DNS_servers);
         DNS_Info.DNS_List[id].latency = latency;
     }
 
@@ -58,11 +63,10 @@ const useDNS_Info = () => {
     }
 
     function checkIsEnable(id) {
-        if (DNS_Info.ConnectedInterfaces.length === 0) return;
-
+        let connected = DNS_Info.ConnectedInterfaces.length > 0;
         if (isSystemDNS_Server(DNS_Info.DNS_List[id].DNS_servers)) {
-            DNS_Info.EnableDNS = id;
-            DNS_Info.DNS_List[id].isEnable = true;
+            DNS_Info.EnableDNS = connected && id;
+            DNS_Info.DNS_List[id].isEnable = connected && true;
         }
     }
 
@@ -117,7 +121,7 @@ const useDNS_Info = () => {
     }, []);
 
 
-    return { DNS_Info, HasUpdate, connect, disconnect, update, remove, edit, add };
+    return { DNS_Info, HasUpdate };
 }
 
 export default useDNS_Info;
