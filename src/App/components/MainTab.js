@@ -4,19 +4,17 @@ import { panels, ConnectedDNSBody } from './panels'
 const MainTab = (props) => {
     var { DNS_Info, HasUpdate, connect, disconnect, update } = props.DNS_Info;
     var DNS_List = DNS_Info.DNS_List;
-    const [Panel, setPanel] = React.useState(null);
 
+    const [Panel, setPanel] = React.useState(<panels.Load />);
+    const [didMount, setDidMount] = React.useState(false);
 
     async function tryAgain() {
         // need fix shell cancel;
         // update();
     }
 
-
     async function updatePanel() {
-        if (!DNS_Info.BestDNS) {
-            setPanel(<panels.Load />)
-        } else if (DNS_Info.EnableDNS) {
+        if (DNS_Info.EnableDNS) {
             var DNS = DNS_List[DNS_Info.EnableDNS];
             var body = <ConnectedDNSBody name={DNS.name} link={DNS.url} />
             setPanel(<panels.Connected btnAction={disconnect} body={body} />);
@@ -29,7 +27,9 @@ const MainTab = (props) => {
     }
 
     React.useEffect(() => {
-        updatePanel();
+        if (didMount)
+            updatePanel();
+        else setDidMount(true);
     }, [HasUpdate]);
 
     return (
