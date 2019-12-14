@@ -1,8 +1,13 @@
+import i51024 from '../../assets/Asset 51024 px.png';
+import i101024 from '../../assets/Asset 101024 px.png';
+import i81024 from '../../assets/Asset 81024 px.png';
+import i91024 from '../../assets/Asset 91024 px.png';
+
 export const panels = {
     Disconnect: function (props) {
         return (
             <div className="status-non card my-3 border-0">
-                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 81024 px.png" />
+                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src={i81024} />
                 <div className="card-body text-center">
                     <h5 className='card-title text-danger'>گلابی وصل نیست</h5>
                     <p className="card-text mb-5">با کلیک بر اتصال به سریع ترین سرویس متصل شوید</p>
@@ -15,7 +20,7 @@ export const panels = {
     Connected: function (props) {
         return (
             <div className="status-non card my-3 border-0">
-                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 51024 px.png" />
+                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src={i51024} />
                 <div className="card-body text-center">
                     <h5 className='card-title text-primary'>گلابی متصل است</h5>
                     <p className="card-text mb-5">{props.body}</p>
@@ -28,7 +33,7 @@ export const panels = {
     NoNet: function (props) {
         return (
             <div className="status-non card my-3 border-0">
-                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 91024 px.png" />
+                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src={i91024} />
                 <div className="card-body text-center">
                     <h5 className='card-title text-danger'>گلابی قطع است</h5>
                     <p className="card-text mb-5">اتصال خود با شبکه را برسی کنید</p>
@@ -41,7 +46,7 @@ export const panels = {
     Load: function () {
         return (
             <div className="status-non card my-3 border-0">
-                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src="/Asset 101024 px.png" />
+                <img className="card-img-top img-fluid w-25 mx-auto mb-5" src={i101024} />
                 <div className="card-body text-center">
                     <h5 className='card-title text-danger'>صبر کنید</h5>
                     <p className="card-text mb-5"> ... در حال بار گذاری </p>

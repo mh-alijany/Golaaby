@@ -2,8 +2,8 @@ const rules = require('./webpack.rules');
 const webpack = require('webpack');
 const babelConfig = require('./babel.config.js');
 
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const path = require('path');
+// const CopyWebpackPlugin = require('copy-webpack-plugin'); .webpack/renderer
 
 rules.push({
   test: /\.css|.scss$/,
@@ -32,18 +32,27 @@ rules.push({
   ],
 })
 
+rules.push({
+  test: /\.(png|jpe?g|gif)$/i,
+  use: [
+    {
+      loader: 'url-loader'
+    },
+  ],
+})
+
 module.exports = {
   // Put your normal webpack config below here
   module: {
     rules,
   },
   plugins: [
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, 'src/assets'),
-        to: path.resolve(__dirname, '.webpack/renderer')
-      }
-    ]),
+    // new CopyWebpackPlugin([
+    //   {
+    //     from: path.resolve(__dirname, 'src/assets'),
+    //     to: path.resolve(__dirname, '.webpack/renderer')
+    //   }
+    // ]),
     new webpack.ProvidePlugin({
       // "$": 'jquery',
       'React': 'react'

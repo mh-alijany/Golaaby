@@ -1,4 +1,9 @@
-const PowerShell = require("powershell");
+const shell = require('node-powershell');
+
+let ps = new shell({
+    executionPolicy: 'Bypass',
+    noProfile: true
+});
 
 /**
  * Retrieves Interface Alias , Interface Index and Status of each network adapter 
@@ -6,12 +11,8 @@ const PowerShell = require("powershell");
  * @returns {Promise} that fulfills with the output of command or rejects with an error
  */
 export function getNetworks() {
-    return new Promise((resolve) => {
-        var ps = new PowerShell('Get-NetAdapter | Select-Object  InterfaceAlias , InterfaceIndex , Status | ConvertTo-Json');
-        ps.on("output", data => {
-            resolve(data);
-        });
-    });
+    ps.addCommand('Get-NetAdapter | Select-Object  InterfaceAlias , InterfaceIndex , Status | ConvertTo-Json');
+    return ps.invoke();
 }
 
 /**
@@ -23,12 +24,8 @@ export function getNetworks() {
  * @returns {Promise} that fulfills with the output of command or rejects with an error
  */
 export function setDNS_servers(index, DNS1, DNS2) {
-    return new Promise((resolve) => {
-        var ps = new PowerShell(`Set-DnsClientServerAddress -InterfaceIndex ${index} -ServerAddresses ("${DNS1}","${DNS2}")`);
-        ps.on("output", data => {
-            resolve(data);
-        });
-    });
+    ps.addCommand(`Set-DnsClientServerAddress -InterfaceIndex ${index} -ServerAddresses ("${DNS1}","${DNS2}")`);
+    return ps.invoke();
 }
 
 /**
@@ -38,11 +35,6 @@ export function setDNS_servers(index, DNS1, DNS2) {
  * @returns {Promise} that fulfills with the output of command or rejects with an error
  */
 export function setDNS_auto(index) {
-    return new Promise((resolve) => {
-        var ps = new PowerShell(`Set-DnsClientServerAddress -InterfaceIndex ${index} -ResetServerAddresses`);
-        ps.on("output", data => {
-            resolve(data);
-        });
-    });
-    
+    ps.addCommand(`Set-DnsClientServerAddress -InterfaceIndex ${index} -ResetServerAddresses`);
+    return ps.invoke();
 }
