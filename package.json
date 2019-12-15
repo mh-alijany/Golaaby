@@ -20,7 +20,7 @@
   "config": {
     "forge": {
       "electronPackagerConfig": {
-        "icon": "/build/icon.ico"
+        "icon": "./build/icon.ico"
       },
       "packagerConfig": {},
       "makers": [
