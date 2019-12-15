@@ -18,7 +18,7 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: "./icons/win/icon.ico",
+    icon: "./build/icon.ico",
     // frame: false,
     webPreferences: {
       nodeIntegration: true
