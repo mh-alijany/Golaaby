@@ -13,5 +13,5 @@ module.exports = [
         outputAssetBase: 'native_modules',
       },
     },
-  },
+  }
 ];

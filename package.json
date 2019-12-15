@@ -20,14 +20,16 @@
   "config": {
     "forge": {
       "electronPackagerConfig": {
-        "icon": "/icons/win/icon.ico"
+        "icon": "/build/icon.ico"
       },
       "packagerConfig": {},
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "golaaby"
+            "name": "golaaby",
+            "setupIcon" : "./build/icon.ico",
+            "iconUrl" : "file:///C:/Users/Mohammad%20hosein/Documents/work%20Space/golaaby/build/icon.ico"
           }
         }
       ],
