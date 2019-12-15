@@ -1,4 +1,3 @@
-import { async } from 'q';
 import { panels, ConnectedDNSBody } from './panels'
 
 const MainTab = (props) => {

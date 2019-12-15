@@ -1,6 +1,5 @@
 import { getNetworks, setDNS_servers, setDNS_auto } from './modules/shell';
 import { measure, getDNS_Servers } from './modules/nsLookup'
-import { async } from 'q';
 
 export async function getAllNetworkInterfaces() {
     let networksJson = await getNetworks();

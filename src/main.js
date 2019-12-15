@@ -1,9 +1,5 @@
-const { app, BrowserWindow, Menu, Tray } = require('electron');
+const { app, BrowserWindow, Menu, webContents } = require('electron');
 import open from 'open';
-
-const nativeImage = require('electron').nativeImage
-
-let image = nativeImage.createFromPath('./build/png/256x256.png')
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -22,7 +18,7 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: image,
+    icon: "./build/icon.ico",
     // frame: false,
     webPreferences: {
       nodeIntegration: true

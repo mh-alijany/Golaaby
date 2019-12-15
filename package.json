@@ -28,8 +28,8 @@
           "name": "@electron-forge/maker-squirrel",
           "config": {
             "name": "golaaby",
-            "setupIcon" : "./build/icon.ico",
-            "iconUrl" : "file:///C:/Users/Mohammad%20hosein/Documents/work%20Space/golaaby/build/icon.ico"
+            "setupIcon": "./build/icon.ico",
+            "iconUrl": "https://srv-file7.gofile.io/download/YoMxfR/icon.ico"
           }
         }
       ],
@@ -51,6 +51,13 @@
           }
         ]
       ]
+    }
+  },
+  "build": {
+    "appId": "Golaaby",
+    "win": {
+      "target": "nsis",
+      "icon": "./build/icon.ico"
     }
   },
   "dependencies": {
