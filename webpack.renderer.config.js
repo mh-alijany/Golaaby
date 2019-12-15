@@ -2,6 +2,9 @@ const rules = require('./webpack.rules');
 const webpack = require('webpack');
 const babelConfig = require('./babel.config.js');
 
+const TerserPlugin = require('terser-webpack-plugin');
+
+
 // const path = require('path');
 // const CopyWebpackPlugin = require('copy-webpack-plugin'); .webpack/renderer
 
@@ -42,6 +45,8 @@ rules.push({
 })
 
 module.exports = {
+  mode: 'production',
+  devtool: false,
   // Put your normal webpack config below here
   module: {
     rules,
@@ -58,4 +63,13 @@ module.exports = {
       'React': 'react'
     })
   ],
+  optimization: {
+    mangleWasmImports: true,
+    removeAvailableModules: true,
+    mergeDuplicateChunks: true,
+    usedExports: true,
+    minimizer: [
+      new TerserPlugin()
+    ]
+  }
 };

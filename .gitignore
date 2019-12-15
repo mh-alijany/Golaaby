@@ -88,4 +88,5 @@ typings/
 
 # Electron-Forge
 out/
+dist/
 test.js
