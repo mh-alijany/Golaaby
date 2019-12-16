@@ -6,7 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 
 // const path = require('path');
-// const CopyWebpackPlugin = require('copy-webpack-plugin'); .webpack/renderer
+// const CopyWebpackPlugin = require('copy-webpack-plugin'); 
 
 rules.push({
   test: /\.css|.scss$/,

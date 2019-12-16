@@ -7,7 +7,7 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make",
+    "make": "electron-forge make --overwrite --setupIcon=./build/icon.ico--icon=./build/icon.ico",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
@@ -20,7 +20,13 @@
   "config": {
     "forge": {
       "electronPackagerConfig": {
-        "icon": "./build/icon.ico"
+        "icon": "./build/icon.ico",
+        "name": "golaaby",
+        "owners": "mohammad h alijany",
+        "title": "golaaby",
+        "noMsi": true,
+        "setupIcon": "./build/icon.ico",
+        "iconUrl": "https://cdn-24.anonfile.com/j1aasfGan9/6d39c050-1576483615/icon.ico"
       },
       "packagerConfig": {},
       "makers": [
@@ -28,8 +34,12 @@
           "name": "@electron-forge/maker-squirrel",
           "config": {
             "name": "golaaby",
+            "owners": "mohammad h alijany",
+            "title": "golaaby",
+            "noMsi": true,
+            "icon": "./build/icon.ico",
             "setupIcon": "./build/icon.ico",
-            "iconUrl": "https://srv-file7.gofile.io/download/YoMxfR/icon.ico"
+            "iconUrl": "https://cdn-24.anonfile.com/j1aasfGan9/6d39c050-1576483615/icon.ico"
           }
         }
       ],
@@ -80,6 +90,7 @@
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
     "babel-loader": "^8.0.6",
     "bootstrap": "^4.4.1",
+    "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.2.0",
     "electron": "7.1.2",
     "electron-builder": "^21.2.0",
