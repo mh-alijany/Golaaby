@@ -17,45 +17,7 @@
   },
   "license": "MIT",
   "config": {
-    "forge": {
-      "electronPackagerConfig": {
-        "icon": "./build/icon.ico",
-        "name": "golaaby"
-      },
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "golaaby",
-            "owners": "mohammad h alijany",
-            "title": "golaaby",
-            "noMsi": false,
-            "icon": "./build/icon.ico",
-            "setupIcon": "./build/icon.ico",
-            "iconUrl": "https://cdn-24.anonfile.com/j1aasfGan9/6d39c050-1576483615/icon.ico"
-          }
-        }
-      ],
-      "plugins": [
-        [
-          "@electron-forge/plugin-webpack",
-          {
-            "mainConfig": "./webpack.main.config.js",
-            "renderer": {
-              "config": "./webpack.renderer.config.js",
-              "entryPoints": [
-                {
-                  "html": "./src/index.html",
-                  "js": "./src/renderer.js",
-                  "name": "main_window"
-                }
-              ]
-            }
-          }
-        ]
-      ]
-    }
+    "forge": "forge.config.js"
   },
   "build": {
     "appId": "Golaaby",
@@ -80,7 +42,7 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.45",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.45",
     "@electron-forge/maker-zip": "^6.0.0-beta.45",
-    "@electron-forge/plugin-webpack": "^6.0.0-beta.45",
+    "@electron-forge/plugin-webpack": "^6.0.0-beta.46",
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
     "babel-loader": "^8.0.6",
     "bootstrap": "^4.4.1",
