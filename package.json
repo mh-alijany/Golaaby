@@ -7,8 +7,7 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make --overwrite --setupIcon=./build/icon.ico--icon=./build/icon.ico",
-    "publish": "electron-forge publish",
+    "make": "electron-forge make --icon=./build/icon.ico",
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],
