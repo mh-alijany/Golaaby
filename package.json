@@ -21,12 +21,7 @@
     "forge": {
       "electronPackagerConfig": {
         "icon": "./build/icon.ico",
-        "name": "golaaby",
-        "owners": "mohammad h alijany",
-        "title": "golaaby",
-        "noMsi": true,
-        "setupIcon": "./build/icon.ico",
-        "iconUrl": "https://cdn-24.anonfile.com/j1aasfGan9/6d39c050-1576483615/icon.ico"
+        "name": "golaaby"
       },
       "packagerConfig": {},
       "makers": [
@@ -36,7 +31,7 @@
             "name": "golaaby",
             "owners": "mohammad h alijany",
             "title": "golaaby",
-            "noMsi": true,
+            "noMsi": false,
             "icon": "./build/icon.ico",
             "setupIcon": "./build/icon.ico",
             "iconUrl": "https://cdn-24.anonfile.com/j1aasfGan9/6d39c050-1576483615/icon.ico"
