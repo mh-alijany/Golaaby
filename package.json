@@ -7,7 +7,7 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make --icon=./build/icon.ico",
+    "make": "electron-forge make --icon=./icon/icon.ico",
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],
@@ -23,7 +23,7 @@
     "appId": "Golaaby",
     "win": {
       "target": "nsis",
-      "icon": "./build/icon.ico"
+      "icon": "./icon/icon.ico"
     }
   },
   "dependencies": {

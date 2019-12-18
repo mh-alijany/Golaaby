@@ -15,7 +15,7 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, './build/icon.ico'),
+        from: path.resolve(__dirname, './icon/icon.ico'),
         to: path.resolve(__dirname, '.webpack/main')
       }
     ])
