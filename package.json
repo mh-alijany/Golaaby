@@ -1,7 +1,7 @@
 {
   "name": "golaaby",
   "productName": "golaaby",
-  "version": "1.0.0",
+  "version": "0.6.0",
   "description": "DNS Server Management Tools",
   "main": ".webpack/main",
   "scripts": {

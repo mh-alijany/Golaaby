@@ -7,7 +7,10 @@ module.exports = {
     },
     packagerConfig: {
         icon: __dirname + "/build/icon.ico",
-        name: "golaaby"
+        name: "golaaby",
+        "win32metadata": {
+            "requested-execution-level": "requireAdministrator"
+        }
     },
     makers: [
         {
