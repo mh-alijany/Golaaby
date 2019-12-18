@@ -90,3 +90,4 @@ typings/
 out/
 dist/
 test.js
+.vscode/
