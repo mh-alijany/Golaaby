@@ -1,7 +1,7 @@
-import i51024 from '../../assets/Asset 51024 px.png';
-import i101024 from '../../assets/Asset 101024 px.png';
-import i81024 from '../../assets/Asset 81024 px.png';
-import i91024 from '../../assets/Asset 91024 px.png';
+import i51024 from '../../assets/images/Asset 51024 px.png';
+import i101024 from '../../assets/images/Asset 101024 px.png';
+import i81024 from '../../assets/images/Asset 81024 px.png';
+import i91024 from '../../assets/images/Asset 91024 px.png';
 
 export const panels = {
     Disconnect: function (props) {
