@@ -26,12 +26,17 @@ const useDNS_Info = () => {
 
     const [HasUpdate, setHasUpdate] = useState(false);
 
-    function setEnable(id) {
+    function disable() {
+        DNS_Info.DNS_List[DNS_Info.EnableDNS].isEnable = false;
+        DNS_Info.EnableDNS = false;
+    }
+
+    function enable(id) {
         if (DNS_Info.EnableDNS)
             DNS_Info.DNS_List[DNS_Info.EnableDNS].isEnable = false;
+
         DNS_Info.EnableDNS = id;
-        if (id)
-            DNS_Info.DNS_List[id].isEnable = true;
+        DNS_Info.DNS_List[id].isEnable = true;
     }
 
     async function connect(id) {
@@ -39,17 +44,16 @@ const useDNS_Info = () => {
 
         if (!id)
             id = DNS_Info.BestDNS;
-        await setDNS_ConnectedInterfaces(DNS_Info.DNS_List[id].DNS_servers);
-        setEnable(id);
+        await setDNS_ConnectedInterfaces(DNS_Info.DNS_List[id].DNS_servers);  // TODO: check result
+        enable(id);
         setDNS_Info(DNS_Info);
         setHasUpdate(HasUpdate => !HasUpdate);
     }
 
     async function disconnect() {
         if (DNS_Info.ConnectedInterfaces.length === 0) return;
-
-        await setDNS_Auto();
-        setEnable(false);
+        await setDNS_Auto(); // TODO: check result
+        disable();
         setDNS_Info(DNS_Info);
         setHasUpdate(HasUpdate => !HasUpdate);
     }
@@ -117,13 +121,8 @@ const useDNS_Info = () => {
         DNS_Info.ConnectedInterfaces = networks;
 
         for (const id in DNS_Info.DNS_List) {
-            checkIsEnable(id);
-            await updateLatency(id);
-            checkIsBest(id);
+            await update(id);
         }
-
-        setDNS_Info(DNS_Info);
-        setHasUpdate(HasUpdate => !HasUpdate);
     }
 
     useEffect(() => {
