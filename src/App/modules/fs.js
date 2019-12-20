@@ -1,15 +1,14 @@
 const Store = require('electron-store');
-const defaultData = require("./default.json");
 const store = new Store();
 
-export function read() {
-    if (store.has("data")) {
-        return store.get("data");
+export function read(key, def = defaultData) {
+    if (store.has(key)) {
+        return store.get(key);
     } else {
-        return defaultData;
+        return def;
     }
 }
 
-export function write(data) {
-    store.set("data", data);
+export function write(key, data) {
+    store.set(key, data);
 }
