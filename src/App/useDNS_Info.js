@@ -26,6 +26,11 @@ const useDNS_Info = () => {
 
     const [HasUpdate, setHasUpdate] = useState(false);
 
+    function saveChanges() {
+        setDNS_Info(DNS_Info);
+        setHasUpdate(HasUpdate => !HasUpdate);
+    }
+
     function disable() {
         DNS_Info.DNS_List[DNS_Info.EnableDNS].isEnable = false;
         DNS_Info.EnableDNS = false;
@@ -46,16 +51,14 @@ const useDNS_Info = () => {
             id = DNS_Info.BestDNS;
         await setDNS_ConnectedInterfaces(DNS_Info.DNS_List[id].DNS_servers);  // TODO: check result
         enable(id);
-        setDNS_Info(DNS_Info);
-        setHasUpdate(HasUpdate => !HasUpdate);
+        saveChanges();
     }
 
     async function disconnect() {
         if (DNS_Info.ConnectedInterfaces.length === 0) return;
         await setDNS_Auto(); // TODO: check result
         disable();
-        setDNS_Info(DNS_Info);
-        setHasUpdate(HasUpdate => !HasUpdate);
+        saveChanges();
     }
 
     async function updateLatency(id) {
@@ -91,16 +94,14 @@ const useDNS_Info = () => {
 
     function edit(id, DNS) {
         Object.assign(DNS_Info.DNS_List[id], DNS);
-        setDNS_Info(DNS_Info);
-        setHasUpdate(HasUpdate => !HasUpdate);
+        saveChanges();
     }
 
     async function remove(id) {
         delete DNS_Info.DNS_List[id];
         if (id == DNS_Info.EnableDNS)
             DNS_Info.EnableDNS = false;
-        setDNS_Info(DNS_Info);
-        setHasUpdate(HasUpdate => !HasUpdate);
+        saveChanges();
     }
 
     async function update(id) {
@@ -111,9 +112,7 @@ const useDNS_Info = () => {
         checkIsEnable(id);
         await updateLatency(id);
         checkIsBest(id);
-
-        setDNS_Info(DNS_Info);
-        setHasUpdate(HasUpdate => !HasUpdate);
+        saveChanges();
     }
 
     async function updateAll() {
