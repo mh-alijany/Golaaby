@@ -1,31 +1,15 @@
+const Store = require('electron-store');
+const defaultData = require("./default.json");
+const store = new Store();
 
-var fs = require('fs');
-const path = require('path');
-
-const filePath = path.resolve('src/data.json');
-
-/**
- * read App data from file
- * @export
- * @param {Any} data return if file not exist
- * @returns {Object} app data
- */
-export function read(data) {
-    if (fs.existsSync(filePath)) {
-        var raw = fs.readFileSync(filePath, 'utf8');
-        return JSON.parse(raw);
-    } else
-        return data;
+export function read() {
+    if (store.has("data")) {
+        return store.get("data");
+    } else {
+        return defaultData;
+    }
 }
 
-/**
- * write new data to file
- * @param {Any} data data to write in file
- * @export
- */
-export async function store(data) {
-    fs.writeFile(filePath, JSON.stringify(data), function (err) {
-        if (err) console.log(err);
-    });
+export function write(data) {
+    store.set("data", data);
 }
-
