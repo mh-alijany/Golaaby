@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { read } from './modules/fs';
 import useNetwork from './useNetwork';
-const defaultData = require("./modules/default.json");
+const defaultData = require("./default.json");
 const data = read("DNS_Info", defaultData);
 
 var { getConnectedNetworkInterfaces, getLatency, isSystemDNS_Server, setDNS_Auto, setDNS_ConnectedInterfaces } = require('./kernel');
