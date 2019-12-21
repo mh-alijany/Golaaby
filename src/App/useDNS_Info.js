@@ -110,10 +110,12 @@ const useDNS_Info = () => {
         DNS_Info.ConnectedInterfaces = networks;
 
         for (const id in DNS_Info.DNS_List) {
-            await update(id);
+            checkIsEnable(id);
+            await updateLatency(id);
+            checkIsBest(id);
         }
 
-        write("DNS_Info", DNS_Info);
+        saveChanges(true);
     }
 
     useEffect(() => {
