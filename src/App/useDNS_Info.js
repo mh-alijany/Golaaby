@@ -12,8 +12,10 @@ var { getConnectedNetworkInterfaces, getLatency, isSystemDNS_Server, setDNS_Auto
 const useDNS_Info = () => {
     let InterfaceChang = useNetwork();
 
+    // it shows DNS changes whit toggle
     const [HasUpdate, setHasUpdate] = useState(false);
 
+    // all of things which our application should know about DNS  
     const [DNS_Info, setDNS_Info] = useState({
         DNS_List: data,
         ConnectedInterfaces: [],
@@ -21,6 +23,7 @@ const useDNS_Info = () => {
         EnableDNS: false,
     });
 
+    // function which components use theme to change DNS info 
     const fn = {
         update: update,
         connect: connect,
@@ -30,6 +33,7 @@ const useDNS_Info = () => {
         edit: edit
     }
 
+    // save DNS info change and notify component's to update their state
     function saveChanges(useStore) {
         if (useStore)
             write("DNS_List", DNS_Info.DNS_List);
@@ -37,16 +41,18 @@ const useDNS_Info = () => {
         setHasUpdate(HasUpdate => !HasUpdate);
     }
 
+    // connect to specified DNS  
     async function connect(id) {
         if (DNS_Info.ConnectedInterfaces.length === 0) return;
 
-        if (!id)
+        if (!id) // TODO: can i remove it ? 
             id = DNS_Info.BestDNS;
         await setDNS_ConnectedInterfaces(DNS_Info.DNS_List[id].DNS_servers);  // TODO: check result
         DNS_Info.EnableDNS = id;
         saveChanges();
     }
 
+    // discount from DNS which currently is used
     async function disconnect() {
         if (DNS_Info.ConnectedInterfaces.length === 0) return;
         await setDNS_Auto(); // TODO: check result
@@ -54,13 +60,14 @@ const useDNS_Info = () => {
         saveChanges();
     }
 
+    // update dsn latency
     async function updateLatency(id) {
         let connected = DNS_Info.ConnectedInterfaces.length > 0;
-
         let latency = connected && await getLatency(DNS_Info.DNS_List[id].DNS_servers);
         DNS_Info.DNS_List[id].latency = latency;
     }
 
+    // check for dns latency is least
     function checkIsBest(id) {
         var best = DNS_Info.DNS_List[DNS_Info.BestDNS];
         var current = DNS_Info.DNS_List[id].latency;
@@ -69,6 +76,7 @@ const useDNS_Info = () => {
         }
     }
 
+    // check for dns is currently is used whit system
     function checkIsEnable(id) {
         let connected = DNS_Info.ConnectedInterfaces.length > 0;
 
@@ -78,6 +86,7 @@ const useDNS_Info = () => {
         }
     }
 
+    // add new dns to dns list
     function add(dns) {
         let id = Math.max(...Object.keys(DNS_Info.DNS_List)) + 1;
         dns.id = String(id);
@@ -85,18 +94,21 @@ const useDNS_Info = () => {
         update(id, true);
     }
 
+    // edit a dns of DNS list
     function edit(id, DNS) {
         Object.assign(DNS_Info.DNS_List[id], DNS);
         saveChanges(true);
     }
 
+    // remove dns from dns list
     async function remove(id) {
         delete DNS_Info.DNS_List[id];
         if (id == DNS_Info.EnableDNS)
             DNS_Info.EnableDNS = false;
         saveChanges(true);
     }
-
+    
+    // update the dns info or all of theme 
     async function update(id, store = false) {
         if (!id) {
             updateAll();
@@ -121,6 +133,7 @@ const useDNS_Info = () => {
         saveChanges(true);
     }
 
+    // update all if network has been changed
     useEffect(() => {
         update();
     }, [InterfaceChang]);
