@@ -15,10 +15,10 @@ const Report = (props) => {
                                         required />
                                     <div className="valid-feedback">
                                         با گلابی کار می کنه
-                                </div>
+                                    </div>
                                     <div className="invalid-feedback">
                                         این فیلتر که.
-                                </div>
+                                    </div>
                                     <div className="input-group-append">
                                         <button className="btn btn-outline-secondary" type="button" id="button-addon2">برسی</button>
                                     </div>

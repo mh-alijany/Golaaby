@@ -45,8 +45,8 @@ rules.push({
 })
 
 module.exports = {
-  // mode: 'production',
-  // devtool: false,
+  mode: 'production',
+  devtool: false,
   // Put your normal webpack config below here
   module: {
     rules,
@@ -64,12 +64,12 @@ module.exports = {
     })
   ],
   optimization: {
-    // mangleWasmImports: true,
-    // removeAvailableModules: true,
-    // mergeDuplicateChunks: true,
-    // usedExports: true,
-    // minimizer: [
-    //   new TerserPlugin()
-    // ]
+    mangleWasmImports: true,
+    removeAvailableModules: true,
+    mergeDuplicateChunks: true,
+    usedExports: true,
+    minimizer: [
+      new TerserPlugin()
+    ]
   }
 };
