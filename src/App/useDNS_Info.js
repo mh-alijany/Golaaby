@@ -33,7 +33,7 @@ const useDNS_Info = () => {
         edit: edit
     }
 
-    // save DNS info change and notify component's to update their state
+    // save changes of DNS info then notify sub component's to update their state
     function saveChanges(useStore) {
         if (useStore)
             write("DNS_List", DNS_Info.DNS_List);
@@ -88,6 +88,7 @@ const useDNS_Info = () => {
 
     // add new dns to dns list
     function add(dns) {
+        // generate unique id 
         let id = Math.max(...Object.keys(DNS_Info.DNS_List)) + 1;
         dns.id = String(id);
         DNS_Info.DNS_List[id] = dns;
@@ -96,6 +97,7 @@ const useDNS_Info = () => {
 
     // edit a dns of DNS list
     function edit(id, DNS) {
+        // merge whit edited props
         Object.assign(DNS_Info.DNS_List[id], DNS);
         saveChanges(true);
     }
@@ -103,13 +105,15 @@ const useDNS_Info = () => {
     // remove dns from dns list
     async function remove(id) {
         delete DNS_Info.DNS_List[id];
+        // if dns is used by system
         if (id == DNS_Info.EnableDNS)
             DNS_Info.EnableDNS = false;
         saveChanges(true);
     }
-    
+
     // update the dns info or all of theme 
     async function update(id, store = false) {
+        // update all if id was not specified
         if (!id) {
             updateAll();
             return;
@@ -119,7 +123,7 @@ const useDNS_Info = () => {
         checkIsBest(id);
         saveChanges(store);
     }
-
+    // update all props of DNS_Info 
     async function updateAll() {
         var networks = await getConnectedNetworkInterfaces();
         DNS_Info.ConnectedInterfaces = networks;

@@ -19,14 +19,14 @@ class DNS_Form extends React.Component {
         })
     }
 
-    isValid() { // move in form
+    isValid() {
         let condition_1 = this.state.Name != '';
         let condition_2 = this.state.DNS1 != this.state.DNS2;
         let condition_3 = /^([\d]{1,3}\.?){4}$/.test(this.state.DNS1)
         let condition_4 = /^([\d]{1,3}\.?){4}$/.test(this.state.DNS2)
 
         condition_1 || this.setState({ Name_: "is-invalid" });
-        condition_2 || this.setState({ DNS1_: "is-invalid", DNS2_: "is-invalid" })
+        condition_2 || this.setState({ DNS1_: "is-invalid", DNS2_: "is-invalid" }) // TODO: need sync
         condition_3 || this.setState({ DNS1_: "is-invalid" })
         condition_4 || this.setState({ DNS2_: "is-invalid" })
 

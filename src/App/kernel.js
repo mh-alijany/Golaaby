@@ -12,6 +12,7 @@ export async function getConnectedNetworkInterfaces() {
     return connectedInterfaces;
 }
 
+// update DNS server of all connected interfaces
 export async function setDNS_ConnectedInterfaces(DNS_Servers) {
     let connectedInterfaces = await getConnectedNetworkInterfaces();
     for (const network of connectedInterfaces) {
@@ -29,6 +30,7 @@ export async function setDNS_Auto() {
     return setDNS_auto(newtWorks[0].InterfaceIndex);
 }
 
+// set DNS server of specified interface by interface index
 export function setDNS_ManualInterface(DNS_Servers, InterfaceIndex) {
     return setDNS_servers(InterfaceIndex, DNS_Servers[0], DNS_Servers[1]);
 }
