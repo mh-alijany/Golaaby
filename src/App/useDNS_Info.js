@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { read } from './modules/fs';
+import { read, write } from './modules/fs';
 import useNetwork from './useNetwork';
 const defaultData = require("./default.json");
 const data = read("DNS_Info", defaultData);
@@ -9,6 +9,8 @@ var { getConnectedNetworkInterfaces, getLatency, isSystemDNS_Server, setDNS_Auto
 
 const useDNS_Info = () => {
     let InterfaceChang = useNetwork();
+
+    const [HasUpdate, setHasUpdate] = useState(false);
 
     const [DNS_Info, setDNS_Info] = useState({
         DNS_List: data.DNS_List,
@@ -25,8 +27,6 @@ const useDNS_Info = () => {
         remove: remove,
         edit: edit
     }
-
-    const [HasUpdate, setHasUpdate] = useState(false);
 
     function saveChanges(useStore) {
         if (useStore)
@@ -93,22 +93,22 @@ const useDNS_Info = () => {
         let id = Math.max(...Object.keys(DNS_Info.DNS_List)) + 1;
         dns.id = String(id);
         DNS_Info.DNS_List[id] = dns;
-        update(id);
+        update(id, true);
     }
 
     function edit(id, DNS) {
         Object.assign(DNS_Info.DNS_List[id], DNS);
-        saveChanges();
+        saveChanges(true);
     }
 
     async function remove(id) {
         delete DNS_Info.DNS_List[id];
         if (id == DNS_Info.EnableDNS)
             DNS_Info.EnableDNS = false;
-        saveChanges();
+        saveChanges(true);
     }
 
-    async function update(id) {
+    async function update(id, store = false) {
         if (!id) {
             updateAll();
             return;
@@ -116,7 +116,7 @@ const useDNS_Info = () => {
         checkIsEnable(id);
         await updateLatency(id);
         checkIsBest(id);
-        saveChanges();
+        saveChanges(store);
     }
 
     async function updateAll() {
@@ -126,6 +126,8 @@ const useDNS_Info = () => {
         for (const id in DNS_Info.DNS_List) {
             await update(id);
         }
+
+        write("DNS_Info", DNS_Info);
     }
 
     useEffect(() => {
