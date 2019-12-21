@@ -2,7 +2,11 @@ import { useState, useEffect } from 'react';
 import { read, write } from './modules/fs';
 import useNetwork from './useNetwork';
 const defaultData = require("./default.json");
+
 const data = read("DNS_Info", defaultData);
+data.EnableDNS = false;
+data.BestDNS = false;
+data.ConnectedInterfaces = [];
 
 var { getConnectedNetworkInterfaces, getLatency, isSystemDNS_Server, setDNS_Auto, setDNS_ConnectedInterfaces } = require('./kernel');
 
@@ -12,12 +16,7 @@ const useDNS_Info = () => {
 
     const [HasUpdate, setHasUpdate] = useState(false);
 
-    const [DNS_Info, setDNS_Info] = useState({
-        DNS_List: data.DNS_List,
-        ConnectedInterfaces: [],
-        BestDNS: false,
-        EnableDNS: false,
-    });
+    const [DNS_Info, setDNS_Info] = useState(data);
 
     const fn = {
         update: update,
@@ -35,33 +34,20 @@ const useDNS_Info = () => {
         setHasUpdate(HasUpdate => !HasUpdate);
     }
 
-    function disable() {
-        DNS_Info.DNS_List[DNS_Info.EnableDNS].isEnable = false;
-        DNS_Info.EnableDNS = false;
-    }
-
-    function enable(id) {
-        if (DNS_Info.EnableDNS)
-            DNS_Info.DNS_List[DNS_Info.EnableDNS].isEnable = false;
-
-        DNS_Info.EnableDNS = id;
-        DNS_Info.DNS_List[id].isEnable = true;
-    }
-
     async function connect(id) {
         if (DNS_Info.ConnectedInterfaces.length === 0) return;
 
         if (!id)
             id = DNS_Info.BestDNS;
         await setDNS_ConnectedInterfaces(DNS_Info.DNS_List[id].DNS_servers);  // TODO: check result
-        enable(id);
+        DNS_Info.EnableDNS = id;
         saveChanges();
     }
 
     async function disconnect() {
         if (DNS_Info.ConnectedInterfaces.length === 0) return;
         await setDNS_Auto(); // TODO: check result
-        disable();
+        DNS_Info.EnableDNS = false;
         saveChanges();
     }
 

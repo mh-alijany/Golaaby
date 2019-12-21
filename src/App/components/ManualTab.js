@@ -21,9 +21,11 @@ export class ManualTab extends React.Component {
     getRows() {
         let DNS_List = Object.values(this.DNS_List);
         return DNS_List.map((DNS) => {
+            let isEnable = this.props.DNS_Info.DNS_Info.EnableDNS == DNS.id;
             let key = `${DNS.id}-${DNS.latency}-${DNS.isEnable}`
-            let action = DNS.isEnable ? this.fn.disconnect : this.fn.connect;
+            let action = isEnable ? this.fn.disconnect : this.fn.connect;
             return <DNS_Row DNS={DNS} key={key}
+                en={isEnable}
                 sync={() => this.syncRow(DNS.id)}
                 action={() => action(DNS.id)}
                 edit={() => this.openEditDNS(DNS)}
