@@ -5,8 +5,7 @@ const app = require('electron').remote.app
 function getSetting() {
     return read("setting", {
         "theme": "light",
-        "autoStart": true,
-        "autoConnect": false
+        "autoStart": true
     })
 }
 
@@ -28,17 +27,11 @@ const SettingTab = (props) => {
         setSave(Save => !Save);
     }
 
-    function autoConnect(e) {
-        let AConnect = !setting.autoConnect;
-        setSetting(setting => Object.assign(setting, { autoConnect: !setting.autoConnect }))
-        setSave(Save => !Save);
-    }
+    React.useEffect(() => {
+        setSetting(setting);
+    }, [Save]);
 
-    function theme(e) {
-        let tm = e.target.id;
-        setSetting(setting => Object.assign(setting, { theme: tm }));
-        setSave(Save => !Save);
-    }
+    // function theme(e)  TODO: i have not no idea at this time :/
 
     return (
         <div className={"tab-pane fade show active" + (props.isActive ? '' : "d-none")}>
@@ -47,7 +40,6 @@ const SettingTab = (props) => {
                 <div className="row text-dark fa">
                     <div className="col-12 mx-3">
                         <form>
-
 
                             <div className="form-group row text-right ">
                                 <h5 className="float-left text-primary">برنامه</h5>
@@ -58,19 +50,10 @@ const SettingTab = (props) => {
                                             onChange={autoStart} />
                                         <label className="custom-control-label" htmlFor="opt-startup">شروع خودکار با بالا آمدنِ ویندوز</label>
                                     </div>
-                                    <div className="custom-control custom-checkbox">
-                                        <input type="checkbox" className="custom-control-input" id="opt-auto"
-                                            checked={setting.autoConnect}
-                                            disabled={true /* TODO: remove :)*/}
-                                            onChange={autoConnect} />
-                                        <label className="custom-control-label" htmlFor="opt-auto">اتصال خودکار</label>
-                                    </div>
                                 </div>
                             </div>
 
-
-
-                            <div className="form-group row text-right">
+                            {/* <div className="form-group row text-right">
                                 <h5 className="float-left text-primary">ظاهر</h5>
                                 <div className="col-12 mb-2">
                                     <div className="custom-control custom-radio">
@@ -86,9 +69,7 @@ const SettingTab = (props) => {
                                         <label className="custom-control-label" htmlFor="dark">تیره</label>
                                     </div>
                                 </div>
-                            </div>
-
-
+                            </div> */}
 
                         </form>
                     </div>
