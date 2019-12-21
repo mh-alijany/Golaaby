@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { read, write } from './modules/fs';
 import useNetwork from './useNetwork';
-const defaultData = require("./default.json");
 
-const data = read("DNS_Info", defaultData);
-data.EnableDNS = false;
-data.BestDNS = false;
-data.ConnectedInterfaces = [];
+const defaultList = require("./defaultList.json");
+
+const data = read("DNS_List", defaultList);
 
 var { getConnectedNetworkInterfaces, getLatency, isSystemDNS_Server, setDNS_Auto, setDNS_ConnectedInterfaces } = require('./kernel');
 
@@ -16,7 +14,12 @@ const useDNS_Info = () => {
 
     const [HasUpdate, setHasUpdate] = useState(false);
 
-    const [DNS_Info, setDNS_Info] = useState(data);
+    const [DNS_Info, setDNS_Info] = useState({
+        DNS_List: data,
+        ConnectedInterfaces: [],
+        BestDNS: false,
+        EnableDNS: false,
+    });
 
     const fn = {
         update: update,
@@ -29,7 +32,7 @@ const useDNS_Info = () => {
 
     function saveChanges(useStore) {
         if (useStore)
-            write("DNS_Info", DNS_Info);
+            write("DNS_List", DNS_Info.DNS_List);
         setDNS_Info(DNS_Info);
         setHasUpdate(HasUpdate => !HasUpdate);
     }

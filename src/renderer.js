@@ -8,6 +8,13 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
+// const app = require('electron').remote.app
+// app.setLoginItemSettings({
+//     openAtLogin: true,
+//     openAsHidden : false , // FIXME: true
+//   })
+  
+
 
 // $(".status-non").show();
 // $(".status-set").hide();

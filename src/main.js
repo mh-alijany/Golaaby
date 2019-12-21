@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, webContents } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 
 import open from 'open';
 
