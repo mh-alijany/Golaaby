@@ -9,10 +9,6 @@ function getSetting() {
     })
 }
 
-function setSetting(setting) { // TODO: use it in use effect
-    write("setting", setting) // TODO: merge white previous setting
-}
-
 const SettingTab = (props) => {
     const [setting, setSetting] = React.useState(getSetting());
     const [Save, setSave] = React.useState(false); // save on state change
@@ -28,7 +24,7 @@ const SettingTab = (props) => {
     }
 
     React.useEffect(() => {
-        setSetting(setting);
+        write("setting", setting)
     }, [Save]);
 
     // function theme(e)  TODO: i have not no idea at this time :/
