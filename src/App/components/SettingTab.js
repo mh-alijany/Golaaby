@@ -1,11 +1,13 @@
 import { read, write } from '../modules/fs';
 const app = require('electron').remote.app
+const path  = require('path')
+const appFolder = path.dirname(process.execPath)
 
 
 function getSetting() {
     return read("setting", {
         "theme": "light",
-        "autoStart": true
+        "autoStart": false
     })
 }
 
@@ -17,7 +19,10 @@ const SettingTab = (props) => {
         let AStart = !setting.autoStart;
         app.setLoginItemSettings({
             openAtLogin: AStart,
-            openAsHidden: false, // FIXME: make it true 
+            path: path.resolve(appFolder, '..', 'Update.exe'),
+            args: [
+                '--processStart', `"${path.basename(process.execPath)}"`
+            ]
         })
         setSetting(setting => Object.assign(setting, { autoStart: !setting.autoStart }))
         setSave(Save => !Save);

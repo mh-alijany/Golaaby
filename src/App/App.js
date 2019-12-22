@@ -1,14 +1,13 @@
 import Nav from './components/Nav';
 import Main from './Components/MainTab';
 import Manual from './Components/ManualTab';
-import Report from './Components/ReportTab';
 import Setting from './Components/SettingTab';
 
 import useDNS_Info from './useDNS_Info'
 
 const App = () => {
     const DNS_Info = useDNS_Info();
-    const tabs = ["اتصال خودکار", "اتصال دستی", "برسی تحریم", "تنظیمات"];
+    const tabs = ["اتصال خودکار", "اتصال دستی", "تنظیمات"];
     const [ActiveTab, setActiveTab] = React.useState(tabs[0]);
 
     return (
@@ -19,8 +18,7 @@ const App = () => {
                     <div className="tab-content " id="v-pills-tabContent">
                         <Main isActive={ActiveTab == tabs[0]} DNS_Info={DNS_Info} />
                         <Manual isActive={ActiveTab == tabs[1]} DNS_Info={DNS_Info} />
-                        <Report isActive={ActiveTab == tabs[2]} />
-                        <Setting isActive={ActiveTab == tabs[3]} />
+                        <Setting isActive={ActiveTab == tabs[2]} />
                     </div>
                 </div>
 
