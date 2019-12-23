@@ -1,6 +1,6 @@
 const dns = require('dns');
 const { Resolver } = dns;
-const resolver = new Resolver();
+var resolver = new Resolver();
 
 /**
  * set DNS servers for resolver
@@ -19,6 +19,7 @@ function setDNS_Servers(DNS_array) {
  */
 export function measure(DNS_array, dist = 'google.com') {
     return new Promise(resolve => {
+        resolver = new Resolver();
         setDNS_Servers(DNS_array);
         var time = new Date().getTime();
         resolver.resolve4(dist, (err, addresses) => {
