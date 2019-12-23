@@ -71,7 +71,7 @@ const useDNS_Info = () => {
     function checkIsBest(id) {
         var best = DNS_Info.DNS_List[DNS_Info.BestDNS];
         var current = DNS_Info.DNS_List[id].latency;
-        if (!DNS_Info.BestDNS || best > current) {
+        if (!DNS_Info.BestDNS || best.latency > current) {
             DNS_Info.BestDNS = id;
         }
     }

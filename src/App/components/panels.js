@@ -23,7 +23,7 @@ export const panels = {
                 <img className="card-img-top img-fluid w-25 mx-auto mb-5" src={i51024} />
                 <div className="card-body text-center">
                     <h5 className='card-title text-primary'>گلابی متصل است</h5>
-                    <p className="card-text mb-5">{props.body}</p>
+                    <p className="card-text mb-5" style={{ direction: "rtl" }}>{props.body}</p>
                     <button type="button" onClick={props.btnAction} className="btn mx-auto d-block text-light btn-danger">قطع اتصال</button>
                 </div>
             </div>
