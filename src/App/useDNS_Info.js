@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { read, write } from './modules/fs';
 import useNetwork from './useNetwork';
-
+const isOnline = require('is-online');
 const defaultList = require("./defaultList.json");
 
 const data = read("DNS_List", defaultList);
@@ -126,7 +126,11 @@ const useDNS_Info = () => {
     // update all props of DNS_Info 
     async function updateAll() {
         var networks = await getConnectedNetworkInterfaces();
-        DNS_Info.ConnectedInterfaces = networks;
+        
+        if (await isOnline())
+            DNS_Info.ConnectedInterfaces = networks;
+        else
+            DNS_Info.ConnectedInterfaces = [];
 
         for (const id in DNS_Info.DNS_List) {
             checkIsEnable(id);
