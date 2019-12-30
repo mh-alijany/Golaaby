@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { read, write } from './modules/fs';
 import useNetwork from './useNetwork';
-const isOnline = require('is-online');
 const defaultList = require("./defaultList.json");
 
 const data = read("DNS_List", defaultList);
@@ -111,15 +110,13 @@ const useDNS_Info = () => {
         saveChanges(true);
     }
 
-    async function checkConnection() {
+    async function checkInternetConnection() {
         var networks = await getConnectedNetworkInterfaces();
 
-        if (await isOnline()) // TODO: use another library
+        if (await getLatency())
             DNS_Info.ConnectedInterfaces = networks;
         else
             DNS_Info.ConnectedInterfaces = [];
-
-        saveChanges();
     }
 
     // update the dns info or all of theme 
@@ -149,7 +146,7 @@ const useDNS_Info = () => {
     // update all if network has been changed
     useEffect(() => {
         (async () => {
-            await checkConnection();
+            await checkInternetConnection();
             update();
         })()
     }, [InterfaceChang]);
