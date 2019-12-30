@@ -118,6 +118,8 @@ const useDNS_Info = () => {
             DNS_Info.ConnectedInterfaces = networks;
         else
             DNS_Info.ConnectedInterfaces = [];
+
+        saveChanges();
     }
 
     // update the dns info or all of theme 
@@ -135,8 +137,6 @@ const useDNS_Info = () => {
 
     // update all props of DNS_Info 
     async function updateAll() {
-        await checkConnection();
-
         for (const id in DNS_Info.DNS_List) {
             checkIsEnable(id);
             await updateLatency(id);
@@ -148,7 +148,10 @@ const useDNS_Info = () => {
 
     // update all if network has been changed
     useEffect(() => {
-        update();
+        (async () => {
+            await checkConnection();
+            update();
+        })()
     }, [InterfaceChang]);
 
 
