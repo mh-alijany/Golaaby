@@ -2,6 +2,8 @@ const dns = require('dns');
 const { Resolver } = dns;
 var resolver = new Resolver();
 
+var timer;
+
 /**
  * set DNS servers for resolver
  * @param {Array} DNS_array ip of static DNS servers
@@ -19,8 +21,10 @@ function setDNS_Servers(DNS_array) {
  */
 export function measure(DNS_array, dist = 'google.com') {
     return new Promise(resolve => {
-        resolver.cancel()
-        DNS_array && etDNS_Servers(DNS_array);
+        resolver.cancel();
+        clearTimeout(timer);
+
+        DNS_array && setDNS_Servers(DNS_array);
         var time = new Date().getTime();
         resolver.resolve4(dist, (err, addresses) => {
             let result;
@@ -29,7 +33,7 @@ export function measure(DNS_array, dist = 'google.com') {
         });
 
         // Set up the timeout
-        setTimeout(function () {
+        timer = setTimeout(function () {
             resolver.cancel();
             resolve(false)
         }, 3000);
