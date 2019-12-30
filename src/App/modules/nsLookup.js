@@ -21,7 +21,8 @@ function setDNS_Servers(DNS_array) {
  */
 export function measure(DNS_array, dist = 'google.com') {
     return new Promise(resolve => {
-        resolver.cancel();
+        //cancel old resolver
+        resolver.cancel(); 
         clearTimeout(timer);
 
         DNS_array && setDNS_Servers(DNS_array);

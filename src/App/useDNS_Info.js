@@ -46,6 +46,7 @@ const useDNS_Info = () => {
 
         if (!id) // TODO: can i remove it ? 
             id = DNS_Info.BestDNS;
+            
         await setDNS_ConnectedInterfaces(DNS_Info.DNS_List[id].DNS_servers);  // TODO: check result
         DNS_Info.EnableDNS = id;
         saveChanges();
@@ -119,7 +120,7 @@ const useDNS_Info = () => {
             DNS_Info.ConnectedInterfaces = [];
     }
 
-    // update the dns info or all of theme 
+    // update dns info
     async function update(id, store = false) {
         // update all if id was not specified
         if (!id) {
