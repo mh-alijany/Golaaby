@@ -20,13 +20,19 @@ function setDNS_Servers(DNS_array) {
 export function measure(DNS_array, dist = 'google.com') {
     return new Promise(resolve => {
         resolver.cancel()
-        setDNS_Servers(DNS_array);
+        DNS_array && etDNS_Servers(DNS_array);
         var time = new Date().getTime();
         resolver.resolve4(dist, (err, addresses) => {
             let result;
             result = (!err && addresses) ? new Date().getTime() - time : undefined;
             resolve(result)
         });
+
+        // Set up the timeout
+        setTimeout(function () {
+            resolver.cancel();
+            resolve(false)
+        }, 3000);
     });
 }
 
@@ -38,4 +44,3 @@ export function measure(DNS_array, dist = 'google.com') {
 export function getDNS_Servers() {
     return dns.getServers()
 };
-
