@@ -111,6 +111,15 @@ const useDNS_Info = () => {
         saveChanges(true);
     }
 
+    async function checkConnection() {
+        var networks = await getConnectedNetworkInterfaces();
+
+        if (await isOnline())
+            DNS_Info.ConnectedInterfaces = networks;
+        else
+            DNS_Info.ConnectedInterfaces = [];
+    }
+
     // update the dns info or all of theme 
     async function update(id, store = false) {
         // update all if id was not specified
@@ -123,14 +132,10 @@ const useDNS_Info = () => {
         checkIsBest(id);
         saveChanges(store);
     }
+
     // update all props of DNS_Info 
     async function updateAll() {
-        var networks = await getConnectedNetworkInterfaces();
-        
-        if (await isOnline())
-            DNS_Info.ConnectedInterfaces = networks;
-        else
-            DNS_Info.ConnectedInterfaces = [];
+        await checkConnection();
 
         for (const id in DNS_Info.DNS_List) {
             checkIsEnable(id);
