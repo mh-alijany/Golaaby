@@ -16,7 +16,7 @@ const MainTab = (props) => {
             var DNS = DNS_List[DNS_Info.EnableDNS];
             var body = <ConnectedDNSBody name={DNS.name} link={DNS.url} />
             setPanel(<panels.Connected btnAction={fn.disconnect} body={body} />);
-        } else if (DNS_Info.ConnectedInterfaces.length === 0) {
+        } else if (DNS_Info.ConnectedInterfaces.length === 0) { // TODO: use State
             setPanel(<panels.NoNet btnAction={tryAgain} />);
         } else {
             setPanel(<panels.Disconnect btnAction={fn.connect} />);

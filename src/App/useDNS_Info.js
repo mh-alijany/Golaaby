@@ -114,7 +114,7 @@ const useDNS_Info = () => {
     async function checkConnection() {
         var networks = await getConnectedNetworkInterfaces();
 
-        if (await isOnline())
+        if (await isOnline()) // TODO: use another library
             DNS_Info.ConnectedInterfaces = networks;
         else
             DNS_Info.ConnectedInterfaces = [];
